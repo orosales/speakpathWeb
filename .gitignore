@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Astro generated types
+.astro/
+
+# Local Netlify folder
+.netlify
+
+# AI assistant config — keep private
+.claude
+.codex

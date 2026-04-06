@@ -1,0 +1,70 @@
+---
+const APP_URL = 'https://app.speakpath.dev';
+
+/* Waveform bars: [height-class, color, animation-delay, animation-duration] */
+const bars = [
+  ['h-8',  'primary',  '0s',     '1.2s'],
+  ['h-16', 'primary',  '0.18s',  '1.5s'],
+  ['h-24', 'tertiary', '0.35s',  '1.1s'],
+  ['h-32', 'primary',  '0.52s',  '1.6s'],
+  ['h-20', 'primary',  '0.7s',   '1.3s'],
+  ['h-28', 'tertiary', '0.12s',  '1.4s'],
+  ['h-12', 'primary',  '0.45s',  '1.2s'],
+  ['h-16', 'primary',  '0.28s',  '1.7s'],
+];
+---
+
+<section class="relative px-6 pt-20 pb-28 md:px-12 max-w-7xl mx-auto">
+  <!-- Ambient background glow -->
+  <div
+    class="pointer-events-none absolute top-0 left-0 w-[600px] h-[600px] rounded-full opacity-5"
+    style="background: radial-gradient(circle, #58f5d1 0%, transparent 70%); transform: translate(-20%, -20%);"
+  ></div>
+
+  <div class="relative flex flex-col md:flex-row md:items-center gap-12 md:gap-0">
+    <!-- Copy -->
+    <div class="max-w-2xl md:w-1/2">
+      <p class="text-tertiary text-xs font-headline tracking-[0.2em] uppercase mb-6 font-semibold">
+        AI Language Training
+      </p>
+
+      <h1
+        class="font-headline font-extrabold text-5xl md:text-7xl tracking-display leading-[1.05] mb-7"
+      >
+        Speak.<br />Learn.<br />
+        <span
+          style="background: linear-gradient(135deg, #58f5d1, #c87dff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"
+        >
+          Improve.
+        </span>
+      </h1>
+
+      <p class="text-on-surface-variant text-lg md:text-xl leading-relaxed mb-10 max-w-lg font-body">
+        Practice real conversations in English, Spanish, French, or German — with
+        an AI that listens, responds, and helps you grow.
+      </p>
+
+      <a href={APP_URL} class="btn-primary group">
+        Start Practicing Free
+        <span class="material-symbols-outlined arrow text-xl">arrow_forward</span>
+      </a>
+
+      <p class="mt-5 text-on-surface-variant text-sm">
+        No credit card. No setup. Just open it and talk.
+      </p>
+    </div>
+
+    <!-- Waveform visualization — DESIGN.md §5 Hero -->
+    <div
+      class="md:w-1/2 flex items-end justify-center md:justify-end gap-[6px] h-36 opacity-50"
+      aria-hidden="true"
+    >
+      {bars.map(([h, color, delay, duration]) => (
+        <div
+          class={`w-[6px] bg-${color} ${h} rounded-full waveform-bar`}
+          style={`animation-delay: ${delay}; animation-duration: ${duration};`}
+        />
+      ))}
+    </div>
+  </div>
+</section>

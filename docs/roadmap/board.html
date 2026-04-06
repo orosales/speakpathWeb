@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Standflow — Roadmap Board</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f1f5f9;
+    color: #1e293b;
+    padding: 24px;
+    min-height: 100vh;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .header h1 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .header .stats {
+    font-size: 14px;
+    color: #64748b;
+  }
+  .progress-bar {
+    max-width: 400px;
+    margin: 12px auto 0;
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .progress-bar .fill {
+    height: 100%;
+    background: #10b981;
+    border-radius: 4px;
+    transition: width 0.3s;
+  }
+  .board {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 16px;
+    align-items: flex-start;
+  }
+  .column {
+    min-width: 260px;
+    flex: 1;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+  }
+  .column-header {
+    padding: 14px 16px;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .column-header .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .column-header .count {
+    margin-left: auto;
+    background: #f1f5f9;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+  .column-body {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .card {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid;
+    cursor: default;
+    transition: box-shadow 0.15s;
+  }
+  .card:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .card-title {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    line-height: 1.4;
+  }
+  .card-desc {
+    font-size: 12px;
+    color: #64748b;
+    line-height: 1.4;
+  }
+  .card-file {
+    font-size: 11px;
+    color: #94a3b8;
+    margin-top: 6px;
+    font-family: monospace;
+  }
+  .empty {
+    text-align: center;
+    padding: 20px 12px;
+    color: #94a3b8;
+    font-size: 13px;
+  }
+  .status-summary {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+  .status-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid;
+  }
+  .status-pill .pill-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .status-pill .pill-count {
+    font-weight: 700;
+  }
+  .generated {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 12px;
+    color: #94a3b8;
+  }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Standflow Roadmap</h1>
+  <div class="stats">5 items &middot; 0 completed (0%)</div>
+  <div class="progress-bar"><div class="fill" style="width: 0%"></div></div>
+  <div class="status-summary">
+    <div class="status-pill" style="background: #f5f3ff; border-color: #ddd6fe; color: #8b5cf6">
+      <span class="pill-dot" style="background: #8b5cf6"></span>
+      Draft: <span class="pill-count">5</span>
+    </div>
+  </div>
+</div>
+<div class="board">
+  <div class="column">
+    <div class="column-header">
+      <span class="dot" style="background: #8b5cf6"></span>
+      Draft
+      <span class="count">5</span>
+    </div>
+    <div class="column-body">
+      <div class="card" style="background: #f5f3ff; border-color: #ddd6fe">
+        <div class="card-title">SpeakPath Landing — Content Sections</div>
+        <div class="card-desc">Build the five middle content sections of the landing page — Languages, How It Works, Levels, Features, and What's Co...</div>
+        <div class="card-file">speakpath-landing-content-sections.md</div>
+      </div>
+      <div class="card" style="background: #f5f3ff; border-color: #ddd6fe">
+        <div class="card-title">SpeakPath Landing — DNS and Deployment</div>
+        <div class="card-desc">Register `speakpath.com`, connect it to Netlify for the landing page, and route `app.speakpath.com` to the existing F...</div>
+        <div class="card-file">speakpath-landing-dns-deploy.md</div>
+      </div>
+      <div class="card" style="background: #f5f3ff; border-color: #ddd6fe">
+        <div class="card-title">SpeakPath Landing — Footer CTA Section</div>
+        <div class="card-desc">Build the bottom conversion section and footer, giving visitors a final nudge to try the app and providing essential ...</div>
+        <div class="card-file">speakpath-landing-footer-cta.md</div>
+      </div>
+      <div class="card" style="background: #f5f3ff; border-color: #ddd6fe">
+        <div class="card-title">SpeakPath Landing — Hero Section</div>
+        <div class="card-desc">Build the hero section with headline, subheadline, animated waveform visualization, and primary CTA button — the firs...</div>
+        <div class="card-file">speakpath-landing-hero.md</div>
+      </div>
+      <div class="card" style="background: #f5f3ff; border-color: #ddd6fe">
+        <div class="card-title">SpeakPath Landing — Astro Project Scaffold</div>
+        <div class="card-desc">Bootstrap the `speakpath-landing` Astro project with base layout, global design tokens (palette, typography), and Net...</div>
+        <div class="card-file">speakpath-landing-scaffold.md</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="generated">Generated on April 5, 2026 at 07:01 PM</div>
+</body>
+</html>

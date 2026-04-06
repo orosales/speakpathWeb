@@ -1,0 +1,106 @@
+/* Self-hosted fonts — no Google CDN */
+@import '@fontsource/plus-jakarta-sans/400.css';
+@import '@fontsource/plus-jakarta-sans/500.css';
+@import '@fontsource/plus-jakarta-sans/600.css';
+@import '@fontsource/plus-jakarta-sans/700.css';
+@import '@fontsource/plus-jakarta-sans/800.css';
+@import '@fontsource/manrope/400.css';
+@import '@fontsource/manrope/500.css';
+@import '@fontsource/manrope/600.css';
+@import '@fontsource/manrope/700.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Manrope', sans-serif;
+    background-color: #010e24;
+    color: #dbe6ff;
+    overflow-x: hidden;
+  }
+
+  /* Material Symbols — loaded via <link> in Base.astro */
+  .material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: inherit;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer components {
+  /* Glassmorphism surface — DESIGN.md §5 */
+  .glass {
+    background: rgba(11, 32, 61, 0.6);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+
+  /* Gradient CTA — DESIGN.md §5 Buttons */
+  .btn-primary {
+    @apply inline-flex items-center gap-3 px-8 py-4 rounded-xl font-bold text-lg font-headline;
+    background: linear-gradient(135deg, #58f5d1, #1cd0ad);
+    color: #003f33;
+    transition: box-shadow 0.25s ease, transform 0.2s ease;
+  }
+  .btn-primary:hover {
+    box-shadow: 0 0 28px rgba(88, 245, 209, 0.45);
+    transform: translateY(-1px);
+  }
+  .btn-primary .arrow {
+    transition: transform 0.2s ease;
+  }
+  .btn-primary:hover .arrow {
+    transform: translateX(4px);
+  }
+
+  /* Ghost border — DESIGN.md §4 */
+  .ghost-border {
+    border: 1px solid rgba(59, 72, 97, 0.15);
+  }
+
+  /* Card hover — DESIGN.md §5 Cards */
+  .card-hover {
+    @apply bg-surface-container rounded-2xl transition-all duration-300;
+  }
+  .card-hover:hover {
+    background-color: #0b203d;
+    border-color: rgba(59, 72, 97, 0.15);
+  }
+}
+
+@layer utilities {
+  /* Waveform bar animation — staggered via inline style */
+  .waveform-bar {
+    transform-origin: bottom;
+    animation: barPulse 1.4s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .waveform-bar {
+      animation: none !important;
+    }
+  }
+
+  /* Tight headline tracking — DESIGN.md §3 */
+  .tracking-display {
+    letter-spacing: -0.04em;
+  }
+}

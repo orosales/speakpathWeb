@@ -1,0 +1,63 @@
+---
+const features = [
+  {
+    icon:  'keyboard_voice',
+    title: 'Voice-first',
+    body:  'No typing. Speak and be heard. Natural speech interaction optimized for any microphone.',
+  },
+  {
+    icon:  'bolt',
+    title: 'Real-time AI responses',
+    body:  'No awkward pauses. Natural back-and-forth conversation, not scripted drills.',
+  },
+  {
+    icon:  'spellcheck',
+    title: 'Grammar analysis',
+    body:  'Session summary highlights what to work on without interrupting your flow.',
+  },
+  {
+    icon:  'language',
+    title: 'Multi-language',
+    body:  'Switch between languages anytime from your dashboard with a single tap.',
+  },
+  {
+    icon:  'cloud_off',
+    title: 'No downloads',
+    body:  'Runs perfectly in any modern browser. Zero friction — open it and talk.',
+  },
+  {
+    icon:  'shield',
+    title: 'Private by design',
+    body:  'Your voice recordings are never stored longer than needed. Conversations stay yours.',
+  },
+];
+---
+
+<section class="px-6 py-24 md:px-12 max-w-7xl mx-auto">
+  <div class="mb-16 text-center">
+    <p class="text-tertiary text-xs font-headline tracking-[0.2em] uppercase font-semibold mb-4">
+      Why SpeakPath
+    </p>
+    <h2 class="font-headline text-3xl md:text-4xl font-bold tracking-display">
+      Built for real improvement
+    </h2>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-y-10 gap-x-10">
+    {features.map((f) => (
+      <div class="flex gap-4 group">
+        <!-- Icon -->
+        <div
+          class="shrink-0 w-10 h-10 rounded-xl flex items-center justify-center bg-surface-container group-hover:bg-surface-container-high transition-colors duration-300"
+          style="box-shadow: 0 0 0 1px rgba(59,72,97,0.15);"
+        >
+          <span class="material-symbols-outlined text-primary text-[1.1rem]">{f.icon}</span>
+        </div>
+        <div>
+          <h4 class="font-bold mb-1.5 font-headline">{f.title}</h4>
+          <p class="text-on-surface-variant text-sm leading-relaxed">{f.body}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

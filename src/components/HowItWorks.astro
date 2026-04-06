@@ -1,0 +1,102 @@
+---
+const steps = [
+  {
+    icon:  'settings_voice',
+    color: 'text-primary',
+    title: 'Choose language & level',
+    body:  'Pick your target language and current proficiency — from beginner to advanced.',
+    offset: false,
+  },
+  {
+    icon:  'record_voice_over',
+    color: 'text-tertiary',
+    title: 'Start talking',
+    body:  'Speak naturally. No typing, no lag. The AI listens and responds in real time.',
+    offset: true,
+  },
+  {
+    icon:  'analytics',
+    color: 'text-primary',
+    title: 'Get feedback',
+    body:  'After each session, review grammar insights, vocabulary notes, and progress.',
+    offset: false,
+  },
+];
+---
+
+<section class="px-6 py-24 md:px-12 max-w-7xl mx-auto">
+  <div class="mb-16">
+    <p class="text-tertiary text-xs font-headline tracking-[0.2em] uppercase font-semibold mb-4">
+      How it works
+    </p>
+    <h2 class="font-headline text-3xl md:text-5xl font-extrabold tracking-display max-w-lg leading-tight">
+      As easy as having<br />a conversation
+    </h2>
+  </div>
+
+  <div class="flex flex-col md:flex-row gap-8">
+    <!-- Steps -->
+    <div class="flex-1 space-y-5">
+      {steps.map((step, i) => (
+        <div
+          class={`bg-surface-container-low p-8 rounded-3xl transition-all duration-300 hover:bg-surface-container ${step.offset ? 'md:ml-12' : ''}`}
+        >
+          <div class="flex items-start gap-4">
+            <span
+              class={`material-symbols-outlined text-4xl ${step.color} shrink-0`}
+              style="font-variation-settings: 'FILL' 1;"
+            >
+              {step.icon}
+            </span>
+            <div>
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-xs font-headline font-bold tracking-widest uppercase text-on-surface-variant">
+                  Step {i + 1}
+                </span>
+              </div>
+              <h3 class="font-bold text-xl mb-2 font-headline">{step.title}</h3>
+              <p class="text-on-surface-variant leading-relaxed">{step.body}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Microphone visualization — DESIGN.md §5 Hero: microphone circle with primary glow -->
+    <div class="hidden md:flex flex-1 justify-center items-center">
+      <div class="relative">
+        <!-- Outer pulse ring -->
+        <div
+          class="absolute inset-0 rounded-full border-2 border-primary/20"
+          style="animation: pulseRing 2.5s ease-out infinite;"
+          aria-hidden="true"
+        ></div>
+        <!-- Secondary pulse ring (offset) -->
+        <div
+          class="absolute inset-[-20px] rounded-full border border-primary/10"
+          style="animation: pulseRing 2.5s ease-out 0.8s infinite;"
+          aria-hidden="true"
+        ></div>
+
+        <div
+          class="relative w-72 h-72 rounded-full bg-surface-bright flex items-center justify-center shadow-[0_0_80px_rgba(88,245,209,0.12)]"
+        >
+          <span
+            class="material-symbols-outlined text-primary"
+            style="font-size: 7rem; font-variation-settings: 'FILL' 1;"
+            aria-hidden="true"
+          >
+            mic
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes pulseRing {
+    0%   { opacity: 0.7; transform: scale(1); }
+    100% { opacity: 0;   transform: scale(1.2); }
+  }
+</style>

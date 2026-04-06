@@ -1,0 +1,12 @@
+[build]
+  command   = "npm run build"
+  publish   = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[redirects]]
+  from   = "http://speakpath.com/*"
+  to     = "https://speakpath.com/:splat"
+  status = 301
+  force  = true

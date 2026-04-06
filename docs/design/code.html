@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SpeakPath | Precision Audio Engineering for Fluency</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface-variant": "#9eabc8",
+                      "on-primary-container": "#003f33",
+                      "on-primary": "#005949",
+                      "error": "#ff716c",
+                      "on-secondary-fixed": "#263655",
+                      "on-tertiary-container": "#140026",
+                      "on-tertiary": "#350057",
+                      "tertiary-fixed-dim": "#cb85ff",
+                      "primary-container": "#1cd0ad",
+                      "surface-variant": "#102645",
+                      "on-error-container": "#ffa8a3",
+                      "secondary-fixed-dim": "#b6c6ed",
+                      "secondary-dim": "#b6c6ed",
+                      "surface-dim": "#010e24",
+                      "surface-tint": "#58f5d1",
+                      "surface": "#010e24",
+                      "surface-container-low": "#02132b",
+                      "secondary-container": "#374767",
+                      "tertiary-dim": "#c87dff",
+                      "error-dim": "#d7383b",
+                      "tertiary": "#c87dff",
+                      "on-tertiary-fixed": "#290045",
+                      "surface-bright": "#152c4e",
+                      "on-secondary-container": "#c0d0f7",
+                      "background": "#010e24",
+                      "outline": "#687690",
+                      "on-error": "#490006",
+                      "on-primary-fixed": "#004437",
+                      "on-surface": "#dbe6ff",
+                      "secondary-fixed": "#c4d4fb",
+                      "on-primary-fixed-variant": "#006452",
+                      "primary-dim": "#45e7c3",
+                      "surface-container-lowest": "#000000",
+                      "primary-fixed-dim": "#45e7c3",
+                      "outline-variant": "#3b4861",
+                      "on-secondary": "#394969",
+                      "tertiary-fixed": "#d498ff",
+                      "inverse-on-surface": "#48556e",
+                      "primary": "#58f5d1",
+                      "surface-container-high": "#0b203d",
+                      "error-container": "#9f0519",
+                      "on-secondary-fixed-variant": "#435273",
+                      "inverse-primary": "#006c58",
+                      "surface-container-highest": "#102645",
+                      "on-tertiary-fixed-variant": "#5a008f",
+                      "on-background": "#dbe6ff",
+                      "secondary": "#c4d4fb",
+                      "tertiary-container": "#bd64ff",
+                      "surface-container": "#061934",
+                      "primary-fixed": "#58f5d1",
+                      "inverse-surface": "#f9f9ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Plus Jakarta Sans"],
+                      "body": ["Manrope"],
+                      "label": ["Plus Jakarta Sans"]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass { background: rgba(11, 32, 61, 0.6); backdrop-filter: blur(24px); }
+        .waveform-bar { transform-origin: bottom; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#010e24] dark:bg-[#010e24]">
+<div class="flex justify-between items-center px-8 py-6 max-w-7xl mx-auto">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#58f5d1]" style="font-variation-settings: 'FILL' 1;">graphic_eq</span>
+<span class="text-2xl font-bold tracking-tighter text-[#58f5d1]">SpeakPath</span>
+</div>
+<button class="text-slate-400 font-medium hover:text-[#c87dff] transition-colors duration-300">Sign In</button>
+</div>
+</nav>
+<main class="pt-24 overflow-x-hidden">
+<!-- Hero Section -->
+<section class="relative px-6 pt-16 pb-24 md:px-12 flex flex-col gap-12 items-start max-w-7xl mx-auto">
+<div class="max-w-2xl">
+<h1 class="font-headline font-extrabold text-5xl md:text-7xl tracking-tighter leading-[1.1] mb-6">
+                    Speak. Learn. <span class="text-primary">Improve.</span>
+</h1>
+<p class="text-body-lg text-on-surface-variant text-xl leading-relaxed mb-10 max-w-lg">
+                    Practice real conversations in English, Spanish, French, or German — with an AI that listens, responds, and helps you grow.
+                </p>
+<button class="group flex items-center gap-3 bg-gradient-to-br from-primary to-primary-container text-on-primary-container px-8 py-4 rounded-xl font-bold text-lg hover:shadow-[0_0_20px_rgba(88,245,209,0.4)] transition-all">
+                    Start Practicing Free
+                    <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+</button>
+</div>
+<!-- Visual Waveform Asymmetry -->
+<div class="w-full md:w-1/2 flex items-center justify-center md:justify-end gap-1 h-32 opacity-40">
+<div class="w-2 bg-primary h-8 rounded-full"></div>
+<div class="w-2 bg-primary h-16 rounded-full"></div>
+<div class="w-2 bg-tertiary h-24 rounded-full"></div>
+<div class="w-2 bg-primary h-32 rounded-full"></div>
+<div class="w-2 bg-primary h-20 rounded-full"></div>
+<div class="w-2 bg-tertiary h-28 rounded-full"></div>
+<div class="w-2 bg-primary h-12 rounded-full"></div>
+<div class="w-2 bg-primary h-16 rounded-full"></div>
+</div>
+</section>
+<!-- Pick Your Language: Bento-ish Grid -->
+<section class="bg-surface-container-low rounded-[48px] px-6 py-24 md:px-12 mx-4 mb-8">
+<div class="max-w-7xl mx-auto">
+<h2 class="font-headline text-3xl md:text-4xl font-bold mb-12">Pick Your Language</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<!-- English -->
+<div class="bg-surface-container p-6 rounded-2xl hover:bg-surface-container-high transition-all group border border-outline-variant/10">
+<div class="text-4xl mb-4">🇺🇸</div>
+<h3 class="font-bold text-xl mb-1">English</h3>
+<p class="text-tertiary text-sm font-headline tracking-widest uppercase">business</p>
+</div>
+<!-- Spanish -->
+<div class="bg-surface-container p-6 rounded-2xl hover:bg-surface-container-high transition-all group border border-outline-variant/10">
+<div class="text-4xl mb-4">🇪🇸</div>
+<h3 class="font-bold text-xl mb-1">Spanish</h3>
+<p class="text-tertiary text-sm font-headline tracking-widest uppercase">500m</p>
+</div>
+<!-- French -->
+<div class="bg-surface-container p-6 rounded-2xl hover:bg-surface-container-high transition-all group border border-outline-variant/10">
+<div class="text-4xl mb-4">🇫🇷</div>
+<h3 class="font-bold text-xl mb-1">French</h3>
+<p class="text-tertiary text-sm font-headline tracking-widest uppercase">culture</p>
+</div>
+<!-- German -->
+<div class="bg-surface-container p-6 rounded-2xl hover:bg-surface-container-high transition-all group border border-outline-variant/10">
+<div class="text-4xl mb-4">🇩🇪</div>
+<h3 class="font-bold text-xl mb-1">German</h3>
+<p class="text-tertiary text-sm font-headline tracking-widest uppercase">science</p>
+</div>
+</div>
+<p class="mt-8 text-on-surface-variant text-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-xs">info</span>
+                    More languages coming soon.
+                </p>
+</div>
+</section>
+<!-- How It Works: Asymmetric Steps -->
+<section class="px-6 py-24 md:px-12 max-w-7xl mx-auto">
+<h2 class="font-headline text-3xl md:text-5xl font-extrabold max-w-lg mb-16">As easy as having a conversation</h2>
+<div class="flex flex-col md:flex-row gap-8">
+<div class="flex-1 space-y-6">
+<div class="bg-surface-container-low p-8 rounded-3xl">
+<span class="material-symbols-outlined text-primary text-4xl mb-4">settings_voice</span>
+<h3 class="font-bold text-xl mb-2">Choose language/level</h3>
+<p class="text-on-surface-variant">Select your target language and current proficiency to start.</p>
+</div>
+<div class="bg-surface-container-low p-8 rounded-3xl ml-0 md:ml-12">
+<span class="material-symbols-outlined text-tertiary text-4xl mb-4">record_voice_over</span>
+<h3 class="font-bold text-xl mb-2">Start talking</h3>
+<p class="text-on-surface-variant">Engage in natural, open-ended dialogue with our precision AI.</p>
+</div>
+<div class="bg-surface-container-low p-8 rounded-3xl">
+<span class="material-symbols-outlined text-primary text-4xl mb-4">analytics</span>
+<h3 class="font-bold text-xl mb-2">Get feedback</h3>
+<p class="text-on-surface-variant">Instant analysis of grammar, pronunciation, and flow.</p>
+</div>
+</div>
+<div class="hidden md:flex flex-1 justify-center items-center">
+<div class="relative w-80 h-80 rounded-full bg-surface-bright flex items-center justify-center border border-primary/20 shadow-[0_0_80px_rgba(88,245,209,0.1)]">
+<span class="material-symbols-outlined text-primary text-8xl" style="font-variation-settings: 'FILL' 1;">mic</span>
+<div class="absolute inset-0 rounded-full border-2 border-primary/30 animate-pulse"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Your Pace Section -->
+<section class="bg-surface-container-lowest py-24 px-6 md:px-12">
+<div class="max-w-7xl mx-auto">
+<h2 class="font-headline text-3xl md:text-4xl font-bold mb-12">Your pace. Your level.</h2>
+<div class="grid md:grid-cols-3 gap-6">
+<div class="glass p-8 rounded-2xl border border-outline-variant/10">
+<h3 class="text-primary font-bold text-xl mb-4">Beginner</h3>
+<p class="text-on-surface-variant mb-6">Short, simple sentences to build your foundation and confidence.</p>
+<div class="h-1.5 w-1/3 bg-primary rounded-full"></div>
+</div>
+<div class="glass p-8 rounded-2xl border border-outline-variant/10">
+<h3 class="text-primary font-bold text-xl mb-4">Intermediate</h3>
+<p class="text-on-surface-variant mb-6">Flowing conversations about daily life, interests, and basic work topics.</p>
+<div class="h-1.5 w-2/3 bg-primary rounded-full"></div>
+</div>
+<div class="glass p-8 rounded-2xl border border-outline-variant/10">
+<h3 class="text-primary font-bold text-xl mb-4">Advanced</h3>
+<p class="text-on-surface-variant mb-6">Nuanced debates, technical discussions, and cultural deep-dives.</p>
+<div class="h-1.5 w-full bg-primary rounded-full"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Key Features -->
+<section class="px-6 py-24 md:px-12 max-w-7xl mx-auto">
+<h2 class="font-headline text-3xl md:text-4xl font-bold mb-16 text-center">Built for real improvement</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-y-12 gap-x-8">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary">keyboard_voice</span>
+<div>
+<h4 class="font-bold mb-2">Voice-first</h4>
+<p class="text-on-surface-variant text-sm">Natural speech interaction optimized for mobile microphones.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary">bolt</span>
+<div>
+<h4 class="font-bold mb-2">Real-time AI</h4>
+<p class="text-on-surface-variant text-sm">No awkward pauses. Responsive and fluid conversation partners.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary">spellcheck</span>
+<div>
+<h4 class="font-bold mb-2">Grammar analysis</h4>
+<p class="text-on-surface-variant text-sm">Visual feedback on errors without interrupting your flow.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary">language</span>
+<div>
+<h4 class="font-bold mb-2">Multi-language</h4>
+<p class="text-on-surface-variant text-sm">Switch between languages with a single tap in your dashboard.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary">cloud_off</span>
+<div>
+<h4 class="font-bold mb-2">No downloads</h4>
+<p class="text-on-surface-variant text-sm">Runs perfectly in any modern browser. Zero friction to start.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary">shield</span>
+<div>
+<h4 class="font-bold mb-2">Private by design</h4>
+<p class="text-on-surface-variant text-sm">Your voice recordings are never stored longer than needed.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- What's Coming -->
+<section class="bg-surface-container-low px-6 py-24 md:px-12">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-16">
+<div class="md:w-1/3">
+<h2 class="font-headline text-3xl font-bold mb-4">This is just the beginning</h2>
+<p class="text-on-surface-variant">Our engineering team is constantly pushing the boundaries of sonic education.</p>
+</div>
+<div class="md:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-4"><div class="p-6 border-l-2 border-outline-variant bg-surface/30">
+<h4 class="font-bold mb-1">Progress tracking &amp; streaks</h4>
+<p class="text-xs text-on-surface-variant">Visualize your fluency growth over time with deep analytics.</p>
+</div>
+<div class="p-6 border-l-2 border-outline-variant bg-surface/30">
+<h4 class="font-bold mb-1">Topic-based scenarios</h4>
+<p class="text-xs text-on-surface-variant">Practice specifically for job interviews, travel, or ordering food.</p>
+</div>
+<div class="p-6 border-l-2 border-outline-variant bg-surface/30">
+<h4 class="font-bold mb-1">Pronunciation scoring</h4>
+<p class="text-xs text-on-surface-variant">Get real-time feedback on your accent and phonetic accuracy.</p>
+</div>
+<div class="p-6 border-l-2 border-outline-variant bg-surface/30">
+<h4 class="font-bold mb-1">More languages</h4>
+<p class="text-xs text-on-surface-variant">Portuguese, Italian, Japanese, and Mandarin coming soon.</p>
+</div>
+<div class="p-6 border-l-2 border-outline-variant bg-surface/30">
+<h4 class="font-bold mb-1">Mobile app</h4>
+<p class="text-xs text-on-surface-variant">Take your practice on the go with our dedicated iOS and Android apps.</p>
+</div>
+<div class="p-6 border-l-2 border-outline-variant bg-surface/30">
+<h4 class="font-bold mb-1">Vocabulary flashcards</h4>
+<p class="text-xs text-on-surface-variant">Custom decks automatically generated from your real conversations.</p>
+</div></div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="px-6 py-32 text-center max-w-4xl mx-auto">
+<h2 class="font-headline text-4xl md:text-6xl font-extrabold mb-6 tracking-tighter">Ready to start speaking?</h2>
+<p class="text-on-surface-variant text-xl mb-12">No credit card. No setup. Just open it and talk.</p>
+<button class="bg-primary text-on-primary-container px-10 py-5 rounded-full font-bold text-xl hover:scale-105 transition-transform shadow-xl shadow-primary/20">
+                Try SpeakPath Free →
+            </button>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full rounded-t-[32px] bg-[#02132b] dark:bg-[#02132b] shadow-[0_-20px_40px_rgba(0,0,0,0.3)]">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 py-16 w-full max-w-7xl mx-auto gap-8">
+<div class="flex flex-col gap-4 items-center md:items-start">
+<div class="text-xl font-bold text-[#58f5d1]">SpeakPath</div>
+<p class="text-slate-500 font-body text-center md:text-left">© 2024 SpeakPath. Precision Audio Engineering for Fluency.</p>
+</div>
+<div class="flex gap-8">
+<a class="text-slate-500 font-label hover:text-[#c87dff] underline-offset-4 hover:underline transition-opacity" href="#">Privacy</a>
+<a class="text-slate-500 font-label hover:text-[#c87dff] underline-offset-4 hover:underline transition-opacity" href="#">Terms</a>
+<a class="text-slate-500 font-label hover:text-[#c87dff] underline-offset-4 hover:underline transition-opacity" href="#">Research</a>
+<a class="text-slate-500 font-label hover:text-[#c87dff] underline-offset-4 hover:underline transition-opacity" href="#">Contact</a>
+</div>
+</div>
+</footer>
+</body></html>
