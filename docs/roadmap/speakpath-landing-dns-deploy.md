@@ -96,7 +96,7 @@ The AgentVoice app is deployed on Fly.io with its own Fly-assigned domain. There
 #### 5.1 — Verification checklist
 
 - `https://speakpath.com` loads the Astro landing page
-- `https://app.speakpath.com` loads the AgentVoice React app
+- `https://app.speakpath.dev` loads the AgentVoice React app
 - WebSocket connections from the app work (open a conversation session)
 - Both URLs redirect HTTP → HTTPS
 - Google OAuth callback URL (if configured) includes `app.speakpath.com` — update Google Cloud Console allowed redirect URIs
@@ -144,7 +144,7 @@ The AgentVoice app is deployed on Fly.io with its own Fly-assigned domain. There
 ## Acceptance Criteria
 
 1. `https://speakpath.com` loads the SpeakPath landing page with valid HTTPS cert.
-2. `https://app.speakpath.com` loads the AgentVoice app with valid HTTPS cert.
+2. `https://app.speakpath.dev` loads the AgentVoice app with valid HTTPS cert.
 3. A push to `main` on `speakpath-landing` triggers an automatic Netlify deploy visible at `speakpath.com` within 2 minutes.
 4. WebSocket-based voice conversations work on `app.speakpath.com`.
 5. HTTP requests to both domains redirect to HTTPS.

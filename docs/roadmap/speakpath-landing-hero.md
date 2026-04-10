@@ -22,7 +22,7 @@ Greenfield. The scaffold (`speakpath-landing-scaffold`) provides `Base.astro`, g
 A `Hero.astro` component mounted in `index.astro` that renders:
 - **Headline:** "Speak. Learn. Improve."
 - **Subheadline:** "Practice real conversations in English, Spanish, French, or German — with an AI that listens, responds, and helps you grow."
-- **CTA button:** "Start Practicing Free →" linking to `https://app.speakpath.com`
+- **CTA button:** "Start Practicing Free →" linking to `https://app.speakpath.dev`
 - **Waveform animation:** A looping SVG or Canvas audio-bar animation below or behind the headline to convey voice interaction
 - Mobile-first layout, centered, full-viewport-height
 
@@ -106,5 +106,5 @@ A `Hero.astro` component mounted in `index.astro` that renders:
 1. Hero section renders headline, subheadline, and CTA button at all viewport widths (320px–1440px).
 2. Waveform animation loops continuously without JavaScript errors.
 3. Animation is static (no movement) when `prefers-reduced-motion: reduce` is set.
-4. CTA button links to `https://app.speakpath.com` and opens in the same tab.
+4. CTA button links to `https://app.speakpath.co` and opens in the same tab.
 5. Lighthouse performance score is ≥ 95 on mobile.

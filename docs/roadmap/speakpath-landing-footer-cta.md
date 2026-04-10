@@ -22,7 +22,7 @@ Greenfield. `speakpath-landing-scaffold` provides Base layout and design tokens.
 A `CTA.astro` component and a `<footer>` element that together render:
 - **Section heading:** "Ready to start speaking?"
 - **Subtext:** "No credit card. No setup. Just open it and talk."
-- **CTA button:** "Try SpeakPath Free →" linking to `https://app.speakpath.com`
+- **CTA button:** "Try SpeakPath Free →" linking to `https://app.speakpath.dev`
 - **Footer links:** Privacy · Contact · GitHub (with `href` placeholders for Privacy and Contact; GitHub links to the repo)
 
 ---
@@ -36,7 +36,7 @@ A `CTA.astro` component and a `<footer>` element that together render:
 #### 1.1 — Create CTA.astro
 
 - **File:** `src/components/CTA.astro`
-- **Change:** `<section>` with a centered layout. Heading (`<h2>`) "Ready to start speaking?", subtext (`<p>`), and a `<a>` styled identically to the hero CTA button (teal background, navy text, bold, rounded). Link to `https://app.speakpath.com`. Add enough top/bottom padding to make this section feel like a natural close.
+- **Change:** `<section>` with a centered layout. Heading (`<h2>`) "Ready to start speaking?", subtext (`<p>`), and a `<a>` styled identically to the hero CTA button (teal background, navy text, bold, rounded). Link to `https://app.speakpath.dev`. Add enough top/bottom padding to make this section feel like a natural close.
 
 ### Phase 2: Footer
 
@@ -96,7 +96,7 @@ A `CTA.astro` component and a `<footer>` element that together render:
 ## Acceptance Criteria
 
 1. "Ready to start speaking?" section renders with heading, subtext, and CTA button.
-2. CTA button links to `https://app.speakpath.com`.
+2. CTA button links to `https://app.speakpath.dev`.
 3. Footer renders three links: Privacy, Contact, GitHub.
 4. Footer appears on every page (rendered via `Base.astro`).
 5. Both CTA button and footer links are keyboard-navigable and have visible focus states.
