@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Background -->
+  <rect width="32" height="32" rx="7" fill="#010e24"/>
+
+  <!-- Audio bars: 9 bars, mountain shape, alternating teal/purple -->
+  <!-- teal -->
+  <rect x="0.5"  y="22" width="2.5" height="7"  rx="1.2" fill="#58f5d1"/>
+  <!-- purple -->
+  <rect x="4"    y="18" width="2.5" height="11" rx="1.2" fill="#c87dff"/>
+  <!-- teal -->
+  <rect x="7.5"  y="14" width="2.5" height="15" rx="1.2" fill="#58f5d1"/>
+  <!-- purple -->
+  <rect x="11"   y="9"  width="2.5" height="20" rx="1.2" fill="#c87dff"/>
+  <!-- teal — peak -->
+  <rect x="14.5" y="6"  width="2.5" height="23" rx="1.2" fill="#58f5d1"/>
+  <!-- purple -->
+  <rect x="18"   y="9"  width="2.5" height="20" rx="1.2" fill="#c87dff"/>
+  <!-- teal -->
+  <rect x="21.5" y="14" width="2.5" height="15" rx="1.2" fill="#58f5d1"/>
+  <!-- purple -->
+  <rect x="25"   y="18" width="2.5" height="11" rx="1.2" fill="#c87dff"/>
+  <!-- teal -->
+  <rect x="28.5" y="22" width="2.5" height="7"  rx="1.2" fill="#58f5d1"/>
+</svg>
