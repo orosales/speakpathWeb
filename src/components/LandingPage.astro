@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from './Hero.astro';
+import Languages from './Languages.astro';
+import HowItWorks from './HowItWorks.astro';
+import Levels from './Levels.astro';
+import Features from './Features.astro';
+import ComingSoon from './ComingSoon.astro';
+import CTA from './CTA.astro';
+import type { LocalizedPageCopy, Locale } from '../i18n/site';
+
+interface Props {
+  locale: Locale;
+  copy: LocalizedPageCopy;
+}
+
+const { locale, copy } = Astro.props;
+---
+
+<Base title={copy.meta.title} description={copy.meta.description} locale={locale} ogLocale={copy.meta.ogLocale} nav={copy.nav} footer={copy.footer}>
+  <Hero copy={copy.hero} />
+  <Languages copy={copy.languages} />
+  <HowItWorks copy={copy.howItWorks} />
+  <Levels copy={copy.levels} />
+  <Features copy={copy.features} />
+  <ComingSoon copy={copy.comingSoon} />
+  <CTA copy={copy.cta} />
+</Base>

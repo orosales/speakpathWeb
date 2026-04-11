@@ -1,30 +1,11 @@
 ---
-const items = [
-  {
-    title: 'Progress tracking & streaks',
-    body:  'Visualize your fluency growth over time with deep session analytics.',
-  },
-  {
-    title: 'Topic-based scenarios',
-    body:  'Practice for job interviews, travel, ordering food, and more.',
-  },
-  {
-    title: 'Pronunciation scoring',
-    body:  'Get real-time feedback on your accent and phonetic accuracy.',
-  },
-  {
-    title: 'More languages',
-    body:  'Portuguese, Italian, Japanese, and Mandarin on the way.',
-  },
-  {
-    title: 'Mobile app',
-    body:  'Take your practice anywhere with native iOS and Android apps.',
-  },
-  {
-    title: 'Vocabulary flashcards',
-    body:  'Custom decks auto-generated from words you encountered in your sessions.',
-  },
-];
+import type { LocalizedPageCopy } from '../i18n/site';
+
+interface Props {
+  copy: LocalizedPageCopy['comingSoon'];
+}
+
+const { copy } = Astro.props;
 ---
 
 <section class="bg-surface-container-low px-6 py-24 md:px-12">
@@ -32,19 +13,19 @@ const items = [
     <!-- Left: heading -->
     <div class="md:w-1/3 md:sticky md:top-32 self-start">
       <p class="text-tertiary text-xs font-headline tracking-[0.2em] uppercase font-semibold mb-4">
-        Roadmap
+        {copy.eyebrow}
       </p>
       <h2 class="font-headline text-3xl font-bold tracking-display mb-5 leading-tight">
-        This is just<br />the beginning
+        {copy.title.line1}<br />{copy.title.line2}
       </h2>
       <p class="text-on-surface-variant leading-relaxed text-sm">
-        Our team is constantly pushing the boundaries of what AI-powered language learning can be.
+        {copy.description}
       </p>
     </div>
 
     <!-- Right: feature cards -->
     <div class="md:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-4">
-      {items.map((item) => (
+      {copy.items.map((item) => (
         <div
           class="p-6 rounded-2xl bg-surface/40 border-l-2 border-outline-variant/40 hover:border-primary/40 hover:bg-surface-container transition-all duration-300"
         >
@@ -52,7 +33,7 @@ const items = [
             <span
               class="text-[10px] font-headline font-bold tracking-widest uppercase px-2 py-0.5 rounded-full bg-surface-container text-tertiary"
             >
-              Soon
+              {copy.badge}
             </span>
           </div>
           <h4 class="font-bold mb-1.5 font-headline text-sm">{item.title}</h4>

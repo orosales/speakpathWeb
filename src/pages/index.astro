@@ -1,20 +1,6 @@
 ---
-import Base         from '../layouts/Base.astro';
-import Hero         from '../components/Hero.astro';
-import Languages    from '../components/Languages.astro';
-import HowItWorks   from '../components/HowItWorks.astro';
-import Levels       from '../components/Levels.astro';
-import Features     from '../components/Features.astro';
-import ComingSoon   from '../components/ComingSoon.astro';
-import CTA          from '../components/CTA.astro';
+import LandingPage from '../components/LandingPage.astro';
+import { defaultLocale, getLocaleCopy } from '../i18n/site';
 ---
 
-<Base>
-  <Hero />
-  <Languages />
-  <HowItWorks />
-  <Levels />
-  <Features />
-  <ComingSoon />
-  <CTA />
-</Base>
+<LandingPage locale={defaultLocale} copy={getLocaleCopy(defaultLocale)} />

@@ -1,50 +1,25 @@
 ---
-const features = [
-  {
-    icon:  'keyboard_voice',
-    title: 'Voice-first',
-    body:  'No typing. Speak and be heard. Natural speech interaction optimized for any microphone.',
-  },
-  {
-    icon:  'bolt',
-    title: 'Real-time AI responses',
-    body:  'No awkward pauses. Natural back-and-forth conversation, not scripted drills.',
-  },
-  {
-    icon:  'spellcheck',
-    title: 'Grammar analysis',
-    body:  'Session summary highlights what to work on without interrupting your flow.',
-  },
-  {
-    icon:  'language',
-    title: 'Multi-language',
-    body:  'Switch between languages anytime from your dashboard with a single tap.',
-  },
-  {
-    icon:  'cloud_off',
-    title: 'No downloads',
-    body:  'Runs perfectly in any modern browser. Zero friction — open it and talk.',
-  },
-  {
-    icon:  'shield',
-    title: 'Private by design',
-    body:  'Your voice recordings are never stored longer than needed. Conversations stay yours.',
-  },
-];
+import type { LocalizedPageCopy } from '../i18n/site';
+
+interface Props {
+  copy: LocalizedPageCopy['features'];
+}
+
+const { copy } = Astro.props;
 ---
 
 <section class="px-6 py-24 md:px-12 max-w-7xl mx-auto">
   <div class="mb-16 text-center">
     <p class="text-tertiary text-xs font-headline tracking-[0.2em] uppercase font-semibold mb-4">
-      Why SpeakPath
+      {copy.eyebrow}
     </p>
     <h2 class="font-headline text-3xl md:text-4xl font-bold tracking-display">
-      Built for real improvement
+      {copy.title}
     </h2>
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-3 gap-y-10 gap-x-10">
-    {features.map((f) => (
+    {copy.items.map((f) => (
       <div class="flex gap-4 group">
         <!-- Icon -->
         <div

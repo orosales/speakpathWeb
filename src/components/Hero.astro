@@ -1,5 +1,13 @@
 ---
+import type { LocalizedPageCopy } from '../i18n/site';
+
 const APP_URL = 'https://app.speakpath.dev';
+
+interface Props {
+  copy: LocalizedPageCopy['hero'];
+}
+
+const { copy } = Astro.props;
 
 const bars = [
   { height: '40%', color: 'primary', delay: '0s', duration: '1.2s' },
@@ -33,32 +41,31 @@ const barGradients = {
   <div class="relative grid items-center gap-14 lg:grid-cols-[minmax(0,1.02fr)_minmax(24rem,33rem)] lg:gap-10">
     <div class="max-w-2xl">
       <p class="mb-6 inline-flex rounded-full bg-secondary-container px-4 py-2 text-[0.68rem] font-bold uppercase tracking-[0.24em] text-primary font-headline">
-        AI-Powered Fluency Engine
+        {copy.eyebrow}
       </p>
 
       <h1 class="font-headline text-5xl font-extrabold leading-[0.98] tracking-display text-on-surface md:text-7xl lg:text-[5.2rem]">
-        Speak.<br />
+        {copy.title.top}<br />
         <span
           style="background: linear-gradient(135deg, #58f5d1 0%, #1cd0ad 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"
         >
-          Learn.
+          {copy.title.accent}
         </span>
         <br />
-        Improve.
+        {copy.title.bottom}
       </h1>
 
       <p class="mt-6 max-w-xl text-base leading-8 text-on-surface-variant md:text-xl md:leading-9">
-        Master any language with high-precision audio analysis. SpeakPath uses neural
-        frequency mapping to refine your accent and rhythm in real-time.
+        {copy.description}
       </p>
 
       <div class="mt-10 flex flex-col items-start gap-5 sm:flex-row sm:items-center">
         <a href={APP_URL} class="btn-primary group">
-          Start Practicing Free
+          {copy.cta}
           <span class="material-symbols-outlined arrow text-xl">arrow_forward</span>
         </a>
         <p class="text-sm text-on-surface-variant">
-          No credit card. No setup. Just open it and talk.
+          {copy.note}
         </p>
       </div>
     </div>
@@ -99,10 +106,10 @@ const barGradients = {
 
             <div class="min-w-0">
               <p class="font-headline text-[0.68rem] font-bold uppercase tracking-[0.24em] text-primary">
-                AI Companion
+                {copy.companionEyebrow}
               </p>
               <p class="mt-1 font-headline text-xl font-bold text-on-surface sm:text-[1.65rem]">
-                Responding in Real-time...
+                {copy.companionTitle}
               </p>
 
               <div class="mt-3 h-1.5 w-full max-w-[15rem] overflow-hidden rounded-full bg-surface-container">
@@ -110,7 +117,7 @@ const barGradients = {
               </div>
 
               <p class="mt-3 text-[0.65rem] uppercase tracking-[0.18em] text-on-surface-variant/70">
-                French • English • German • Spanish
+                {copy.companionLanguages}
               </p>
             </div>
           </div>

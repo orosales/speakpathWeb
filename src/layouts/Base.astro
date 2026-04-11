@@ -1,22 +1,52 @@
 ---
 import '../styles/global.css';
+import { defaultLocale, getLocalizedPath, localeLabels, localeOgLocales, locales, type Locale } from '../i18n/site';
 
 interface Props {
   title?:       string;
   description?: string;
+  locale?: Locale;
+  ogLocale?: string;
+  nav?: {
+    signIn: string;
+    languageSwitcherLabel: string;
+  };
+  footer?: {
+    tagline: string;
+    privacy: string;
+    contact: string;
+    github: string;
+  };
 }
 
 const {
   title       = 'SpeakPath — Practice Real Language Conversations with AI',
   description = 'Practice real conversations in English, Spanish, French, or German with an AI that listens, responds, and helps you grow. Start free, no download needed.',
+  locale      = defaultLocale,
+  ogLocale    = 'en_US',
+  nav = {
+    signIn: 'Sign In',
+    languageSwitcherLabel: 'Choose site language',
+  },
+  footer = {
+    tagline: 'Precision Audio Engineering for Fluency.',
+    privacy: 'Privacy',
+    contact: 'Contact',
+    github: 'GitHub',
+  },
 } = Astro.props;
 
 const appName = 'SpeakPath';
 const siteUrl = (Astro.site?.href ?? 'https://speakpath.dev').replace(/\/$/, '');
+const languageLinks = locales.map((code) => ({
+  ...localeLabels[code],
+  code,
+  href: getLocalizedPath(code),
+}));
 ---
 
 <!doctype html>
-<html lang="en" class="dark">
+<html lang={locale} class="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -38,7 +68,21 @@ const siteUrl = (Astro.site?.href ?? 'https://speakpath.dev').replace(/\/$/, '')
     <meta property="og:image:alt"    content="SpeakPath — AI language conversation practice" />
     <meta property="og:image:width"  content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:locale"       content="en_US" />
+    <meta property="og:locale"       content={ogLocale} />
+    {locales
+      .filter((code) => code !== locale)
+      .map((code) => (
+        <meta property="og:locale:alternate" content={localeOgLocales[code]} />
+      ))}
+
+    {languageLinks.map((link) => (
+      <link
+        rel="alternate"
+        hreflang={link.code}
+        href={`${siteUrl}${link.href === '/' ? '' : link.href}`}
+      />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={siteUrl} />
 
     <!-- Twitter / X Card -->
     <meta name="twitter:card"        content="summary_large_image" />
@@ -61,7 +105,7 @@ const siteUrl = (Astro.site?.href ?? 'https://speakpath.dev').replace(/\/$/, '')
       "applicationSubCategory": "Language Learning",
       "operatingSystem": "Web",
       "browserRequirements": "Requires a modern browser with microphone access",
-      "inLanguage": ["en", "es", "fr", "de"],
+      "inLanguage": locales,
       "offers": {
         "@type": "Offer",
         "price": "0",
@@ -125,19 +169,44 @@ const siteUrl = (Astro.site?.href ?? 'https://speakpath.dev').replace(/\/$/, '')
   <body>
     <!-- Top nav -->
     <nav class="fixed top-0 w-full z-50 bg-surface/95 backdrop-blur-sm border-b border-outline-variant/10">
-      <div class="flex justify-between items-center px-6 md:px-8 py-5 max-w-7xl mx-auto">
+      <div class="flex justify-between items-center gap-4 px-6 md:px-8 py-5 max-w-7xl mx-auto">
         <a href="/" class="flex items-center gap-2 no-underline">
           <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">
             graphic_eq
           </span>
           <span class="text-xl font-bold tracking-tighter text-primary font-headline">SpeakPath</span>
         </a>
-        <a
-          href="https://app.speakpath.dev"
-          class="text-on-surface-variant font-medium hover:text-tertiary transition-colors duration-300 text-sm"
-        >
-          Sign In
-        </a>
+        <div class="flex items-center gap-4 sm:gap-5">
+          <div class="flex items-center gap-2" aria-label={nav.languageSwitcherLabel}>
+            {languageLinks.map((link) => {
+              const isActive = link.code === locale;
+              return (
+                <a
+                  href={link.href}
+                  hreflang={link.code}
+                  lang={link.code}
+                  title={link.nativeLabel}
+                  aria-current={isActive ? 'page' : undefined}
+                  class:list={[
+                    'rounded-full px-3 py-1.5 text-xs font-headline tracking-[0.16em] uppercase transition-colors duration-300',
+                    isActive
+                      ? 'bg-primary text-surface'
+                      : 'text-on-surface-variant hover:text-tertiary hover:bg-surface-container',
+                  ]}
+                >
+                  {link.code}
+                </a>
+              );
+            })}
+          </div>
+
+          <a
+            href="https://app.speakpath.dev"
+            class="text-on-surface-variant font-medium hover:text-tertiary transition-colors duration-300 text-sm"
+          >
+            {nav.signIn}
+          </a>
+        </div>
       </div>
     </nav>
 
@@ -154,18 +223,18 @@ const siteUrl = (Astro.site?.href ?? 'https://speakpath.dev').replace(/\/$/, '')
         <div class="flex flex-col gap-3 items-center md:items-start">
           <div class="text-lg font-bold text-primary font-headline tracking-tight">SpeakPath</div>
           <p class="text-on-surface-variant text-sm text-center md:text-left">
-            © {new Date().getFullYear()} SpeakPath. Precision Audio Engineering for Fluency.
+            © {new Date().getFullYear()} SpeakPath. {footer.tagline}
           </p>
         </div>
         <div class="flex gap-8">
           <a href="#" class="text-on-surface-variant text-sm font-label hover:text-tertiary underline-offset-4 hover:underline transition-colors">
-            Privacy
+            {footer.privacy}
           </a>
           <a href="#" class="text-on-surface-variant text-sm font-label hover:text-tertiary underline-offset-4 hover:underline transition-colors">
-            Contact
+            {footer.contact}
           </a>
           <a href="https://github.com" class="text-on-surface-variant text-sm font-label hover:text-tertiary underline-offset-4 hover:underline transition-colors">
-            GitHub
+            {footer.github}
           </a>
         </div>
       </div>

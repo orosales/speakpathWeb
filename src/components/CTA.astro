@@ -1,5 +1,13 @@
 ---
+import type { LocalizedPageCopy } from '../i18n/site';
+
 const APP_URL = 'https://app.speakpath.dev';
+
+interface Props {
+  copy: LocalizedPageCopy['cta'];
+}
+
+const { copy } = Astro.props;
 ---
 
 <section class="relative px-6 py-32 text-center max-w-4xl mx-auto overflow-hidden">
@@ -16,17 +24,17 @@ const APP_URL = 'https://app.speakpath.dev';
 
   <div class="relative">
     <p class="text-tertiary text-xs font-headline tracking-[0.2em] uppercase font-semibold mb-6">
-      Start today
+      {copy.eyebrow}
     </p>
 
     <h2
       class="font-headline text-4xl md:text-6xl font-extrabold tracking-display mb-6 leading-tight"
     >
-      Ready to start<br />speaking?
+      {copy.title.line1}<br />{copy.title.line2}
     </h2>
 
     <p class="text-on-surface-variant text-xl mb-12 font-body">
-      No credit card. No setup. Just open it and talk.
+      {copy.body}
     </p>
 
     <a
@@ -34,7 +42,7 @@ const APP_URL = 'https://app.speakpath.dev';
       class="inline-flex items-center gap-3 px-10 py-5 rounded-full font-bold text-xl font-headline group transition-all duration-300 hover:scale-105"
       style="background: linear-gradient(135deg, #58f5d1, #1cd0ad); color: #003f33; box-shadow: 0 0 40px rgba(88,245,209,0.2);"
     >
-      Try SpeakPath Free
+      {copy.button}
       <span
         class="material-symbols-outlined"
         style="transition: transform 0.2s ease;"

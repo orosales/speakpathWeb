@@ -1,0 +1,20 @@
+---
+import LandingPage from '../../components/LandingPage.astro';
+import { getLocaleCopy, isLocale, locales, type Locale } from '../../i18n/site';
+
+export function getStaticPaths() {
+  return locales
+    .filter((locale) => locale !== 'en')
+    .map((locale) => ({ params: { lang: locale } }));
+}
+
+const langParam = Astro.params.lang;
+
+if (!isLocale(langParam) || langParam === 'en') {
+  throw new Error(`Unsupported locale: ${langParam ?? 'undefined'}`);
+}
+
+const locale = langParam as Locale;
+---
+
+<LandingPage locale={locale} copy={getLocaleCopy(locale)} />
