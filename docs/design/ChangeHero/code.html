@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Manrope:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#140026",
+                        "surface-container-high": "#0b203d",
+                        "error-container": "#9f0519",
+                        "background": "#010e24",
+                        "on-secondary": "#394969",
+                        "primary-fixed": "#58f5d1",
+                        "surface-tint": "#58f5d1",
+                        "on-primary": "#005949",
+                        "surface-dim": "#010e24",
+                        "tertiary-dim": "#c87dff",
+                        "on-secondary-fixed-variant": "#435273",
+                        "tertiary-fixed": "#d498ff",
+                        "on-tertiary": "#350057",
+                        "error": "#ff716c",
+                        "surface-variant": "#102645",
+                        "inverse-primary": "#006c58",
+                        "tertiary-container": "#bd64ff",
+                        "on-error": "#490006",
+                        "surface-container-low": "#02132b",
+                        "on-surface-variant": "#9eabc8",
+                        "secondary-container": "#374767",
+                        "secondary-dim": "#b6c6ed",
+                        "primary-container": "#1cd0ad",
+                        "error-dim": "#d7383b",
+                        "surface-container-lowest": "#000000",
+                        "on-secondary-container": "#c0d0f7",
+                        "tertiary-fixed-dim": "#cb85ff",
+                        "surface": "#010e24",
+                        "on-primary-fixed": "#004437",
+                        "tertiary": "#c87dff",
+                        "on-tertiary-fixed-variant": "#5a008f",
+                        "on-error-container": "#ffa8a3",
+                        "secondary-fixed": "#c4d4fb",
+                        "on-surface": "#dbe6ff",
+                        "primary": "#58f5d1",
+                        "secondary": "#c4d4fb",
+                        "on-tertiary-fixed": "#290045",
+                        "on-primary-fixed-variant": "#006452",
+                        "primary-dim": "#45e7c3",
+                        "on-secondary-fixed": "#263655",
+                        "on-background": "#dbe6ff",
+                        "on-primary-container": "#003f33",
+                        "primary-fixed-dim": "#45e7c3",
+                        "surface-container": "#061934",
+                        "inverse-surface": "#f9f9ff",
+                        "secondary-fixed-dim": "#b6c6ed",
+                        "surface-container-highest": "#102645",
+                        "outline-variant": "#3b4861",
+                        "surface-bright": "#152c4e",
+                        "inverse-on-surface": "#48556e",
+                        "outline": "#687690"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Manrope"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #010e24; }
+        .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass-effect {
+            background: rgba(11, 32, 61, 0.4);
+            backdrop-filter: blur(24px);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary/30 overflow-x-hidden">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#010e24] dark:bg-[#010e24]">
+<div class="flex justify-between items-center px-8 py-6 max-w-7xl mx-auto">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#58f5d1] text-3xl" data-icon="graphic_eq">graphic_eq</span>
+<span class="text-2xl font-bold tracking-tighter text-[#58f5d1]">SpeakPath</span>
+</div>
+<div class="hidden md:flex items-center gap-10">
+<a class="text-[#58f5d1] border-b-2 border-[#58f5d1] hover:text-[#c87dff] transition-colors duration-300" href="#">Home</a>
+<a class="text-slate-400 font-medium hover:text-[#c87dff] transition-colors duration-300" href="#">Features</a>
+<a class="text-slate-400 font-medium hover:text-[#c87dff] transition-colors duration-300" href="#">Pricing</a>
+<a class="text-slate-400 font-medium hover:text-[#c87dff] transition-colors duration-300" href="#">Research</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-[#58f5d1] font-bold hover:text-[#c87dff] transition-colors duration-300 scale-95 duration-200 ease-in-out">Sign In</button>
+</div>
+</div>
+</nav>
+<main class="relative pt-32 pb-24 overflow-hidden">
+<!-- Ambient Glow Elements -->
+<div class="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="absolute bottom-[20%] right-[-5%] w-[600px] h-[600px] bg-tertiary/10 rounded-full blur-[150px] pointer-events-none"></div>
+<div class="max-w-7xl mx-auto px-8 relative z-10">
+<div class="flex flex-col lg:flex-row items-center justify-between gap-16">
+<!-- Left Content: The Identity Anchor -->
+<div class="w-full lg:w-1/2 flex flex-col items-start space-y-8">
+<div class="space-y-4">
+<span class="inline-block py-1 px-4 rounded-full bg-secondary-container text-primary font-label text-xs font-bold tracking-widest uppercase">
+                            AI-Powered Fluency Engine
+                        </span>
+<h1 class="font-headline text-5xl md:text-7xl font-extrabold text-on-surface leading-[1.1] tracking-[-4%]">
+                            Speak. <br/>
+<span class="bg-gradient-to-r from-primary to-primary-container bg-clip-text text-transparent">Learn.</span> <br/>
+                            Improve.
+                        </h1>
+<p class="text-on-surface-variant text-lg md:text-xl max-w-lg leading-relaxed font-body">
+                            Master any language with high-precision audio analysis. SpeakPath uses neural frequency mapping to refine your accent and rhythm in real-time.
+                        </p>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-6 w-full sm:w-auto items-start">
+<button class="group relative px-8 py-5 rounded-xl bg-gradient-to-br from-primary to-primary-container text-on-primary-container font-bold text-lg flex items-center gap-3 transition-all duration-300 hover:shadow-[0_0_30px_rgba(88,245,209,0.4)] hover:scale-105 active:scale-95">
+                            Start Practicing Free
+                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Right Content: The Visual Instrument -->
+<div class="w-full lg:w-1/2 flex justify-center lg:justify-end">
+<div class="relative w-full max-w-lg aspect-square flex items-center justify-center">
+<!-- Floating Glass Interface -->
+<div class="glass-effect p-12 rounded-[40px] border border-outline-variant/10 shadow-2xl relative z-10 w-full">
+<div class="flex flex-col items-center gap-12">
+<!-- Equalizer Visualization -->
+<div class="flex items-end justify-center gap-2 h-48 w-full">
+<div class="w-3 rounded-full bg-gradient-to-t from-primary to-transparent h-[40%]"></div>
+<div class="w-3 rounded-full bg-gradient-to-t from-primary to-transparent h-[70%]"></div>
+<div class="w-3 rounded-full bg-gradient-to-t from-primary to-transparent h-[55%]"></div>
+<div class="w-3 rounded-full bg-gradient-to-t from-tertiary to-transparent h-[90%]"></div>
+<div class="w-3 rounded-full bg-gradient-to-t from-primary to-transparent h-[35%]"></div>
+<div class="w-3 rounded-full bg-gradient-to-t from-primary to-transparent h-[65%]"></div>
+<div class="w-3 rounded-full bg-gradient-to-t from-tertiary to-transparent h-[85%]"></div>
+<div class="w-3 rounded-full bg-gradient-to-t from-primary to-transparent h-[50%]"></div>
+<div class="w-3 rounded-full bg-gradient-to-t from-primary to-transparent h-[75%]"></div>
+<div class="w-3 rounded-full bg-gradient-to-t from-primary to-transparent h-[45%]"></div>
+</div>
+<!-- Core Interaction Unit -->
+<div class="flex items-center gap-6">
+<div class="w-20 h-20 rounded-full bg-surface-bright flex items-center justify-center shadow-[0_0_25px_rgba(88,245,209,0.3)] relative">
+<div class="absolute inset-0 rounded-full border-2 border-primary/20 animate-ping"></div>
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="mic" data-weight="fill">mic</span>
+</div>
+<div class="space-y-1">
+<div class="text-xs font-label text-primary font-bold tracking-widest uppercase">AI COMPANION</div>
+<div class="text-on-surface font-headline font-bold text-xl">Responding in Real-time...</div>
+<div class="flex gap-1 h-1 w-full rounded-full bg-surface-container overflow-hidden">
+<div class="w-3/4 h-full bg-primary"></div>
+</div><div class="text-[10px] text-on-surface-variant/70 mt-1 uppercase tracking-wider">French • English • German • Spanish</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Secondary Floating Card -->
+<!-- Atmospheric Glow Backdrops -->
+<div class="absolute inset-0 bg-primary/5 rounded-full blur-[80px] -z-10"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Content Sections (Asymmetric Layout Example) -->
+<section class="py-24 bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-8">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<div class="p-10 rounded-[32px] bg-surface-container space-y-6 transition-all hover:bg-surface-container-high group border border-outline-variant/5">
+<div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="waves">waves</span>
+</div>
+<h3 class="font-headline text-2xl font-bold">Sonic Accuracy</h3>
+<p class="text-on-surface-variant font-body">Capture every nuance. Our engine detects pitch, tone, and inflection with studio-grade precision.</p>
+</div>
+<div class="p-10 rounded-[32px] bg-surface-container space-y-6 transition-all hover:bg-surface-container-high group border border-outline-variant/5">
+<div class="w-14 h-14 rounded-2xl bg-tertiary/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-tertiary text-3xl" data-icon="monitoring">monitoring</span>
+</div>
+<h3 class="font-headline text-2xl font-bold">Visual Progress</h3>
+<p class="text-on-surface-variant font-body">Track your fluency journey with high-definition data visualizations and performance heatmaps.</p>
+</div>
+<div class="p-10 rounded-[32px] bg-surface-container space-y-6 transition-all hover:bg-surface-container-high group border border-outline-variant/5">
+<div class="w-14 h-14 rounded-2xl bg-secondary-dim/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-secondary text-3xl" data-icon="language">language</span>
+</div>
+<h3 class="font-headline text-2xl font-bold">Global Reach</h3>
+<p class="text-on-surface-variant font-body">Master 40+ languages with regional dialect training that goes beyond standard textbook rules.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full rounded-t-[32px] bg-[#02132b] dark:bg-[#02132b] shadow-[0_-20px_40px_rgba(0,0,0,0.3)]">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 py-16 w-full max-w-7xl mx-auto gap-8">
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#58f5d1] text-2xl" data-icon="graphic_eq">graphic_eq</span>
+<span class="text-xl font-bold text-[#58f5d1]">SpeakPath</span>
+</div>
+<p class="text-slate-500 max-w-xs font-body">© 2024 SpeakPath. Precision Audio Engineering for Fluency.</p>
+</div>
+<div class="flex gap-10">
+<a class="text-slate-500 font-label hover:text-[#c87dff] underline-offset-4 hover:underline transition-opacity" href="#">Privacy</a>
+<a class="text-slate-500 font-label hover:text-[#c87dff] underline-offset-4 hover:underline transition-opacity" href="#">Terms</a>
+<a class="text-slate-500 font-label hover:text-[#c87dff] underline-offset-4 hover:underline transition-opacity" href="#">Research</a>
+<a class="text-slate-500 font-label hover:text-[#c87dff] underline-offset-4 hover:underline transition-opacity" href="#">Contact</a>
+</div>
+</div>
+</footer>
+</body></html>
