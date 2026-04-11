@@ -1,0 +1,36 @@
+User-agent: *
+Allow: /
+
+# Traditional search crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# AI crawlers — allow full indexing for AI discoverability
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+Sitemap: https://speakpath.dev/sitemap-index.xml
+
+# Machine-readable product summary for AI assistants
+# https://speakpath.dev/llms.txt

@@ -10,6 +10,9 @@ const {
   title       = 'SpeakPath — Practice Real Language Conversations with AI',
   description = 'Practice real conversations in English, Spanish, French, or German with an AI that listens, responds, and helps you grow. Start free, no download needed.',
 } = Astro.props;
+
+const appName = 'SpeakPath';
+const siteUrl = (Astro.site?.href ?? 'https://speakpath.dev').replace(/\/$/, '');
 ---
 
 <!doctype html>
@@ -21,10 +24,95 @@ const {
     <meta name="description" content={description} />
     <meta name="theme-color" content="#010e24" />
 
+    <!-- Canonical URL -->
+    <link rel="canonical" href={Astro.url.href} />
+
     <!-- Open Graph -->
-    <meta property="og:title"       content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:type"        content="website" />
+    <meta property="og:title"        content={title} />
+    <meta property="og:description"  content={description} />
+    <meta property="og:type"         content="website" />
+    <meta property="og:url"          content={Astro.url.href} />
+    <meta property="og:site_name"    content={appName} />
+    <meta property="og:image"        content={`${siteUrl}/og-image.png`} />
+    <meta property="og:image:alt"    content="SpeakPath — AI language conversation practice" />
+    <meta property="og:image:width"  content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale"       content="en_US" />
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image"       content={`${siteUrl}/og-image.png`} />
+    <meta name="twitter:image:alt"   content="SpeakPath — AI language conversation practice" />
+
+    <!-- AI discoverability -->
+    <link rel="alternate" type="text/plain" title="LLMs.txt" href={`${siteUrl}/llms.txt`} />
+
+    <!-- JSON-LD Structured Data: SoftwareApplication -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": appName,
+      "description": description,
+      "url": siteUrl,
+      "applicationCategory": "EducationApplication",
+      "applicationSubCategory": "Language Learning",
+      "operatingSystem": "Web",
+      "browserRequirements": "Requires a modern browser with microphone access",
+      "inLanguage": ["en", "es", "fr", "de"],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "description": "Free tier available — no download required"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": appName,
+        "url": siteUrl
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": appName,
+        "url": siteUrl
+      },
+      "featureList": [
+        "AI-powered voice conversation practice",
+        "Real-time speech recognition and feedback",
+        "Support for English, Spanish, French, and German",
+        "Multiple proficiency levels from beginner to advanced",
+        "No download required — runs in the browser"
+      ]
+    })} />
+
+    <!-- JSON-LD Structured Data: WebSite -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": appName,
+      "url": siteUrl,
+      "description": description,
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": `${siteUrl}/?q={search_term_string}`
+        },
+        "query-input": "required name=search_term_string"
+      }
+    })} />
+
+    <!-- JSON-LD Structured Data: Organization -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": appName,
+      "url": siteUrl,
+      "description": "SpeakPath is an AI-powered language learning platform that helps users practice real conversations in English, Spanish, French, and German.",
+      "sameAs": []
+    })} />
 
     <!-- Material Symbols (icons only — acceptable CDN dependency) -->
     <link
