@@ -177,27 +177,49 @@ const languageLinks = locales.map((code) => ({
           <span class="text-xl font-bold tracking-tighter text-primary font-headline">SpeakPath</span>
         </a>
         <div class="flex items-center gap-4 sm:gap-5">
-          <div class="flex items-center gap-2" aria-label={nav.languageSwitcherLabel}>
-            {languageLinks.map((link) => {
-              const isActive = link.code === locale;
-              return (
-                <a
-                  href={link.href}
-                  hreflang={link.code}
-                  lang={link.code}
-                  title={link.nativeLabel}
-                  aria-current={isActive ? 'page' : undefined}
-                  class:list={[
-                    'rounded-full px-3 py-1.5 text-xs font-headline tracking-[0.16em] uppercase transition-colors duration-300',
-                    isActive
-                      ? 'bg-primary text-surface'
-                      : 'text-on-surface-variant hover:text-tertiary hover:bg-surface-container',
-                  ]}
-                >
-                  {link.code}
-                </a>
-              );
-            })}
+          <!-- Language dropdown -->
+          <div class="relative" id="lang-switcher">
+            <button
+              id="lang-btn"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+              aria-label={nav.languageSwitcherLabel}
+              class="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-headline tracking-[0.16em] uppercase text-on-surface-variant hover:text-tertiary hover:bg-surface-container transition-colors duration-300"
+            >
+              <span class="material-symbols-outlined text-base leading-none" style="font-size:16px">language</span>
+              <span>{locale.toUpperCase()}</span>
+              <span class="material-symbols-outlined text-base leading-none" style="font-size:14px" id="lang-chevron">keyboard_arrow_down</span>
+            </button>
+            <ul
+              id="lang-menu"
+              role="listbox"
+              aria-label={nav.languageSwitcherLabel}
+              class="hidden absolute right-0 mt-2 w-44 rounded-xl bg-surface-container border border-outline-variant/20 shadow-xl overflow-hidden z-50"
+            >
+              {languageLinks.map((link) => {
+                const isActive = link.code === locale;
+                return (
+                  <li role="option" aria-selected={isActive}>
+                    <a
+                      href={link.href}
+                      hreflang={link.code}
+                      lang={link.code}
+                      class:list={[
+                        'flex items-center justify-between px-4 py-2.5 text-sm transition-colors duration-200',
+                        isActive
+                          ? 'text-primary font-semibold bg-surface-container-high'
+                          : 'text-on-surface-variant hover:text-tertiary hover:bg-surface-container-high',
+                      ]}
+                    >
+                      <span>{link.nativeLabel}</span>
+                      {isActive && (
+                        <span class="material-symbols-outlined text-primary" style="font-size:16px">check</span>
+                      )}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
 
           <a
@@ -239,5 +261,25 @@ const languageLinks = locales.map((code) => ({
         </div>
       </div>
     </footer>
+    <script>
+      const btn = document.getElementById('lang-btn');
+      const menu = document.getElementById('lang-menu');
+      const chevron = document.getElementById('lang-chevron');
+
+      btn?.addEventListener('click', () => {
+        const open = !menu?.classList.contains('hidden');
+        menu?.classList.toggle('hidden', open);
+        btn.setAttribute('aria-expanded', String(!open));
+        chevron?.classList.toggle('rotate-180', !open);
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!document.getElementById('lang-switcher')?.contains(e.target as Node)) {
+          menu?.classList.add('hidden');
+          btn?.setAttribute('aria-expanded', 'false');
+          chevron?.classList.remove('rotate-180');
+        }
+      });
+    </script>
   </body>
 </html>

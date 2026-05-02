@@ -235,14 +235,24 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
           body: 'No awkward pauses. Natural back-and-forth conversation, not scripted drills.',
         },
         {
+          icon: 'waving_hand',
+          title: 'Interrupt anytime',
+          body: 'No need to wait for the AI to finish speaking. Jump in at any moment and it stops, listens, and responds — just like a real conversation.',
+        },
+        {
           icon: 'spellcheck',
           title: 'Grammar analysis',
           body: 'Session summary highlights what to work on without interrupting your flow.',
         },
         {
+          icon: 'trending_up',
+          title: 'Progress tracking',
+          body: 'See how your skills improve session over session. Grammar trends, fluency scores, and recurring mistakes — all tracked automatically.',
+        },
+        {
           icon: 'language',
           title: 'Multi-language',
-          body: 'Switch between languages anytime from your dashboard with a single tap.',
+          body: 'Switch languages mid-conversation just by speaking. The AI adapts instantly — no need to stop the session.',
         },
         {
           icon: 'cloud_off',
@@ -253,6 +263,11 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
           icon: 'shield',
           title: 'Private by design',
           body: 'Your voice recordings are never stored longer than needed. Conversations stay yours.',
+        },
+        {
+          icon: 'rate_review',
+          title: 'Built-in feedback',
+          body: 'Found a bug or have an idea? Tap the feedback button and the team sees it directly. We read everything.',
         },
       ],
     },
@@ -267,8 +282,8 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
         'Our team is constantly pushing the boundaries of what AI-powered language learning can be.',
       items: [
         {
-          title: 'Progress tracking & streaks',
-          body: 'Visualize your fluency growth over time with deep session analytics.',
+          title: 'Streaks',
+          body: 'Stay motivated with daily streaks and weekly goals that reward consistent practice.',
         },
         {
           title: 'Speaking insights',
@@ -304,11 +319,11 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
     meta: {
       title: 'SpeakPath — Practica conversaciones reales con IA',
       description:
-        'Practica conversaciones reales en ingles, espanol, frances o aleman con una IA que escucha, responde y te ayuda a mejorar. Empieza gratis, sin descargas.',
+        'Practica conversaciones reales en inglés, español, francés o alemán con una IA que escucha, responde y te ayuda a mejorar. Empieza gratis, sin descargas.',
       ogLocale: 'es_ES',
     },
     nav: {
-      signIn: 'Iniciar sesion',
+      signIn: 'Iniciar sesión',
       languageSwitcherLabel: 'Elegir idioma del sitio',
     },
     hero: {
@@ -319,29 +334,29 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
         bottom: 'Mejora.',
       },
       description:
-        'Domina cualquier idioma con practica de conversacion real. SpeakPath te ayuda a desarrollar confianza, vocabulario y fluidez con sesiones de IA que responden en tiempo real.',
+        'Domina cualquier idioma con práctica de conversación real. SpeakPath te ayuda a desarrollar confianza, vocabulario y fluidez con sesiones de IA que responden en tiempo real.',
       cta: 'Empieza gratis',
       note: 'Sin tarjeta. Empieza en minutos.',
-      companionEyebrow: 'Companero con IA',
+      companionEyebrow: 'Compañero con IA',
       companionTitle: 'Respondiendo en tiempo real...',
-      companionLanguages: 'Frances • Ingles • Aleman • Espanol',
+      companionLanguages: 'Francés • Inglés • Alemán • Español',
     },
     languages: {
       title: 'Elige tu idioma',
-      intro: 'Empieza donde estes. Cambia cuando quieras.',
-      moreSoon: 'Pronto habra mas idiomas.',
+      intro: 'Empieza donde estés. Cambia cuando quieras.',
+      moreSoon: 'Pronto habrá más idiomas.',
       cards: [
-        { flag: '🇺🇸', name: 'Ingles', label: 'Negocios', tagline: 'El idioma global de los negocios' },
-        { flag: '🇪🇸', name: 'Espanol', label: '500M', tagline: '500 millones de hablantes nativos' },
-        { flag: '🇫🇷', name: 'Frances', label: 'Cultura', tagline: 'Romance, cultura y oportunidad' },
-        { flag: '🇩🇪', name: 'Aleman', label: 'Ciencia', tagline: 'Precision, ciencia y crecimiento profesional' },
+        { flag: '🇺🇸', name: 'Inglés', label: 'Negocios', tagline: 'El idioma global de los negocios' },
+        { flag: '🇪🇸', name: 'Español', label: '500M', tagline: '500 millones de hablantes nativos' },
+        { flag: '🇫🇷', name: 'Francés', label: 'Cultura', tagline: 'Romance, cultura y oportunidad' },
+        { flag: '🇩🇪', name: 'Alemán', label: 'Ciencia', tagline: 'Precisión, ciencia y crecimiento profesional' },
       ],
     },
     howItWorks: {
-      eyebrow: 'Como funciona',
+      eyebrow: 'Cómo funciona',
       title: {
-        line1: 'Tan facil como tener',
-        line2: 'una conversacion',
+        line1: 'Tan fácil como tener',
+        line2: 'una conversación',
       },
       stepLabel: 'Paso',
       steps: [
@@ -362,8 +377,8 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
         {
           icon: 'analytics',
           color: 'text-primary',
-          title: 'Recibe retroalimentacion',
-          body: 'Despues de cada sesion, revisa gramatica, vocabulario y tu progreso.',
+          title: 'Recibe retroalimentación',
+          body: 'Después de cada sesión, revisa gramática, vocabulario y tu progreso.',
           offset: false,
         },
       ],
@@ -371,58 +386,73 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
     levels: {
       eyebrow: 'Dificultad',
       title: 'Tu ritmo. Tu nivel.',
-      note: 'Los niveles ajustan automaticamente la dificultad, la complejidad del vocabulario y la profundidad de las respuestas de la IA.',
+      note: 'Los niveles ajustan automáticamente la dificultad, la complejidad del vocabulario y la profundidad de las respuestas de la IA.',
       items: [
         {
           name: 'Principiante',
-          body: 'Frases cortas y simples para construir tu base y tu confianza. Temas cotidianos y vocabulario comun.',
+          body: 'Frases cortas y simples para construir tu base y tu confianza. Temas cotidianos y vocabulario común.',
           fill: 'w-1/3',
         },
         {
           name: 'Intermedio',
-          body: 'Dialogos fluidos sobre la vida diaria, intereses y trabajo. Vocabulario mas amplio y expresiones naturales.',
+          body: 'Diálogos fluidos sobre la vida diaria, intereses y trabajo. Vocabulario más amplio y expresiones naturales.',
           fill: 'w-2/3',
         },
         {
           name: 'Avanzado',
-          body: 'Debates matizados, conversaciones tecnicas, lenguaje idiomatico y profundidad cultural.',
+          body: 'Debates matizados, conversaciones técnicas, lenguaje idiomático y profundidad cultural.',
           fill: 'w-full',
         },
       ],
     },
     features: {
-      eyebrow: 'Por que SpeakPath',
+      eyebrow: 'Por qué SpeakPath',
       title: 'Creado para mejorar de verdad',
       items: [
         {
           icon: 'keyboard_voice',
           title: 'Primero la voz',
-          body: 'Sin escribir. Habla y hazte entender. Interaccion natural optimizada para cualquier microfono.',
+          body: 'Sin escribir. Habla y hazte entender. Interacción natural optimizada para cualquier micrófono.',
         },
         {
           icon: 'bolt',
           title: 'Respuestas con IA en tiempo real',
-          body: 'Sin pausas incomodas. Conversaciones naturales, no ejercicios mecanicos.',
+          body: 'Sin pausas incómodas. Conversaciones naturales, no ejercicios mecánicos.',
+        },
+        {
+          icon: 'waving_hand',
+          title: 'Interrumpe cuando quieras',
+          body: 'No hace falta esperar a que la IA termine de hablar. Empieza a hablar en cualquier momento y ella para, escucha y responde, como en una conversación real.',
         },
         {
           icon: 'spellcheck',
-          title: 'Analisis gramatical',
-          body: 'El resumen de cada sesion destaca que mejorar sin interrumpir tu fluidez.',
+          title: 'Análisis gramatical',
+          body: 'El resumen de cada sesión destaca qué mejorar sin interrumpir tu fluidez.',
+        },
+        {
+          icon: 'trending_up',
+          title: 'Seguimiento de progreso',
+          body: 'Observa cómo mejoran tus habilidades sesión a sesión. Tendencias gramaticales, fluidez y errores recurrentes, todo registrado automáticamente.',
         },
         {
           icon: 'language',
           title: 'Multiidioma',
-          body: 'Cambia de idioma cuando quieras desde tu panel con un solo toque.',
+          body: 'Cambia de idioma durante la conversación simplemente hablando. La IA se adapta al instante sin interrumpir la sesión.',
         },
         {
           icon: 'cloud_off',
           title: 'Sin descargas',
-          body: 'Funciona en cualquier navegador moderno. Cero friccion: abre y habla.',
+          body: 'Funciona en cualquier navegador moderno. Cero fricción: abre y habla.',
         },
         {
           icon: 'shield',
-          title: 'Privacidad por diseno',
-          body: 'Tus grabaciones de voz nunca se guardan mas tiempo del necesario. Tus conversaciones siguen siendo tuyas.',
+          title: 'Privacidad por diseño',
+          body: 'Tus grabaciones de voz nunca se guardan más tiempo del necesario. Tus conversaciones siguen siendo tuyas.',
+        },
+        {
+          icon: 'rate_review',
+          title: 'Comentarios integrados',
+          body: '¿Encontraste un error o tienes una idea? Toca el botón de comentarios y el equipo lo recibe directamente. Leemos todo.',
         },
       ],
     },
@@ -434,23 +464,23 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
         line2: 'el comienzo',
       },
       description:
-        'Nuestro equipo sigue ampliando los limites de lo que puede ser el aprendizaje de idiomas con IA.',
+        'Nuestro equipo sigue ampliando los límites de lo que puede ser el aprendizaje de idiomas con IA.',
       items: [
         {
-          title: 'Seguimiento de progreso y rachas',
-          body: 'Visualiza tu crecimiento en fluidez con analitica profunda de cada sesion.',
+          title: 'Rachas',
+          body: 'Mantente motivado con rachas diarias y metas semanales que recompensan la práctica constante.',
         },
         {
-          title: 'Analisis del habla',
-          body: 'Recibe comentarios mas detallados sobre ritmo, consistencia y fluidez en la conversacion.',
+          title: 'Análisis del habla',
+          body: 'Recibe comentarios más detallados sobre ritmo, consistencia y fluidez en la conversación.',
         },
         {
-          title: 'App movil',
+          title: 'App móvil',
           body: 'Practica en cualquier lugar con apps nativas para iOS y Android.',
         },
         {
           title: 'Tarjetas de vocabulario',
-          body: 'Mazos personalizados generados automaticamente con las palabras que encontraste en tus sesiones.',
+          body: 'Mazos personalizados generados automáticamente con las palabras que encontraste en tus sesiones.',
         },
       ],
     },
@@ -464,7 +494,7 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
       button: 'Probar SpeakPath gratis',
     },
     footer: {
-      tagline: 'Ingenieria de audio de precision para la fluidez.',
+      tagline: 'Ingeniería de audio de precisión para la fluidez.',
       privacy: 'Privacidad',
       contact: 'Contacto',
       github: 'GitHub',
@@ -575,14 +605,24 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
           body: 'Pas de silences genants. Une vraie conversation, pas des exercices scripts.',
         },
         {
+          icon: 'waving_hand',
+          title: 'Interrompez a tout moment',
+          body: 'Pas besoin d attendre que l IA finisse de parler. Prenez la parole a tout instant et elle s arrete, ecoute et repond, comme une vraie conversation.',
+        },
+        {
           icon: 'spellcheck',
           title: 'Analyse grammaticale',
           body: 'Le resume de session montre quoi travailler sans casser votre elan.',
         },
         {
+          icon: 'trending_up',
+          title: 'Suivi de progression',
+          body: 'Voyez comment vos competences s ameliorent session apres session. Tendances grammaticales, fluidite et erreurs recurrentes, tout suivi automatiquement.',
+        },
+        {
           icon: 'language',
           title: 'Multilingue',
-          body: 'Passez d une langue a l autre a tout moment depuis votre tableau de bord.',
+          body: 'Changez de langue en pleine conversation rien qu en parlant. L IA s adapte instantanement sans interrompre la session.',
         },
         {
           icon: 'cloud_off',
@@ -593,6 +633,11 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
           icon: 'shield',
           title: 'Confidentialite integree',
           body: 'Vos enregistrements vocaux ne sont jamais conserves plus longtemps que necessaire. Vos conversations vous appartiennent.',
+        },
+        {
+          icon: 'rate_review',
+          title: 'Retours integres',
+          body: 'Vous avez trouve un bug ou une idee ? Appuyez sur le bouton de retour et l equipe le reçoit directement. On lit tout.',
         },
       ],
     },
@@ -607,8 +652,8 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
         'Notre equipe repousse en permanence les limites de l apprentissage des langues avec l IA.',
       items: [
         {
-          title: 'Suivi des progres et series',
-          body: 'Visualisez votre progression en fluidite grace a des analyses detaillees de session.',
+          title: 'Series',
+          body: 'Restez motive avec des series quotidiennes et des objectifs hebdomadaires qui recompensent une pratique reguliere.',
         },
         {
           title: 'Analyse de prise de parole',
@@ -745,14 +790,24 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
           body: 'Keine peinlichen Pausen. Ein natürlicher Dialog statt starrer Übungen.',
         },
         {
+          icon: 'waving_hand',
+          title: 'Jederzeit unterbrechen',
+          body: 'Du musst nicht warten, bis die KI fertig spricht. Sprich einfach drein — sie hört sofort auf, hört zu und antwortet, ganz wie im echten Gespräch.',
+        },
+        {
           icon: 'spellcheck',
           title: 'Grammatik-Analyse',
           body: 'Die Session-Zusammenfassung zeigt, woran du arbeiten solltest, ohne deinen Flow zu unterbrechen.',
         },
         {
+          icon: 'trending_up',
+          title: 'Fortschrittsverfolgung',
+          body: 'Sieh, wie sich deine Fähigkeiten von Session zu Session verbessern. Grammatiktrends, Flüssigkeitswerte und häufige Fehler — alles automatisch erfasst.',
+        },
+        {
           icon: 'language',
           title: 'Mehrsprachig',
-          body: 'Wechsle jederzeit mit einem Klick zwischen den Sprachen in deinem Dashboard.',
+          body: 'Wechsle die Sprache mitten im Gespräch, einfach durch Sprechen. Die KI passt sich sofort an — ohne die Session zu unterbrechen.',
         },
         {
           icon: 'cloud_off',
@@ -763,6 +818,11 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
           icon: 'shield',
           title: 'Datenschutz by design',
           body: 'Deine Sprachaufnahmen werden nie länger als nötig gespeichert. Deine Gespräche gehören dir.',
+        },
+        {
+          icon: 'rate_review',
+          title: 'Integriertes Feedback',
+          body: 'Einen Fehler gefunden oder eine Idee? Tippe auf den Feedback-Button und das Team sieht es direkt. Wir lesen alles.',
         },
       ],
     },
@@ -777,8 +837,8 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
         'Unser Team verschiebt standig die Grenzen dessen, was KI-gestutztes Sprachenlernen sein kann.',
       items: [
         {
-          title: 'Fortschrittsverfolgung und Serien',
-          body: 'Visualisiere dein Wachstum mit tiefen Analysen über mehrere Sessions hinweg.',
+          title: 'Serien',
+          body: 'Bleib motiviert mit täglichen Serien und wöchentlichen Zielen, die konsequentes Üben belohnen.',
         },
         {
           title: 'Sprechanalyse',
