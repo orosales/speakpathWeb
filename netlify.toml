@@ -10,3 +10,21 @@
   to     = "https://speakpath.com/:splat"
   status = 301
   force  = true
+
+# Hashed assets — cache forever at the CDN edge
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# HTML pages — always revalidate so deploys take effect immediately
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Static files without hashes — short cache
+[[headers]]
+  for = "/favicon.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"

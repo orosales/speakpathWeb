@@ -1,6 +1,6 @@
 export const defaultLocale = 'en';
 
-export const locales = ['en', 'es', 'fr', 'de'] as const;
+export const locales = ['en', 'es', 'fr', 'de', 'pt'] as const;
 
 export type Locale = (typeof locales)[number];
 
@@ -108,6 +108,7 @@ export const localeLabels: Record<Locale, { label: string; nativeLabel: string }
   es: { label: 'Spanish', nativeLabel: 'Español' },
   fr: { label: 'French', nativeLabel: 'Français' },
   de: { label: 'German', nativeLabel: 'Deutsch' },
+  pt: { label: 'Portuguese', nativeLabel: 'Português' },
 };
 
 export const localeOgLocales: Record<Locale, string> = {
@@ -115,6 +116,7 @@ export const localeOgLocales: Record<Locale, string> = {
   es: 'es_ES',
   fr: 'fr_FR',
   de: 'de_DE',
+  pt: 'pt_BR',
 };
 
 export function isLocale(value: string | undefined): value is Locale {
@@ -867,6 +869,191 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
       tagline: 'Präzises Audio-Engineering für echte Sprachflüssigkeit.',
       privacy: 'Datenschutz',
       contact: 'Kontakt',
+      github: 'GitHub',
+    },
+  },
+  pt: {
+    meta: {
+      title: 'SpeakPath — Pratique conversas reais de idiomas com IA',
+      description:
+        'Pratique conversas reais em inglês, espanhol, francês ou alemão com uma IA que escuta, responde e te ajuda a evoluir. Comece grátis, sem download.',
+      ogLocale: 'pt_BR',
+    },
+    nav: {
+      signIn: 'Entrar',
+      languageSwitcherLabel: 'Escolher idioma do site',
+    },
+    hero: {
+      eyebrow: 'Motor de Fluência com IA',
+      title: {
+        top: 'Fale.',
+        accent: 'Aprenda.',
+        bottom: 'Evolua.',
+      },
+      description:
+        'Domine qualquer idioma com prática de conversação real. O SpeakPath te ajuda a desenvolver confiança, vocabulário e fluência com sessões de IA que respondem em tempo real.',
+      cta: 'Comece Gratuitamente',
+      note: 'Sem cartão de crédito. Comece em minutos.',
+      companionEyebrow: 'Companheiro de IA',
+      companionTitle: 'Respondendo em tempo real...',
+      companionLanguages: 'Francês • Inglês • Alemão • Espanhol',
+    },
+    languages: {
+      title: 'Escolha seu idioma',
+      intro: 'Comece onde você está. Mude quando quiser.',
+      moreSoon: 'Mais idiomas em breve.',
+      cards: [
+        { flag: '🇺🇸', name: 'Inglês', label: 'Negócios', tagline: 'O idioma global dos negócios' },
+        { flag: '🇪🇸', name: 'Espanhol', label: '500M', tagline: '500 milhões de falantes nativos' },
+        { flag: '🇫🇷', name: 'Francês', label: 'Cultura', tagline: 'Romance, cultura e oportunidade' },
+        { flag: '🇩🇪', name: 'Alemão', label: 'Ciência', tagline: 'Precisão, ciência e crescimento profissional' },
+      ],
+    },
+    howItWorks: {
+      eyebrow: 'Como funciona',
+      title: {
+        line1: 'Tão fácil quanto ter',
+        line2: 'uma conversa',
+      },
+      stepLabel: 'Passo',
+      steps: [
+        {
+          icon: 'settings_voice',
+          color: 'text-primary',
+          title: 'Escolha o idioma e o nível',
+          body: 'Selecione seu idioma-alvo e seu nível atual, do iniciante ao avançado.',
+          offset: false,
+        },
+        {
+          icon: 'record_voice_over',
+          color: 'text-tertiary',
+          title: 'Comece a falar',
+          body: 'Fale naturalmente. Sem digitar, sem atraso. A IA escuta e responde em tempo real.',
+          offset: true,
+        },
+        {
+          icon: 'analytics',
+          color: 'text-primary',
+          title: 'Receba feedback',
+          body: 'Após cada sessão, revise gramática, vocabulário e seu progresso.',
+          offset: false,
+        },
+      ],
+    },
+    levels: {
+      eyebrow: 'Dificuldade',
+      title: 'Seu ritmo. Seu nível.',
+      note: 'Os níveis ajustam automaticamente a dificuldade, a complexidade do vocabulário e a profundidade das respostas da IA.',
+      items: [
+        {
+          name: 'Iniciante',
+          body: 'Frases curtas e simples para construir sua base e confiança. Temas do dia a dia e vocabulário comum.',
+          fill: 'w-1/3',
+        },
+        {
+          name: 'Intermediário',
+          body: 'Diálogos fluidos sobre o cotidiano, interesses e trabalho. Vocabulário mais amplo e expressões naturais.',
+          fill: 'w-2/3',
+        },
+        {
+          name: 'Avançado',
+          body: 'Debates aprofundados, discussões técnicas, linguagem idiomática e mergulhos culturais.',
+          fill: 'w-full',
+        },
+      ],
+    },
+    features: {
+      eyebrow: 'Por que o SpeakPath',
+      title: 'Feito para uma evolução real',
+      items: [
+        {
+          icon: 'keyboard_voice',
+          title: 'Voz em primeiro lugar',
+          body: 'Sem digitar. Fale e seja ouvido. Interação de fala natural otimizada para qualquer microfone.',
+        },
+        {
+          icon: 'bolt',
+          title: 'Respostas de IA em tempo real',
+          body: 'Sem pausas constrangedoras. Conversa natural de verdade, não exercícios roteirizados.',
+        },
+        {
+          icon: 'waving_hand',
+          title: 'Interrompa a qualquer momento',
+          body: 'Não precisa esperar a IA terminar de falar. Entre na conversa quando quiser e ela para, escuta e responde — exatamente como uma conversa real.',
+        },
+        {
+          icon: 'spellcheck',
+          title: 'Análise gramatical',
+          body: 'O resumo da sessão destaca o que melhorar sem interromper seu fluxo.',
+        },
+        {
+          icon: 'trending_up',
+          title: 'Acompanhamento de progresso',
+          body: 'Veja como suas habilidades evoluem sessão a sessão. Tendências de gramática, pontuações de fluência e erros recorrentes — tudo registrado automaticamente.',
+        },
+        {
+          icon: 'language',
+          title: 'Multilíngue',
+          body: 'Mude de idioma no meio da conversa apenas falando. A IA se adapta na hora — sem precisar encerrar a sessão.',
+        },
+        {
+          icon: 'cloud_off',
+          title: 'Sem downloads',
+          body: 'Funciona perfeitamente em qualquer navegador moderno. Zero atrito — abra e fale.',
+        },
+        {
+          icon: 'shield',
+          title: 'Privacidade por design',
+          body: 'Suas gravações de voz nunca são armazenadas por mais tempo do que o necessário. Suas conversas são suas.',
+        },
+        {
+          icon: 'rate_review',
+          title: 'Feedback integrado',
+          body: 'Encontrou um bug ou tem uma ideia? Toque no botão de feedback e a equipe vê diretamente. Lemos tudo.',
+        },
+      ],
+    },
+    comingSoon: {
+      eyebrow: 'Roadmap',
+      badge: 'Em breve',
+      title: {
+        line1: 'Isso é só',
+        line2: 'o começo',
+      },
+      description:
+        'Nossa equipe está constantemente expandindo os limites do que o aprendizado de idiomas com IA pode ser.',
+      items: [
+        {
+          title: 'Sequências',
+          body: 'Mantenha-se motivado com sequências diárias e metas semanais que recompensam a prática consistente.',
+        },
+        {
+          title: 'Análise de fala',
+          body: 'Receba feedback mais detalhado sobre ritmo, consistência e fluidez na conversa.',
+        },
+        {
+          title: 'App mobile',
+          body: 'Leve sua prática para qualquer lugar com apps nativos para iOS e Android.',
+        },
+        {
+          title: 'Flashcards de vocabulário',
+          body: 'Decks personalizados gerados automaticamente com palavras que você encontrou em suas sessões.',
+        },
+      ],
+    },
+    cta: {
+      eyebrow: 'Comece hoje',
+      title: {
+        line1: 'Pronto para começar',
+        line2: 'a falar?',
+      },
+      body: 'Sem cartão de crédito. Comece em minutos.',
+      button: 'Experimente o SpeakPath Grátis',
+    },
+    footer: {
+      tagline: 'Engenharia de áudio de precisão para fluência.',
+      privacy: 'Privacidade',
+      contact: 'Contato',
       github: 'GitHub',
     },
   },
