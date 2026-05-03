@@ -1,24 +1,65 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <!-- Background -->
-  <rect width="32" height="32" rx="7" fill="#010e24"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">SpeakPath favicon</title>
+  <desc id="desc">A rounded dark square with a gradient S-shaped speech path and white voice waveform.</desc>
 
-  <!-- Audio bars: 9 bars, mountain shape, alternating teal/purple -->
-  <!-- teal -->
-  <rect x="0.5"  y="22" width="2.5" height="7"  rx="1.2" fill="#58f5d1"/>
-  <!-- purple -->
-  <rect x="4"    y="18" width="2.5" height="11" rx="1.2" fill="#c87dff"/>
-  <!-- teal -->
-  <rect x="7.5"  y="14" width="2.5" height="15" rx="1.2" fill="#58f5d1"/>
-  <!-- purple -->
-  <rect x="11"   y="9"  width="2.5" height="20" rx="1.2" fill="#c87dff"/>
-  <!-- teal — peak -->
-  <rect x="14.5" y="6"  width="2.5" height="23" rx="1.2" fill="#58f5d1"/>
-  <!-- purple -->
-  <rect x="18"   y="9"  width="2.5" height="20" rx="1.2" fill="#c87dff"/>
-  <!-- teal -->
-  <rect x="21.5" y="14" width="2.5" height="15" rx="1.2" fill="#58f5d1"/>
-  <!-- purple -->
-  <rect x="25"   y="18" width="2.5" height="11" rx="1.2" fill="#c87dff"/>
-  <!-- teal -->
-  <rect x="28.5" y="22" width="2.5" height="7"  rx="1.2" fill="#58f5d1"/>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#070b16"/>
+      <stop offset="1" stop-color="#0d1930"/>
+    </linearGradient>
+
+    <linearGradient id="sGradient" x1="250" y1="180" x2="790" y2="820" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#b000ff"/>
+      <stop offset="0.43" stop-color="#4f73ff"/>
+      <stop offset="0.72" stop-color="#009dff"/>
+      <stop offset="1" stop-color="#21f4d4"/>
+    </linearGradient>
+
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- App icon background -->
+  <rect x="128" y="128" width="768" height="768" rx="160" fill="url(#bg)" stroke="#26334f" stroke-width="2" filter="url(#softShadow)"/>
+
+  <!-- Top part of S -->
+  <path d="M684 292
+           H492
+           C373 292 293 374 293 487
+           C293 598 381 671 497 671
+           H584"
+        fill="none"
+        stroke="url(#sGradient)"
+        stroke-width="74"
+        stroke-linecap="round"/>
+
+  <!-- Middle and lower part of S / speech bubble path -->
+  <path d="M449 425
+           H590
+           C702 425 770 496 770 594
+           C770 699 693 767 574 767
+           H365
+           C342 767 318 783 306 806
+           L276 863"
+        fill="none"
+        stroke="url(#sGradient)"
+        stroke-width="74"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+  <!-- Small inner blue stroke under waveform -->
+  <path d="M340 624 H586" fill="none" stroke="#4f73ff" stroke-width="12" stroke-linecap="round"/>
+
+  <!-- Voice waveform -->
+  <g fill="#ffffff">
+    <rect x="387" y="526" width="20" height="52" rx="10"/>
+    <rect x="421" y="506" width="22" height="92" rx="11"/>
+    <rect x="463" y="481" width="24" height="142" rx="12"/>
+    <rect x="509" y="452" width="26" height="200" rx="13"/>
+    <rect x="556" y="468" width="25" height="230" rx="13"/>
+    <rect x="601" y="487" width="24" height="158" rx="12"/>
+    <rect x="645" y="514" width="23" height="86" rx="11"/>
+    <rect x="688" y="530" width="20" height="48" rx="10"/>
+  </g>
 </svg>

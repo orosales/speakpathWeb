@@ -689,9 +689,9 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
   },
   de: {
     meta: {
-      title: 'SpeakPath — Übe echte Gespräche mit KI',
+      title: 'SpeakPath — Sprachen lernen mit KI | Sprechen üben',
       description:
-        'Übe echte Gespräche auf Englisch, Spanisch, Französisch oder Deutsch mit einer KI, die zuhört, antwortet und dir beim Fortschritt hilft. Starte kostenlos, ohne Download.',
+        'KI-App zum Sprechen üben: Englisch, Spanisch, Französisch oder Deutsch. Echte Konversationen mit KI in Echtzeit. Kostenloser Sprachkurs online – kein Download nötig.',
       ogLocale: 'de_DE',
     },
     nav: {
