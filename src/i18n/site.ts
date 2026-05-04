@@ -99,7 +99,6 @@ export interface LocalizedPageCopy {
     tagline: string;
     privacy: string;
     contact: string;
-    github: string;
   };
 }
 
@@ -314,7 +313,6 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
       tagline: 'Precision Audio Engineering for Fluency.',
       privacy: 'Privacy',
       contact: 'Contact',
-      github: 'GitHub',
     },
   },
   es: {
@@ -499,7 +497,6 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
       tagline: 'Ingeniería de audio de precisión para la fluidez.',
       privacy: 'Privacidad',
       contact: 'Contacto',
-      github: 'GitHub',
     },
   },
   fr: {
@@ -684,7 +681,6 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
       tagline: 'Ingenierie audio de precision au service de la fluidite.',
       privacy: 'Confidentialite',
       contact: 'Contact',
-      github: 'GitHub',
     },
   },
   de: {
@@ -869,7 +865,6 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
       tagline: 'Präzises Audio-Engineering für echte Sprachflüssigkeit.',
       privacy: 'Datenschutz',
       contact: 'Kontakt',
-      github: 'GitHub',
     },
   },
   pt: {
@@ -1054,7 +1049,6 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
       tagline: 'Engenharia de áudio de precisão para fluência.',
       privacy: 'Privacidade',
       contact: 'Contato',
-      github: 'GitHub',
     },
   },
 };

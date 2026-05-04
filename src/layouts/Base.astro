@@ -15,7 +15,6 @@ interface Props {
     tagline: string;
     privacy: string;
     contact: string;
-    github: string;
   };
 }
 
@@ -32,7 +31,6 @@ const {
     tagline: 'Precision Audio Engineering for Fluency.',
     privacy: 'Privacy',
     contact: 'Contact',
-    github: 'GitHub',
   },
 } = Astro.props;
 
@@ -249,14 +247,11 @@ const languageLinks = locales.map((code) => ({
           </p>
         </div>
         <div class="flex gap-8">
-          <a href="#" class="text-on-surface-variant text-sm font-label hover:text-tertiary underline-offset-4 hover:underline transition-colors">
+          <a href="/privacy" class="text-on-surface-variant text-sm font-label hover:text-tertiary underline-offset-4 hover:underline transition-colors">
             {footer.privacy}
           </a>
           <a href="#" class="text-on-surface-variant text-sm font-label hover:text-tertiary underline-offset-4 hover:underline transition-colors">
             {footer.contact}
-          </a>
-          <a href="https://github.com" class="text-on-surface-variant text-sm font-label hover:text-tertiary underline-offset-4 hover:underline transition-colors">
-            {footer.github}
           </a>
         </div>
       </div>
