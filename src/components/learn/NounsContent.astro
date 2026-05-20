@@ -1,0 +1,267 @@
+---
+interface Props {
+  locale?: string;
+}
+const { locale = 'en' } = Astro.props;
+type SupportedLocale = 'en' | 'es' | 'fr' | 'de' | 'pt';
+
+const currentLocale: SupportedLocale = ['en', 'es', 'fr', 'de', 'pt'].includes(locale)
+  ? (locale as SupportedLocale)
+  : 'en';
+
+const localizedCopy = {
+  en: {
+    title: 'Core Nouns',
+    intro: 'A limited set of nouns shows up in almost every real conversation. Learn these by category — they give you the vocabulary to talk about any situation with clarity.',
+    vocabTitle: 'Vocabulary by Category',
+    uncountableTitle: 'Nouns learners often get wrong (Uncountable)',
+    uncountableDesc: 'These nouns cannot be pluralized or used with "a / an" directly. They are common sources of errors even at intermediate level.',
+    uncountableTypeLabel: 'uncountable',
+    collocationsTitle: 'Key Collocations (Noun + Verb / Adjective)',
+    collocationsDesc: 'Collocations are words that naturally go together. Knowing them makes your English sound fluent, not just correct.',
+    collocationsNounHeader: 'Noun',
+    collocationsColHeader: 'Natural Collocations',
+    pluralsTitle: 'Agreement: tricky plurals',
+    pluralSingHeader: 'Singular',
+    pluralPluHeader: 'Plural',
+    pluralNoteHeader: 'Note',
+    whyTitle: 'Why this helps your speaking',
+    whyBody: 'In conversation, the speaker who reaches for the right noun instantly — "issue" not "problem with", "opportunity" not "chance to do something" — sounds natural and prepared. Vocabulary is not about knowing every word. It is about having the right words immediately available. Build this list slowly but actively: use one new noun from each category in every practice session.',
+  },
+  es: {
+    title: 'Sustantivos clave',
+    intro: 'Un conjunto limitado de sustantivos aparece en casi todas las conversaciones reales. Apréndelos por categoría: te darán el vocabulario para hablar de cualquier situación con claridad.',
+    vocabTitle: 'Vocabulario por categoría',
+    uncountableTitle: 'Sustantivos que los estudiantes suelen usar mal (incontables)',
+    uncountableDesc: 'Estos sustantivos no se pueden pluralizar ni usar directamente con "a / an". Son fuentes comunes de errores incluso en nivel intermedio.',
+    uncountableTypeLabel: 'incontable',
+    collocationsTitle: 'Colocaciones clave (sustantivo + verbo / adjetivo)',
+    collocationsDesc: 'Las colocaciones son palabras que van juntas de forma natural. Conocerlas hace que tu inglés suene fluido, no solo correcto.',
+    collocationsNounHeader: 'Sustantivo',
+    collocationsColHeader: 'Colocaciones naturales',
+    pluralsTitle: 'Concordancia: plurales complicados',
+    pluralSingHeader: 'Singular',
+    pluralPluHeader: 'Plural',
+    pluralNoteHeader: 'Nota',
+    whyTitle: 'Por qué esto ayuda a hablar',
+    whyBody: 'En una conversación, quien alcanza el sustantivo correcto de inmediato — "issue" en lugar de "problem with", "opportunity" en lugar de "chance to do something" — suena natural y preparado. El vocabulario no consiste en conocer todas las palabras. Consiste en tener las palabras correctas disponibles de inmediato. Construye esta lista despacio pero activamente: usa un sustantivo nuevo de cada categoría en cada sesión de práctica.',
+  },
+  fr: {
+    title: 'Noms essentiels',
+    intro: 'Un petit nombre de noms revient dans presque toutes les conversations réelles. Apprenez-les par catégorie — ils vous donnent le vocabulaire pour parler de n\'importe quelle situation avec clarté.',
+    vocabTitle: 'Vocabulaire par catégorie',
+    uncountableTitle: 'Noms souvent mal utilisés par les apprenants (indénombrables)',
+    uncountableDesc: 'Ces noms ne peuvent pas être mis au pluriel ni utilisés directement avec "a / an". Ce sont des sources d\'erreurs fréquentes, même à niveau intermédiaire.',
+    uncountableTypeLabel: 'indénombrable',
+    collocationsTitle: 'Collocations clés (nom + verbe / adjectif)',
+    collocationsDesc: 'Les collocations sont des mots qui vont naturellement ensemble. Les connaître rend votre anglais fluide, pas seulement correct.',
+    collocationsNounHeader: 'Nom',
+    collocationsColHeader: 'Collocations naturelles',
+    pluralsTitle: 'Accord : pluriels délicats',
+    pluralSingHeader: 'Singulier',
+    pluralPluHeader: 'Pluriel',
+    pluralNoteHeader: 'Note',
+    whyTitle: 'Pourquoi cela aide à parler',
+    whyBody: 'En conversation, celui qui trouve immédiatement le bon nom — "issue" plutôt que "problem with", "opportunity" plutôt que "chance to do something" — semble naturel et préparé. Le vocabulaire n\'est pas une question de tout connaître. C\'est d\'avoir les bons mots immédiatement disponibles. Construisez cette liste lentement mais activement : utilisez un nouveau nom de chaque catégorie dans chaque session de pratique.',
+  },
+  de: {
+    title: 'Kernsubstantive',
+    intro: 'Eine begrenzte Menge an Nomen taucht in fast jedem echten Gespräch auf. Lerne sie nach Kategorie — sie geben dir das Vokabular, um jede Situation klar zu beschreiben.',
+    vocabTitle: 'Wortschatz nach Kategorie',
+    uncountableTitle: 'Nomen, die Lernende oft falsch verwenden (unzählbar)',
+    uncountableDesc: 'Diese Nomen können nicht ins Plural gesetzt oder direkt mit "a / an" verwendet werden. Sie sind häufige Fehlerquellen, selbst auf mittlerem Niveau.',
+    uncountableTypeLabel: 'unzählbar',
+    collocationsTitle: 'Schlüsselkollokationen (Nomen + Verb / Adjektiv)',
+    collocationsDesc: 'Kollokationen sind Wörter, die natürlich zusammenpassen. Wenn du sie kennst, klingt dein Englisch fließend, nicht nur korrekt.',
+    collocationsNounHeader: 'Nomen',
+    collocationsColHeader: 'Natürliche Kollokationen',
+    pluralsTitle: 'Übereinstimmung: knifflige Pluralformen',
+    pluralSingHeader: 'Singular',
+    pluralPluHeader: 'Plural',
+    pluralNoteHeader: 'Hinweis',
+    whyTitle: 'Warum das beim Sprechen hilft',
+    whyBody: 'Im Gespräch wirkt derjenige natürlich und vorbereitet, der sofort das richtige Nomen greift — "issue" statt "problem with", "opportunity" statt "chance to do something". Wortschatz bedeutet nicht, jedes Wort zu kennen. Es bedeutet, die richtigen Wörter sofort verfügbar zu haben. Bau diese Liste langsam, aber aktiv auf: Verwende in jeder Übungseinheit ein neues Nomen aus jeder Kategorie.',
+  },
+  pt: {
+    title: 'Substantivos essenciais',
+    intro: 'Um conjunto limitado de substantivos aparece em quase todas as conversas reais. Aprenda-os por categoria — eles darão a você o vocabulário para falar sobre qualquer situação com clareza.',
+    vocabTitle: 'Vocabulário por categoria',
+    uncountableTitle: 'Substantivos que os aprendizes costumam errar (incontáveis)',
+    uncountableDesc: 'Esses substantivos não podem ser pluralizados nem usados diretamente com "a / an". São fontes comuns de erros, mesmo em nível intermediário.',
+    uncountableTypeLabel: 'incontável',
+    collocationsTitle: 'Colocações-chave (substantivo + verbo / adjetivo)',
+    collocationsDesc: 'Colocações são palavras que naturalmente vão juntas. Conhecê-las faz seu inglês soar fluente, não apenas correto.',
+    collocationsNounHeader: 'Substantivo',
+    collocationsColHeader: 'Colocações naturais',
+    pluralsTitle: 'Concordância: plurais complicados',
+    pluralSingHeader: 'Singular',
+    pluralPluHeader: 'Plural',
+    pluralNoteHeader: 'Nota',
+    whyTitle: 'Por que isso ajuda a falar',
+    whyBody: 'Em uma conversa, o falante que encontra o substantivo certo imediatamente — "issue" em vez de "problem with", "opportunity" em vez de "chance to do something" — soa natural e preparado. Vocabulário não é saber todas as palavras. É ter as palavras certas disponíveis imediatamente. Construa essa lista devagar, mas ativamente: use um substantivo novo de cada categoria em cada sessão de prática.',
+  },
+};
+
+const copy = localizedCopy[currentLocale];
+
+type LocaleMap = { en: string; es: string; fr: string; de: string; pt: string };
+
+const categories: { label: LocaleMap; items: string[] }[] = [
+  { label: { en: 'Time & Frequency', es: 'Tiempo y frecuencia', fr: 'Temps et fréquence', de: 'Zeit und Häufigkeit', pt: 'Tempo e frequência' }, items: ['moment', 'period', 'stage', 'point', 'deadline', 'schedule', 'routine', 'phase', 'duration', 'instant'] },
+  { label: { en: 'People & Roles', es: 'Personas y roles', fr: 'Personnes et rôles', de: 'Personen und Rollen', pt: 'Pessoas e papéis' }, items: ['colleague', 'partner', 'client', 'audience', 'expert', 'candidate', 'individual', 'team', 'leader', 'mentor'] },
+  { label: { en: 'Work & Projects', es: 'Trabajo y proyectos', fr: 'Travail et projets', de: 'Arbeit und Projekte', pt: 'Trabalho e projetos' }, items: ['goal', 'task', 'challenge', 'solution', 'approach', 'strategy', 'outcome', 'process', 'result', 'effort'] },
+  { label: { en: 'Ideas & Communication', es: 'Ideas y comunicación', fr: 'Idées et communication', de: 'Ideen und Kommunikation', pt: 'Ideias e comunicação' }, items: ['point', 'idea', 'opinion', 'reason', 'example', 'argument', 'concern', 'feedback', 'suggestion', 'perspective'] },
+  { label: { en: 'Places & Contexts', es: 'Lugares y contextos', fr: 'Lieux et contextes', de: 'Orte und Kontexte', pt: 'Lugares e contextos' }, items: ['area', 'field', 'environment', 'context', 'setting', 'situation', 'condition', 'region', 'sector', 'market'] },
+  { label: { en: 'Abstract & General', es: 'Abstracto y general', fr: 'Abstrait et général', de: 'Abstrakt und Allgemein', pt: 'Abstrato e geral' }, items: ['aspect', 'factor', 'issue', 'matter', 'case', 'opportunity', 'benefit', 'risk', 'impact', 'value'] },
+];
+
+const countableVsUncountable: { noun: string; note: LocaleMap }[] = [
+  { noun: 'advice', note: { en: 'Not "advices". Say "a piece of advice".', es: 'No se dice "advices". Di "a piece of advice".', fr: 'Pas "advices". Dites "a piece of advice".', de: 'Nicht "advices". Sage "a piece of advice".', pt: 'Não se diz "advices". Diga "a piece of advice".' } },
+  { noun: 'information', note: { en: 'Not "informations". Say "a piece of information".', es: 'No se dice "informations". Di "a piece of information".', fr: 'Pas "informations". Dites "a piece of information".', de: 'Nicht "informations". Sage "a piece of information".', pt: 'Não se diz "informations". Diga "a piece of information".' } },
+  { noun: 'news', note: { en: '"The news is good." (singular verb)', es: '"The news is good." (verbo en singular)', fr: '"The news is good." (verbe au singulier)', de: '"The news is good." (Verb im Singular)', pt: '"The news is good." (verbo no singular)' } },
+  { noun: 'furniture', note: { en: 'Not "furnitures". Say "pieces of furniture".', es: 'No se dice "furnitures". Di "pieces of furniture".', fr: 'Pas "furnitures". Dites "pieces of furniture".', de: 'Nicht "furnitures". Sage "pieces of furniture".', pt: 'Não se diz "furnitures". Diga "pieces of furniture".' } },
+  { noun: 'equipment', note: { en: 'Say "a piece of equipment".', es: 'Di "a piece of equipment".', fr: 'Dites "a piece of equipment".', de: 'Sage "a piece of equipment".', pt: 'Diga "a piece of equipment".' } },
+  { noun: 'progress', note: { en: '"We made progress." (no article needed)', es: '"We made progress." (sin artículo)', fr: '"We made progress." (pas d\'article nécessaire)', de: '"We made progress." (kein Artikel nötig)', pt: '"We made progress." (sem artigo)' } },
+  { noun: 'research', note: { en: 'Not "researches". Say "a piece of research".', es: 'No se dice "researches". Di "a piece of research".', fr: 'Pas "researches". Dites "a piece of research".', de: 'Nicht "researches". Sage "a piece of research".', pt: 'Não se diz "researches". Diga "a piece of research".' } },
+  { noun: 'knowledge', note: { en: '"Her knowledge is impressive."', es: '"Her knowledge is impressive." (sin artículo, sin plural)', fr: '"Her knowledge is impressive." (sans article, sans pluriel)', de: '"Her knowledge is impressive." (kein Artikel, kein Plural)', pt: '"Her knowledge is impressive." (sem artigo, sem plural)' } },
+];
+
+const trickyPlurals: { singular: string; plural: string; note: LocaleMap }[] = [
+  { singular: 'person', plural: 'people', note: { en: 'Not "persons" in everyday speech.', es: 'No se dice "persons" en el habla cotidiana.', fr: 'Pas "persons" dans le langage courant.', de: 'Im Alltag nicht "persons".', pt: 'Não se diz "persons" na fala cotidiana.' } },
+  { singular: 'child', plural: 'children', note: { en: 'Irregular.', es: 'Irregular.', fr: 'Irrégulier.', de: 'Unregelmäßig.', pt: 'Irregular.' } },
+  { singular: 'criterion', plural: 'criteria', note: { en: '"Criteria is" is wrong — it\'s plural.', es: '"Criteria is" es incorrecto — es plural.', fr: '"Criteria is" est incorrect — c\'est un pluriel.', de: '"Criteria is" ist falsch — es ist Plural.', pt: '"Criteria is" está errado — é plural.' } },
+  { singular: 'datum', plural: 'data', note: { en: '"Data are" is technically correct, though "data is" is now common.', es: '"Data are" es técnicamente correcto, aunque "data is" ya es común.', fr: '"Data are" est techniquement correct, bien que "data is" soit désormais courant.', de: '"Data are" ist technisch korrekt, obwohl "data is" inzwischen üblich ist.', pt: '"Data are" é tecnicamente correto, embora "data is" seja atualmente comum.' } },
+  { singular: 'analysis', plural: 'analyses', note: { en: 'Greek origin — ends in -es.', es: 'Origen griego — termina en -es.', fr: 'Origine grecque — se termine en -es.', de: 'Griechischer Ursprung — endet auf -es.', pt: 'Origem grega — termina em -es.' } },
+  { singular: 'phenomenon', plural: 'phenomena', note: { en: '"Phenomenas" does not exist.', es: '"Phenomenas" no existe.', fr: '"Phenomenas" n\'existe pas.', de: '"Phenomenas" existiert nicht.', pt: '"Phenomenas" não existe.' } },
+];
+
+const getCategoryLabel = (label: LocaleMap) => label[currentLocale];
+const getNote = (note: LocaleMap) => note[currentLocale];
+---
+
+<h1 class="font-headline text-3xl md:text-4xl font-bold tracking-display text-on-surface mb-3">
+  {copy.title}
+</h1>
+<p class="text-on-surface-variant text-lg leading-relaxed mb-10 max-w-2xl">
+  {copy.intro}
+</p>
+
+<!-- High-frequency noun categories -->
+<section class="mb-12">
+  <h2 class="font-headline text-xl font-bold text-on-surface mb-6 flex items-center gap-2">
+    <span class="material-symbols-outlined text-primary" style="font-size:22px">category</span>
+    {copy.vocabTitle}
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+    {categories.map((cat) => (
+      <div class="p-5 rounded-2xl bg-surface-container border border-outline-variant/15">
+        <h3 class="font-headline font-semibold text-primary mb-3 text-sm">{getCategoryLabel(cat.label)}</h3>
+        <div class="flex flex-wrap gap-2">
+          {cat.items.map(word => (
+            <span class="px-2.5 py-1 rounded-lg bg-surface-container-high text-on-surface-variant text-sm">
+              {word}
+            </span>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<!-- Countable vs uncountable -->
+<section class="mb-12">
+  <h2 class="font-headline text-xl font-bold text-on-surface mb-4 flex items-center gap-2">
+    <span class="material-symbols-outlined text-primary" style="font-size:22px">calculate</span>
+    {copy.uncountableTitle}
+  </h2>
+  <p class="text-on-surface-variant text-sm mb-5 leading-relaxed">
+    {copy.uncountableDesc}
+  </p>
+  <div class="space-y-3">
+    {countableVsUncountable.map((item) => (
+      <div class="flex gap-4 items-start p-4 rounded-xl bg-surface-container border border-outline-variant/15 text-sm">
+        <span class="text-primary font-bold font-headline shrink-0 w-28">{item.noun}</span>
+        <div>
+          <span class="text-xs text-on-surface-variant/60 uppercase tracking-wider font-semibold">{copy.uncountableTypeLabel}</span>
+          <p class="text-on-surface-variant mt-0.5">{getNote(item.note)}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<!-- Collocations -->
+<section class="mb-12">
+  <h2 class="font-headline text-xl font-bold text-on-surface mb-6 flex items-center gap-2">
+    <span class="material-symbols-outlined text-primary" style="font-size:22px">join</span>
+    {copy.collocationsTitle}
+  </h2>
+  <p class="text-on-surface-variant text-sm mb-4 leading-relaxed">
+    {copy.collocationsDesc}
+  </p>
+  <div class="overflow-x-auto">
+    <table class="w-full text-sm text-left border-collapse">
+      <thead>
+        <tr class="border-b border-outline-variant/20">
+          <th class="py-2 pr-6 text-on-surface-variant font-medium">{copy.collocationsNounHeader}</th>
+          <th class="py-2 text-on-surface-variant font-medium">{copy.collocationsColHeader}</th>
+        </tr>
+      </thead>
+      <tbody class="text-on-surface-variant">
+        {[
+          { noun: 'decision', collocations: 'make a decision, reach a decision, difficult decision, key decision' },
+          { noun: 'effort', collocations: 'make an effort, put in effort, considerable effort, worth the effort' },
+          { noun: 'opportunity', collocations: 'take an opportunity, miss an opportunity, great opportunity, rare opportunity' },
+          { noun: 'progress', collocations: 'make progress, track progress, significant progress, steady progress' },
+          { noun: 'mistake', collocations: 'make a mistake, common mistake, costly mistake, avoid a mistake' },
+          { noun: 'issue', collocations: 'address an issue, raise an issue, serious issue, deal with an issue' },
+          { noun: 'point', collocations: 'make a point, miss the point, valid point, key point' },
+        ].map(item => (
+          <tr class="border-b border-outline-variant/10">
+            <td class="py-2.5 pr-6 text-primary font-semibold font-headline">{item.noun}</td>
+            <td class="py-2.5 text-on-surface-variant">{item.collocations}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Singular vs plural agreement -->
+<section class="mb-12">
+  <h2 class="font-headline text-xl font-bold text-on-surface mb-4 flex items-center gap-2">
+    <span class="material-symbols-outlined text-primary" style="font-size:22px">spellcheck</span>
+    {copy.pluralsTitle}
+  </h2>
+  <div class="overflow-x-auto">
+    <table class="w-full text-sm text-left border-collapse">
+      <thead>
+        <tr class="border-b border-outline-variant/20">
+          <th class="py-2 pr-6 text-on-surface-variant font-medium">{copy.pluralSingHeader}</th>
+          <th class="py-2 pr-6 text-on-surface-variant font-medium">{copy.pluralPluHeader}</th>
+          <th class="py-2 text-on-surface-variant font-medium">{copy.pluralNoteHeader}</th>
+        </tr>
+      </thead>
+      <tbody class="text-on-surface-variant">
+        {trickyPlurals.map(item => (
+          <tr class="border-b border-outline-variant/10">
+            <td class="py-2.5 pr-6 text-primary font-semibold">{item.singular}</td>
+            <td class="py-2.5 pr-6 text-on-surface font-medium">{item.plural}</td>
+            <td class="py-2.5 text-on-surface-variant">{getNote(item.note)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Why it helps -->
+<section class="p-6 rounded-2xl bg-primary/5 border border-primary/15">
+  <h3 class="font-headline font-semibold text-primary mb-2 flex items-center gap-2">
+    <span class="material-symbols-outlined" style="font-size:18px">record_voice_over</span>
+    {copy.whyTitle}
+  </h3>
+  <p class="text-on-surface-variant leading-relaxed text-sm">
+    {copy.whyBody}
+  </p>
+</section>

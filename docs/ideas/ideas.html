@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SpeakPath — Ideas</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f1f5f9;
+    color: #1e293b;
+    padding: 24px;
+    min-height: 100vh;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .back-link {
+    display: inline-block;
+    font-size: 13px;
+    color: #6366f1;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid #c7d2fe;
+    background: #eef2ff;
+    margin-bottom: 16px;
+    transition: background 0.15s;
+  }
+  .back-link:hover { background: #e0e7ff; }
+  .header h1 { font-size: 24px; font-weight: 700; margin-bottom: 6px; }
+  .header .stats { font-size: 14px; color: #64748b; }
+  .ideas-list {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .idea-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px 18px;
+    cursor: pointer;
+    transition: box-shadow 0.15s, transform 0.1s;
+    user-select: none;
+  }
+  .idea-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    transform: translateY(-1px);
+  }
+  .idea-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #0f172a;
+  }
+  .idea-desc {
+    font-size: 13px;
+    color: #475569;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+  .idea-meta {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .idea-date {
+    font-size: 12px;
+    color: #94a3b8;
+    white-space: nowrap;
+    margin-top: 4px;
+  }
+  .idea-tags { flex: 1; }
+  .idea-file {
+    font-size: 11px;
+    color: #cbd5e1;
+    margin-top: 8px;
+    font-family: monospace;
+  }
+  .generated {
+    text-align: center;
+    margin-top: 32px;
+    font-size: 12px;
+    color: #94a3b8;
+  }
+
+  /* Modal */
+  #modal-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(2px);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  #modal-backdrop.open { display: flex; }
+  #modal {
+    background: #fff;
+    border-radius: 14px;
+    width: 100%;
+    max-width: 780px;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.18);
+    overflow: hidden;
+    animation: modal-in 0.18s ease;
+  }
+  @keyframes modal-in {
+    from { opacity: 0; transform: scale(0.97) translateY(8px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  #modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid #e2e8f0;
+    flex-shrink: 0;
+  }
+  #modal-filename { font-size: 12px; color: #94a3b8; font-family: monospace; }
+  #modal-close {
+    width: 30px; height: 30px;
+    border-radius: 50%; border: none;
+    background: #f1f5f9; color: #64748b;
+    font-size: 18px; line-height: 1;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s; flex-shrink: 0;
+  }
+  #modal-close:hover { background: #e2e8f0; color: #1e293b; }
+  #modal-body { overflow-y: auto; padding: 24px 28px; flex: 1; }
+  #modal-body h1 { font-size: 20px; font-weight: 700; margin: 0 0 16px; color: #0f172a; }
+  #modal-body h2 { font-size: 16px; font-weight: 700; margin: 24px 0 10px; color: #0f172a; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; }
+  #modal-body h3 { font-size: 14px; font-weight: 600; margin: 18px 0 8px; color: #1e293b; }
+  #modal-body p  { font-size: 14px; line-height: 1.6; margin: 0 0 12px; color: #334155; }
+  #modal-body a  { color: #6366f1; text-decoration: underline; }
+  #modal-body hr { border: none; border-top: 1px solid #e2e8f0; margin: 20px 0; }
+  #modal-body ul, #modal-body ol { font-size: 14px; line-height: 1.6; margin: 0 0 12px 20px; color: #334155; }
+  #modal-body li { margin-bottom: 4px; }
+  #modal-body blockquote {
+    border-left: 3px solid #c7d2fe; background: #eef2ff;
+    padding: 10px 14px; border-radius: 0 6px 6px 0;
+    margin: 0 0 12px; color: #4338ca; font-size: 14px;
+  }
+  #modal-body code {
+    background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 4px;
+    padding: 1px 5px; font-family: 'SFMono-Regular', Consolas, monospace;
+    font-size: 12px; color: #be185d;
+  }
+  #modal-body pre {
+    background: #0f172a; border-radius: 8px;
+    padding: 14px 16px; overflow-x: auto; margin: 0 0 14px;
+  }
+  #modal-body pre code { background: none; border: none; padding: 0; color: #e2e8f0; font-size: 13px; }
+  #modal-body strong { font-weight: 600; color: #0f172a; }
+</style>
+</head>
+<body>
+
+<div id="modal-backdrop">
+  <div id="modal">
+    <div id="modal-header">
+      <span id="modal-filename"></span>
+      <button id="modal-close" title="Close (Esc)">&#x2715;</button>
+    </div>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<div class="header">
+  <div><a href="../roadmap/board.html" class="back-link">&#8592; Roadmap Board</a></div>
+  <h1>&#128161; Ideas</h1>
+  <div class="stats">7 ideas &middot; sorted by date</div>
+</div>
+
+<div class="ideas-list">
+  <div class="idea-card" data-file="cloudflare-proxy-fallback.md" onclick="openModal(this.dataset.file)">
+    <div class="idea-title">Cloudflare Proxy + Always Online Fallback</div>
+    <div class="idea-desc">Enable Cloudflare's proxy (orange cloud) on the `speakpath.dev` DNS records pointing to</div>
+    <div class="idea-meta">
+      <span class="idea-date">May 19, 2026</span>
+      <div class="idea-tags"><span style="display:inline-block;background:#f1f5f9;border:1px solid #e2e8f0;color:#475569;font-size:11px;padding:2px 8px;border-radius:10px;margin:2px 2px 0 0">infrastructure</span><span style="display:inline-block;background:#f1f5f9;border:1px solid #e2e8f0;color:#475569;font-size:11px;padding:2px 8px;border-radius:10px;margin:2px 2px 0 0">reliability</span><span style="display:inline-block;background:#f1f5f9;border:1px solid #e2e8f0;color:#475569;font-size:11px;padding:2px 8px;border-radius:10px;margin:2px 2px 0 0">performance</span></div>
+    </div>
+    <div class="idea-file">cloudflare-proxy-fallback.md</div>
+  </div>
+  <div class="idea-card" data-file="hero-copy-differentiation.md" onclick="openModal(this.dataset.file)">
+    <div class="idea-title">Hero Copy Differentiation</div>
+    <div class="idea-desc">The current hero presents SpeakPath with generic language-learning promises (&quot;Speak. Learn.</div>
+    <div class="idea-meta">
+      <span class="idea-date">May 18, 2026</span>
+      <div class="idea-tags"><span style="display:inline-block;background:#f1f5f9;border:1px solid #e2e8f0;color:#475569;font-size:11px;padding:2px 8px;border-radius:10px;margin:2px 2px 0 0">copy</span><span style="display:inline-block;background:#f1f5f9;border:1px solid #e2e8f0;color:#475569;font-size:11px;padding:2px 8px;border-radius:10px;margin:2px 2px 0 0">landing-page</span><span style="display:inline-block;background:#f1f5f9;border:1px solid #e2e8f0;color:#475569;font-size:11px;padding:2px 8px;border-radius:10px;margin:2px 2px 0 0">messaging</span><span style="display:inline-block;background:#f1f5f9;border:1px solid #e2e8f0;color:#475569;font-size:11px;padding:2px 8px;border-radius:10px;margin:2px 2px 0 0">hero</span></div>
+    </div>
+    <div class="idea-file">hero-copy-differentiation.md</div>
+  </div>
+  <div class="idea-card" data-file="rename-write-to-speak-section.md" onclick="openModal(this.dataset.file)">
+    <div class="idea-title">Rename &quot;Write Better to Speak Better&quot; Section</div>
+    <div class="idea-desc">Rename the `writeToSpeak` homepage section from &quot;Write Better to Speak Better&quot; to &quot;Build</div>
+    <div class="idea-meta">
+      <span class="idea-date">May 18, 2026</span>
+      <div class="idea-tags"><span style="display:inline-block;background:#f1f5f9;border:1px solid #e2e8f0;color:#475569;font-size:11px;padding:2px 8px;border-radius:10px;margin:2px 2px 0 0">copy</span><span style="display:inline-block;background:#f1f5f9;border:1px solid #e2e8f0;color:#475569;font-size:11px;padding:2px 8px;border-radius:10px;margin:2px 2px 0 0">landing-page</span><span style="display:inline-block;background:#f1f5f9;border:1px solid #e2e8f0;color:#475569;font-size:11px;padding:2px 8px;border-radius:10px;margin:2px 2px 0 0">messaging</span></div>
+    </div>
+    <div class="idea-file">rename-write-to-speak-section.md</div>
+  </div>
+  <div class="idea-card" data-file="linkedin-launch-post.md" onclick="openModal(this.dataset.file)">
+    <div class="idea-title">LinkedIn Launch Post — SpeakPath</div>
+    <div class="idea-desc">A drafted LinkedIn post announcing the public launch of SpeakPath. Shares the origin story</div>
+    <div class="idea-meta">
+      <span class="idea-date">Apr 5, 2026</span>
+      <div class="idea-tags"><span style="display:inline-block;background:#f1f5f9;border:1px solid #e2e8f0;color:#475569;font-size:11px;padding:2px 8px;border-radius:10px;margin:2px 2px 0 0">marketing</span><span style="display:inline-block;background:#f1f5f9;border:1px solid #e2e8f0;color:#475569;font-size:11px;padding:2px 8px;border-radius:10px;margin:2px 2px 0 0">launch</span></div>
+    </div>
+    <div class="idea-file">linkedin-launch-post.md</div>
+  </div>
+  <div class="idea-card" data-file="speakpath-landing-architecture.md" onclick="openModal(this.dataset.file)">
+    <div class="idea-title">SpeakPath — Landing Page Architecture</div>
+    <div class="idea-desc">Technical blueprint for building and deploying the SpeakPath landing page as a separate</div>
+    <div class="idea-meta">
+      <span class="idea-date">Apr 5, 2026</span>
+      <div class="idea-tags"><span style="display:inline-block;background:#f1f5f9;border:1px solid #e2e8f0;color:#475569;font-size:11px;padding:2px 8px;border-radius:10px;margin:2px 2px 0 0">architecture</span><span style="display:inline-block;background:#f1f5f9;border:1px solid #e2e8f0;color:#475569;font-size:11px;padding:2px 8px;border-radius:10px;margin:2px 2px 0 0">infrastructure</span><span style="display:inline-block;background:#f1f5f9;border:1px solid #e2e8f0;color:#475569;font-size:11px;padding:2px 8px;border-radius:10px;margin:2px 2px 0 0">landing-page</span></div>
+    </div>
+    <div class="idea-file">speakpath-landing-architecture.md</div>
+  </div>
+  <div class="idea-card" data-file="speakpath-landing-content.md" onclick="openModal(this.dataset.file)">
+    <div class="idea-title">SpeakPath — Landing Page Content</div>
+    <div class="idea-desc">Copy and section structure for the entire SpeakPath landing page: hero, languages, how it</div>
+    <div class="idea-meta">
+      <span class="idea-date">Apr 5, 2026</span>
+      <div class="idea-tags"><span style="display:inline-block;background:#f1f5f9;border:1px solid #e2e8f0;color:#475569;font-size:11px;padding:2px 8px;border-radius:10px;margin:2px 2px 0 0">copy</span><span style="display:inline-block;background:#f1f5f9;border:1px solid #e2e8f0;color:#475569;font-size:11px;padding:2px 8px;border-radius:10px;margin:2px 2px 0 0">content</span><span style="display:inline-block;background:#f1f5f9;border:1px solid #e2e8f0;color:#475569;font-size:11px;padding:2px 8px;border-radius:10px;margin:2px 2px 0 0">landing-page</span></div>
+    </div>
+    <div class="idea-file">speakpath-landing-content.md</div>
+  </div>
+  <div class="idea-card" data-file="speakpath-landing-page.md" onclick="openModal(this.dataset.file)">
+    <div class="idea-title">SpeakPath — Landing Page</div>
+    <div class="idea-desc">Create a static marketing landing page at speakpath.dev for the SpeakPath brand. The page</div>
+    <div class="idea-meta">
+      <span class="idea-date">Apr 5, 2026</span>
+      <div class="idea-tags"><span style="display:inline-block;background:#f1f5f9;border:1px solid #e2e8f0;color:#475569;font-size:11px;padding:2px 8px;border-radius:10px;margin:2px 2px 0 0">landing-page</span></div>
+    </div>
+    <div class="idea-file">speakpath-landing-page.md</div>
+  </div>
+</div>
+
+<div class="generated">Generated on May 20, 2026 at 07:13 AM</div>
+
+<script>
+const IDEAS_MD = {"cloudflare-proxy-fallback.md":"---\ndate: 2026-05-19\nlast-reviewed: 2026-05-19\nstatus: idea\nroadmap:\ntags: [infrastructure, reliability, performance]\n---\n\n# Cloudflare Proxy + Always Online Fallback\n\n## Summary\n\nEnable Cloudflare's proxy (orange cloud) on the `speakpath.dev` DNS records pointing to\nNetlify. This adds automatic edge caching and activates \"Always Online\" — so when Netlify\nhas an outage (as happened on 2026-05-19), Cloudflare serves the cached landing page\nautomatically with no manual intervention. Free tier, zero ongoing maintenance.\n\n## Details\n\n### Why this matters\n\nToday (2026-05-19) Netlify had an incident — \"elevated response times affecting origin\nservices\" — that made speakpath.dev return a generic error page for all visitors. Since\nthe site is a static landing page, there's no reason visitors should ever see a broken\npage; the HTML doesn't change between deploys.\n\n### How Cloudflare proxy works for a static site\n\n```\nVisitor → Cloudflare edge (cached) → Netlify origin (only on cache miss)\n```\n\n- Cloudflare sits in front of Netlify as a CDN proxy\n- Static assets (`/_astro/*`) are cached indefinitely (they're content-hashed)\n- HTML pages need an explicit Cache Rule to be cached (not cached by default)\n- \"Always Online\" serves a Cloudflare-held snapshot when the origin returns 5xx\n\n### Step-by-step setup\n\n**Step 1 — Confirm speakpath.dev is in Cloudflare DNS**\nGo to Cloudflare dashboard → select the `speakpath.dev` zone → DNS tab.\nThe `A` or `CNAME` record pointing to Netlify should exist there.\n\n**Step 2 — Enable the orange cloud (proxy)**\nClick the proxy toggle on the `speakpath.dev` record so it turns orange.\nDo the same for `www.speakpath.dev` if it exists.\n> Note: `app.speakpath.dev` (Fly.io) should stay grey/DNS-only or use its own proxy\n> setting — don't touch it here.\n\n**Step 3 — Add a Cache Rule for HTML pages**\nIn Cloudflare → Caching → Cache Rules → Create rule:\n- **Match:** `hostname eq speakpath.dev`\n- **Cache eligibility:** Eligible for cache\n- **Edge TTL:** 1 hour (or \"respect origin\" — Netlify already sends `max-age=0, must-revalidate` for HTML)\n- **Browser TTL:** 0 (let Netlify control browser cache)\n\nThis tells Cloudflare to hold a copy of the HTML at the edge, even if for a short time.\n\n**Step 4 — Enable Always Online**\nIn Cloudflare → Caching → Configuration → Always Online → On.\nThis makes Cloudflare serve its cached snapshot of the site when Netlify returns 5xx errors.\n\n**Step 5 — Verify**\n- Visit speakpath.dev and confirm it loads\n- Check response headers: `cf-cache-status: HIT` on the second request confirms caching works\n- Check `server: cloudflare` in response headers\n\n### What this does NOT fix\n- If Cloudflare itself has an outage (rare — they have 100% SLA on the free tier CDN)\n- Cold cache: if no one has visited recently, Always Online has nothing to serve\n- The actual app at `app.speakpath.dev` — that's on Fly.io and has its own resilience\n\n### Tradeoffs\n| Pro | Con |\n|---|---|\n| Automatic — no action needed during incidents | Cache needs to be warm to serve stale content |\n| Also improves global load time via CDN | Deploys may take a few minutes to propagate through Cloudflare cache |\n| Free on Cloudflare's free tier | Need to purge Cloudflare cache after each deploy (or set short TTL) |\n\n### Cache purge after deploy\nAfter running `netlify deploy --prod`, also run:\n```bash\n# Requires Cloudflare API token with Cache Purge permission\ncurl -X POST \"https://api.cloudflare.com/client/v4/zones/<ZONE_ID>/purge_cache\" \\\n  -H \"Authorization: Bearer <CF_TOKEN>\" \\\n  -H \"Content-Type: application/json\" \\\n  --data '{\"purge_everything\":true}'\n```\nOr do it manually from Cloudflare dashboard → Caching → Purge Everything after deploys.\n\n## Open Questions\n\n- Is speakpath.dev DNS already managed in Cloudflare, or is it pointing directly to Netlify\n  without Cloudflare in the middle?\n- Is there a Cloudflare API token already set up for cache purges, or does that need to be\n  created?\n\n## Next Step\n\nPromote to roadmap\n","hero-copy-differentiation.md":"---\ndate: 2026-05-18\nlast-reviewed: 2026-05-18\nstatus: promoted\nroadmap: hero-copy-differentiation\ntags: [copy, landing-page, messaging, hero]\n---\n\n# Hero Copy Differentiation\n\n## Summary\n\nThe current hero presents SpeakPath with generic language-learning promises (\"Speak. Learn.\nImprove.\", \"build confidence, vocabulary, and fluency\") that any competitor could claim.\nThe actual differentiator — speak, get per-issue grammar feedback, study the linked theory\npage, speak again — never appears in the hero. Five targeted copy changes would fix this\nwithout touching layout or structure.\n\n## Details\n\nAll changes are in `src/i18n/site.ts`, English locale only (other locales follow once\nthe English copy is validated).\n\n### 1. Hero eyebrow\n\n| | Text |\n|---|---|\n| **Current** | `AI-Powered Fluency Engine` |\n| **Proposed** | `Real Conversation Practice` |\n\n\"Fluency Engine\" is internal product language. \"Real Conversation Practice\" orients a\nstranger in one second and separates SpeakPath from grammar drill apps immediately.\n\n---\n\n### 2. Hero title\n\n| | Text |\n|---|---|\n| **Current** | `Speak.` / `Learn.` / `Improve.` |\n| **Proposed** | `Speak.` / `Get Corrected.` / `Speak Better.` |\n\n\"Learn. Improve.\" is what every language product promises. \"Get Corrected.\" names the\nfeedback loop mechanism — the thing no competitor front-loads — and is concrete enough\nto be memorable.\n\n---\n\n### 3. Hero description\n\n| | Text |\n|---|---|\n| **Current** | `Master any language through real conversation practice. SpeakPath helps you build confidence, vocabulary, and fluency with responsive AI sessions in real time.` |\n| **Proposed** | `Have a real AI conversation — no typing, no scripts. After each session, SpeakPath shows you the grammar mistakes you made and tells you exactly which topic to work on. Then you go back and speak again.` |\n\nThe current description is indistinguishable from Duolingo or Babbel marketing. The proposed\nversion describes the actual product experience — conversation → grammar feedback → topic\nguidance → repeat — which is the real differentiator and currently appears nowhere in the hero.\n\n---\n\n### 4. How It Works — Step 3\n\n| | Text |\n|---|---|\n| **Current** | Title: `Get feedback` / Body: `After each session, review grammar insights, vocabulary notes, and progress.` |\n| **Proposed** | Title: `Get feedback — and fix it` / Body: `After each session, SpeakPath flags your grammar patterns and links you directly to the theory page for each issue. Study it, then come back and speak again.` |\n\nStep 3 currently reads like a passive report card. The link between feedback and the theory\npages is the core product mechanic and it's missing from the How It Works narrative entirely.\nThis bridges How It Works (position 3) and WriteToSpeak (position 6) so the closed loop\nlands early and the detail lands later.\n\n---\n\n### 5. WriteToSpeak CTA button\n\n| | Text |\n|---|---|\n| **Current** | `Explore the Foundation` |\n| **Proposed** | `Open the Theory Pages` |\n\n\"Foundation\" appears twice in the same visual block: section title \"Build Your **Speaking\nFoundation**\" and button \"Explore the **Foundation**\". \"Open the Theory Pages\" is direct,\ndescriptive, and removes the echo.\n\n---\n\n### What to leave unchanged\n\n- `Start Practicing Free` / `No credit card. Get started in minutes.` — honest and friction-free.\n- All Features section copy — \"Interrupt anytime\" description is particularly strong.\n- All WriteToSpeak body copy — the messaging we just updated is correct.\n- Page structure and section order — no layout changes needed.\n\n## Open Questions\n\n- Does \"Get Corrected.\" land well for the target audience, or does it feel negative/harsh?\n  Could test \"Speak. Get Feedback. Speak Better.\" as a softer variant.\n- Once English is validated, do the same changes apply to all 5 locales, or only the\n  locales with significant traffic?\n","rename-write-to-speak-section.md":"---\ndate: 2026-05-18\nlast-reviewed: 2026-05-18\nstatus: promoted\nroadmap: rename-build-speaking-foundation\ntags: [copy, landing-page, messaging]\n---\n\n# Rename \"Write Better to Speak Better\" Section\n\n## Summary\n\nRename the `writeToSpeak` homepage section from \"Write Better to Speak Better\" to \"Build\nYour Speaking Foundation\" to eliminate visitor confusion about whether SpeakPath is a writing\ntool. Every line of copy should anchor on the speaking outcome — grammar study is the\naccelerator, not the destination.\n\n## Details\n\n### Problem\n\n\"Write Better to Speak Better\" leads with \"write\" on a product whose entire identity is\nspeaking. First-time visitors may misread the product category and search traffic from\nwriting-tool queries (email/essay) could pollute the funnel.\n\n### English copy changes (`src/i18n/site.ts`, en locale)\n\n| Field | Before | After |\n|---|---|---|\n| `title.line1` | `Write Better to` | `Build Your` |\n| `title.accent` | `Speak Better` | `Speaking Foundation` |\n| `description` | \"The fastest path to fluency starts on paper…\" | \"Fluency means speaking without thinking…\" |\n| `body1` | \"Writing forces you to slow down…\" | \"Real fluency is when grammar becomes automatic…\" |\n| `body2` | \"Work through the foundation. Then open the app…\" | \"Work through the pages, then open the app…\" |\n\nUnchanged: `cta`, `ctaNote`, `steps` (Grammar, Key Verbs, Connectors, Phrasal Verbs, Nouns,\nEssay Template).\n\n### Other locales\n\nAll four non-English locales (es, fr, de, pt) carry the same writing-first framing. Each\nshould be updated to parallel the new messaging — speaking outcome first, grammar study as\nthe tool.\n\n### Messaging principle\n\nSpeaking is the goal, grammar study is the accelerator. Every line of copy anchors on the\nspeaking outcome — the writing/study method is never the destination.\n\n## Open Questions\n\n## Next Step\n\nPromote to roadmap\n","linkedin-launch-post.md":"---\ndate: 2026-04-05\nlast-reviewed: 2026-05-18\nstatus: idea\nroadmap:\ntags: [marketing, launch]\n---\n\n# LinkedIn Launch Post — SpeakPath\n\n## Summary\n\nA drafted LinkedIn post announcing the public launch of SpeakPath. Shares the origin story\n(Collect event → redesign → SpeakPath), the core differentiator (voice-first AI conversation\nvs. typing-based chatbots), and early organic traction — 26 registrations from Germany, Asia,\nand Africa with no paid promotion.\n\n## Details\n\nDraft copy:\n\n> At the beginning of this year I presented my first product idea at a Collect event.\n>\n> The experience was truly encouraging. Sharing with other members, receiving their feedback,\n> and learning from their perspectives gave me exactly what I needed to keep going.\n>\n> But I noticed people weren't registering. So I kept listening.\n>\n> I dug into SEO, rethought the architecture, redesigned the experience from scratch — and\n> built something better.\n>\n> That's how SpeakPath was born.\n>\n> Most language tools — including popular AI chatbots — are great at explaining grammar or\n> translating text. But they weren't designed to help you speak. You can type to them all day\n> and never train your brain to form a sentence out loud under pressure.\n>\n> SpeakPath is different. You have a real AI conversation — in English, Spanish, French, or\n> German — and at the end you get instant feedback on your grammar, your patterns, and where\n> you're improving. It's closer to having a patient conversation partner than a chatbot.\n>\n> I launched quietly. No ads, no campaign.\n>\n> This week I checked my dashboard: 26 people registered from Germany, across Asia, and Africa.\n> That blew me away.\n>\n> This is just the beginning. There's a lot of room to grow and I know there's much more to\n> build. If you're learning a language — or you know someone who is — I'd love for you to try\n> it and tell me honestly what you think.\n>\n> speakpath.dev\n>\n> A genuine thank you to Collect and Sam Silver for creating a space where builders can share\n> ideas, learn from each other, and come back stronger.\n\n## Open Questions\n\n- Has this post been published yet?\n- Should the user count be updated with newer stats before posting?\n- Tag Collect / Sam Silver by their LinkedIn handles?\n\n## Next Step\n\nExplore further — confirm publish status and update stats if needed before posting.\n","speakpath-landing-architecture.md":"---\ndate: 2026-04-05\nlast-reviewed: 2026-05-18\nstatus: promoted\nroadmap: speakpath-landing-scaffold\ntags: [architecture, infrastructure, landing-page]\n---\n\n# SpeakPath — Landing Page Architecture\n\n## Summary\n\nTechnical blueprint for building and deploying the SpeakPath landing page as a separate\nAstro static site on Netlify, decoupled from the Fly.io app. Covers stack decision, repo\nstructure, DNS routing, and deploy steps.\n\n## Details\n\n### Stack\n\n| Layer | Tech | Host | Cost |\n|---|---|---|---|\n| Landing page (`speakpath.dev`) | Astro (static) | Netlify | Free |\n| App (`app.speakpath.dev`) | Node/Express + React/Vite | Fly.io | Existing |\n\n**Why Astro:** near-zero JS ships → perfect Lighthouse scores; MDX for future blog posts;\nfree Netlify hosting; independent deploy cycle — landing page changes never touch Fly.io.\n\n### Repository structure\n\n```\nrepo: agentVoiceWeb  (this repo)  -> Netlify\n├── astro.config.mjs\n├── src/\n│   ├── pages/\n│   │   └── index.astro\n│   ├── layouts/\n│   │   └── Base.astro\n│   └── components/\n│       ├── Hero.astro\n│       ├── Languages.astro\n│       ├── HowItWorks.astro\n│       ├── Levels.astro\n│       ├── Features.astro\n│       └── CTA.astro\n└── package.json\n```\n\n### DNS setup\n\n```\nspeakpath.dev        -> Netlify  (landing page)\napp.speakpath.dev    -> Fly.io   (app)\n```\n\nCloudflare proxies both records. For the Fly.io subdomain WebSocket gotcha, see the\n`fly-custom-domain-oauth` skill.\n\n### Deploy steps (original plan, now completed)\n\n1. Register `speakpath.dev`\n2. Scaffold Astro project\n3. Build components from `speakpath-landing-content.md`\n4. Connect to Netlify — auto-deploys on push to `main`\n5. Point DNS: `speakpath.dev → Netlify`, `app.speakpath.dev → Fly.io`\n6. Add \"Try SpeakPath\" CTA in the app linking back to `speakpath.dev`\n\n### Live URLs\n\n| What | URL |\n|---|---|\n| Production | https://speakpath.dev |\n| Netlify dashboard | https://app.netlify.com/projects/speakpath |\n\n### Future evolution\n\n| Trigger | Action |\n|---|---|\n| Write posts from phone/browser | Add Decap CMS (stores `.md` in same repo) |\n| Need live data on landing page | Switch Astro to SSR mode |\n| Blog grows large | Add content collections with tag filtering |\n\n## Open Questions\n\n## Next Step\n\nPromote to roadmap\n","speakpath-landing-content.md":"---\ndate: 2026-04-05\nlast-reviewed: 2026-05-18\nstatus: promoted\nroadmap: speakpath-landing-content-sections\ntags: [copy, content, landing-page]\n---\n\n# SpeakPath — Landing Page Content\n\n## Summary\n\nCopy and section structure for the entire SpeakPath landing page: hero, languages, how it\nworks, levels, features, coming soon, and CTA footer. Includes design direction (palette,\ntypography, motion, tone). Ready to hand off to a designer or drop into any site builder.\n\n## Details\n\n### Section 1 — Hero\n\n**Headline:** Speak. Learn. Improve.\n\n**Subheadline:** Practice real conversations in English, Spanish, French, or German — with\nan AI that listens, responds, and helps you grow.\n\n**CTA:** Start Practicing Free → `app.speakpath.dev`\n\n**Visual:** Animated waveform or subtle looping audio visualization.\n\n---\n\n### Section 2 — Languages\n\n**Heading:** Pick Your Language\n\n| Language | Tagline |\n|---|---|\n| English | The world's business language |\n| Spanish | 500 million native speakers |\n| French | Romance, culture, opportunity |\n| German | Precision, science, career growth |\n\nFooter note: More languages coming soon.\n\n---\n\n### Section 3 — How It Works\n\n**Heading:** As easy as having a conversation\n\n1. **Choose a language and level** — Pick what fits you today.\n2. **Start talking** — Speak naturally. No typing, no lag.\n3. **Get feedback** — After each session, see grammar insights and progress.\n\n---\n\n### Section 4 — Conversation Levels\n\n**Heading:** Your pace. Your level.\n\n| Level | Description |\n|---|---|\n| Beginner | Short, simple sentences. Everyday topics. |\n| Intermediate | Flowing dialogue. Wider vocabulary. |\n| Advanced | Nuanced discussion. Idiomatic language. |\n\nLevels adjust difficulty, vocabulary complexity, and AI response depth automatically.\n\n---\n\n### Section 5 — Key Features\n\n**Heading:** Built for real improvement\n\n- **Voice-first** — No typing. Speak and be heard.\n- **Real-time AI responses** — Natural back-and-forth, not scripted drills.\n- **Grammar analysis** — Session summary highlights what to work on.\n- **Multi-language** — Switch languages anytime.\n- **No downloads** — Runs in your browser.\n- **Private by design** — Conversations stay yours.\n\n---\n\n### Section 6 — Coming Soon\n\n**Heading:** This is just the beginning\n\n- Progress tracking & streaks\n- Topic-based scenarios (job interview, travel, ordering food)\n- Pronunciation scoring\n- More languages (Portuguese, Italian, Japanese, Mandarin)\n- Mobile app\n- Vocabulary flashcards tied to your sessions\n\n---\n\n### Section 7 — CTA / Footer\n\n**Heading:** Ready to start speaking?\n\n**Subtext:** No credit card. No setup. Just open it and talk.\n\n**Button:** Try SpeakPath Free → `app.speakpath.dev`\n\n**Footer links:** Privacy · Contact · GitHub\n\n---\n\n### Design direction\n\n- **Palette:** Deep navy + electric teal accent\n- **Typography:** Inter or Plus Jakarta Sans\n- **Motion:** Waveform animation on hero, hover states on cards. No autoplay video.\n- **Tone:** Direct, encouraging, human. Not corporate.\n- **Layout:** Mobile-first\n\n## Open Questions\n\n## Next Step\n\nPromote to roadmap\n","speakpath-landing-page.md":"---\ndate: 2026-04-05\nlast-reviewed: 2026-05-18\nstatus: promoted\nroadmap: speakpath-landing-scaffold\ntags: [landing-page]\n---\n\n# SpeakPath — Landing Page\n\n## Summary\n\nCreate a static marketing landing page at speakpath.dev for the SpeakPath brand. The page\nis fully decoupled from the app (separate repo, Netlify deploy) and serves as the public\nentry point that converts visitors into app users. Covers copy/content and the technical\nbuild-and-deploy plan.\n\n## Details\n\nThis idea was split into two companion documents at capture time:\n\n- **[speakpath-landing-content.md](speakpath-landing-content.md)** — All copy, section\n  structure, and design direction. Ready to hand off to a designer or drop into any builder.\n- **[speakpath-landing-architecture.md](speakpath-landing-architecture.md)** — Tech stack\n  (Astro + Netlify), repo structure, DNS setup, and deploy steps.\n\nBoth have since been promoted to roadmap docs and implemented.\n\n## Open Questions\n\n## Next Step\n\nPromote to roadmap\n"};
+
+const backdrop = document.getElementById('modal-backdrop');
+const modalBody = document.getElementById('modal-body');
+const modalFilename = document.getElementById('modal-filename');
+
+function openModal(file) {
+  modalFilename.textContent = file;
+  const md = IDEAS_MD[file];
+  if (!md) {
+    modalBody.innerHTML = '<p>Content not found.</p>';
+  } else {
+    try {
+      modalBody.innerHTML = marked.parse(md);
+    } catch(e) {
+      modalBody.innerHTML = '<pre style="white-space:pre-wrap;font-size:13px">' + md.replace(/&/g,'&amp;').replace(/</g,'&lt;') + '</pre>';
+    }
+  }
+  modalBody.scrollTop = 0;
+  backdrop.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  backdrop.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.querySelectorAll('.idea-card').forEach(card => {
+  card.addEventListener('click', () => openModal(card.dataset.file));
+});
+
+document.getElementById('modal-close').addEventListener('click', closeModal);
+backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>

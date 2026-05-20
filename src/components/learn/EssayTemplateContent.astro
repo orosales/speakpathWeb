@@ -1,0 +1,412 @@
+---
+interface Props {
+  locale?: string;
+}
+const { locale = 'en' } = Astro.props;
+type SupportedLocale = 'en' | 'es' | 'fr' | 'de' | 'pt';
+
+const currentLocale: SupportedLocale = ['en', 'es', 'fr', 'de', 'pt'].includes(locale)
+  ? (locale as SupportedLocale)
+  : 'en';
+
+const localizedCopy = {
+  en: {
+    title: 'Essay Template',
+    intro: 'Structure is not just for writing. When you know how to organize ideas in an essay, you can do it in real time — and that is what fluent speaking looks like from the outside.',
+    connectionTitle: 'The connection between writing and speaking',
+    connectionBody: 'An essay forces you to decide: what is my main point? What evidence supports it? What connects one idea to the next? When you answer these questions in writing — slowly, with time to revise — you train the thinking pattern. Then in a conversation, that pattern fires automatically. You speak in structured paragraphs without thinking about structure at all.',
+    structureTitle: 'The 5-Paragraph Essay Structure',
+    introLabel: 'Introduction',
+    hookLabel: 'Hook',
+    hookDesc: 'An opening sentence that captures attention — a fact, a question, or a short statement.',
+    bgLabel: 'Background',
+    bgDesc: '1–2 sentences of context that lead the reader toward your argument.',
+    thesisLabel: 'Thesis Statement',
+    thesisDesc: 'One clear sentence stating your main claim.',
+    bodyLabel: 'Body Paragraphs (×3)',
+    bodySubLabel: 'Use the PEEL structure for each paragraph',
+    peelItems: [
+      { letter: 'P', label: 'Point', description: 'State the main idea of the paragraph in one sentence.' },
+      { letter: 'E', label: 'Evidence / Example', description: 'Provide a fact, statistic, or concrete example that supports it.' },
+      { letter: 'E', label: 'Explanation', description: 'Explain how the evidence supports your point.' },
+      { letter: 'L', label: 'Link', description: 'Connect back to the thesis or lead into the next paragraph.' },
+    ],
+    exampleParaLabel: 'Example body paragraph',
+    conclusionLabel: 'Conclusion',
+    restateLabel: 'Restate Thesis',
+    restateDesc: 'Rephrase your main claim — do not copy it word for word.',
+    summaryLabel: 'Summary',
+    summaryDesc: 'Briefly summarize the 3 body paragraph points in 2–3 sentences.',
+    finalLabel: 'Final Thought',
+    finalDesc: 'A closing observation — broader implication, recommendation, or call to reflection.',
+    startersTitle: 'Sentence Starters by Section',
+    starterSections: [
+      { section: 'Introduction', phrases: ['In recent years, ...', 'It is widely believed that ...', 'One of the most significant ...', 'The question of ... has become increasingly important.'] },
+      { section: 'Body — Point', phrases: ['One key reason is ...', 'A major factor is ...', 'First and foremost, ...', 'Another important aspect is ...'] },
+      { section: 'Body — Evidence', phrases: ['For example, ...', 'For instance, ...', 'According to ...', 'Studies show that ...', 'Research suggests that ...'] },
+      { section: 'Conclusion', phrases: ['In conclusion, ...', 'To summarize, ...', 'Overall, it is clear that ...', 'Having considered all the evidence, ...'] },
+    ],
+    exerciseTitle: 'The Weekly Writing Exercise',
+    exerciseDesc: 'Each week, write one short essay (250–350 words) on any topic you care about. Follow the structure above. Use connectors from the previous section. Include vocabulary from the nouns and verbs pages.',
+    exerciseSteps: [
+      'Monday: Choose a topic and write your thesis statement.',
+      'Tuesday: Write body paragraph 1 (PEEL).',
+      'Wednesday: Write body paragraphs 2 and 3.',
+      'Thursday: Write the introduction and conclusion.',
+      'Friday: Read it aloud — then discuss the same topic in a SpeakPath session.',
+    ],
+    whyTitle: 'Why this helps your speaking',
+    whyBody: 'An essay has a beginning, middle, and end. So does a good answer in a job interview, a meeting, or a casual explanation to a friend. When you practice structuring your thoughts on paper, you stop rambling in conversation. You make a point, support it, and close it. That is what people call "speaking well" — and it starts here, in writing, before it ever reaches your voice.',
+  },
+  es: {
+    title: 'Plantilla de ensayo',
+    intro: 'La estructura no es solo para escribir. Cuando sabes cómo organizar ideas en un ensayo, puedes hacerlo en tiempo real, y eso es lo que parece la habla fluida desde afuera.',
+    connectionTitle: 'La conexión entre escribir y hablar',
+    connectionBody: 'Un ensayo te obliga a decidir: ¿cuál es mi punto principal? ¿Qué evidencia lo respalda? ¿Qué conecta una idea con la siguiente? Cuando respondes estas preguntas por escrito, despacio y con tiempo para revisar, entrenas el patrón de pensamiento. Luego, en una conversación, ese patrón se activa automáticamente. Hablas en párrafos estructurados sin pensar en la estructura en absoluto.',
+    structureTitle: 'La estructura del ensayo de 5 párrafos',
+    introLabel: 'Introducción',
+    hookLabel: 'Gancho',
+    hookDesc: 'Una oración de apertura que captura la atención: un dato, una pregunta o una afirmación breve.',
+    bgLabel: 'Contexto',
+    bgDesc: '1-2 oraciones de contexto que guían al lector hacia tu argumento.',
+    thesisLabel: 'Declaración de tesis',
+    thesisDesc: 'Una oración clara que expresa tu afirmación principal.',
+    bodyLabel: 'Párrafos de desarrollo (×3)',
+    bodySubLabel: 'Usa la estructura PEEL en cada párrafo',
+    peelItems: [
+      { letter: 'P', label: 'Point', description: 'Declara la idea principal del párrafo en una oración.' },
+      { letter: 'E', label: 'Evidence / Example', description: 'Proporciona un dato, estadística o ejemplo concreto que lo respalde.' },
+      { letter: 'E', label: 'Explanation', description: 'Explica cómo la evidencia apoya tu punto.' },
+      { letter: 'L', label: 'Link', description: 'Conecta de vuelta a la tesis o lleva al siguiente párrafo.' },
+    ],
+    exampleParaLabel: 'Ejemplo de párrafo de desarrollo',
+    conclusionLabel: 'Conclusión',
+    restateLabel: 'Retomar la tesis',
+    restateDesc: 'Reformula tu afirmación principal, no la copies palabra por palabra.',
+    summaryLabel: 'Resumen',
+    summaryDesc: 'Resume brevemente los 3 puntos de los párrafos de desarrollo en 2-3 oraciones.',
+    finalLabel: 'Reflexión final',
+    finalDesc: 'Una observación final: implicación más amplia, recomendación o llamada a la reflexión.',
+    startersTitle: 'Inicios de oración por sección',
+    starterSections: [
+      { section: 'Introducción', phrases: ['In recent years, ...', 'It is widely believed that ...', 'One of the most significant ...', 'The question of ... has become increasingly important.'] },
+      { section: 'Desarrollo — Punto', phrases: ['One key reason is ...', 'A major factor is ...', 'First and foremost, ...', 'Another important aspect is ...'] },
+      { section: 'Desarrollo — Evidencia', phrases: ['For example, ...', 'For instance, ...', 'According to ...', 'Studies show that ...', 'Research suggests that ...'] },
+      { section: 'Conclusión', phrases: ['In conclusion, ...', 'To summarize, ...', 'Overall, it is clear that ...', 'Having considered all the evidence, ...'] },
+    ],
+    exerciseTitle: 'El ejercicio de escritura semanal',
+    exerciseDesc: 'Cada semana, escribe un ensayo corto (250–350 palabras) sobre cualquier tema que te importe. Sigue la estructura anterior. Usa conectores de la sección anterior. Incluye vocabulario de las páginas de sustantivos y verbos.',
+    exerciseSteps: [
+      'Lunes: Elige un tema y escribe tu declaración de tesis.',
+      'Martes: Escribe el párrafo de desarrollo 1 (PEEL).',
+      'Miércoles: Escribe los párrafos de desarrollo 2 y 3.',
+      'Jueves: Escribe la introducción y la conclusión.',
+      'Viernes: Léelo en voz alta y luego habla sobre el mismo tema en una sesión de SpeakPath.',
+    ],
+    whyTitle: 'Por qué esto ayuda a hablar',
+    whyBody: 'Un ensayo tiene principio, desarrollo y final. También lo tiene una buena respuesta en una entrevista de trabajo, una reunión o una explicación casual a un amigo. Cuando practicas estructurar tus ideas en papel, dejas de hablar sin rumbo en las conversaciones. Haces un punto, lo apoyas y lo cierras. Eso es lo que la gente llama "hablar bien", y empieza aquí, en la escritura, antes de llegar a tu voz.',
+  },
+  fr: {
+    title: 'Modèle de dissertation',
+    intro: 'La structure n\'est pas uniquement pour l\'écrit. Quand vous savez organiser des idées dans une dissertation, vous pouvez le faire en temps réel — et c\'est ce à quoi ressemble un discours fluide vu de l\'extérieur.',
+    connectionTitle: 'Le lien entre écrire et parler',
+    connectionBody: 'Un essai vous force à décider : quel est mon argument principal ? Quelles preuves le soutiennent ? Qu\'est-ce qui relie une idée à la suivante ? Quand vous répondez à ces questions par écrit — lentement, avec le temps de réviser — vous entraînez le schéma de pensée. Puis, dans une conversation, ce schéma se déclenche automatiquement. Vous parlez en paragraphes structurés sans même penser à la structure.',
+    structureTitle: 'La structure de la dissertation en 5 paragraphes',
+    introLabel: 'Introduction',
+    hookLabel: 'Accroche',
+    hookDesc: 'Une phrase d\'ouverture qui capte l\'attention — un fait, une question ou une courte affirmation.',
+    bgLabel: 'Contexte',
+    bgDesc: '1 à 2 phrases de contexte qui mènent le lecteur vers votre argument.',
+    thesisLabel: 'Thèse',
+    thesisDesc: 'Une phrase claire énonçant votre argument principal.',
+    bodyLabel: 'Paragraphes de développement (×3)',
+    bodySubLabel: 'Utilisez la structure PEEL pour chaque paragraphe',
+    peelItems: [
+      { letter: 'P', label: 'Point', description: 'Énoncez l\'idée principale du paragraphe en une phrase.' },
+      { letter: 'E', label: 'Evidence / Example', description: 'Fournissez un fait, une statistique ou un exemple concret qui le soutient.' },
+      { letter: 'E', label: 'Explanation', description: 'Expliquez comment la preuve soutient votre point.' },
+      { letter: 'L', label: 'Link', description: 'Renvoyez à la thèse ou introduisez le paragraphe suivant.' },
+    ],
+    exampleParaLabel: 'Exemple de paragraphe de développement',
+    conclusionLabel: 'Conclusion',
+    restateLabel: 'Reformuler la thèse',
+    restateDesc: 'Reformulez votre argument principal — ne le copiez pas mot pour mot.',
+    summaryLabel: 'Résumé',
+    summaryDesc: 'Résumez brièvement les 3 points des paragraphes de développement en 2 à 3 phrases.',
+    finalLabel: 'Pensée finale',
+    finalDesc: 'Une observation finale — implication plus large, recommandation ou invitation à réfléchir.',
+    startersTitle: 'Amorces de phrases par section',
+    starterSections: [
+      { section: 'Introduction', phrases: ['In recent years, ...', 'It is widely believed that ...', 'One of the most significant ...', 'The question of ... has become increasingly important.'] },
+      { section: 'Développement — Point', phrases: ['One key reason is ...', 'A major factor is ...', 'First and foremost, ...', 'Another important aspect is ...'] },
+      { section: 'Développement — Preuve', phrases: ['For example, ...', 'For instance, ...', 'According to ...', 'Studies show that ...', 'Research suggests that ...'] },
+      { section: 'Conclusion', phrases: ['In conclusion, ...', 'To summarize, ...', 'Overall, it is clear that ...', 'Having considered all the evidence, ...'] },
+    ],
+    exerciseTitle: 'L\'exercice d\'écriture hebdomadaire',
+    exerciseDesc: 'Chaque semaine, écrivez un court essai (250–350 mots) sur n\'importe quel sujet qui vous tient à cœur. Suivez la structure ci-dessus. Utilisez les connecteurs de la section précédente. Incluez le vocabulaire des pages de noms et de verbes.',
+    exerciseSteps: [
+      'Lundi : Choisissez un sujet et rédigez votre thèse.',
+      'Mardi : Rédigez le paragraphe de développement 1 (PEEL).',
+      'Mercredi : Rédigez les paragraphes de développement 2 et 3.',
+      'Jeudi : Rédigez l\'introduction et la conclusion.',
+      'Vendredi : Lisez-le à voix haute — puis discutez du même sujet dans une session SpeakPath.',
+    ],
+    whyTitle: 'Pourquoi cela aide à parler',
+    whyBody: 'Un essai a un début, un milieu et une fin. C\'est aussi le cas d\'une bonne réponse lors d\'un entretien d\'embauche, d\'une réunion ou d\'une explication informelle à un ami. Quand vous vous entraînez à structurer vos pensées sur papier, vous cessez de vous perdre dans les conversations. Vous faites un point, vous le soutenez et vous le clôturez. C\'est ce qu\'on appelle "bien parler" — et cela commence ici, dans l\'écriture, avant d\'atteindre votre voix.',
+  },
+  de: {
+    title: 'Aufsatzvorlage',
+    intro: 'Struktur ist nicht nur für das Schreiben. Wenn du weißt, wie du Ideen in einem Aufsatz organisierst, kannst du das auch in Echtzeit — und genau das ist, was fließendes Sprechen von außen so aussehen lässt.',
+    connectionTitle: 'Der Zusammenhang zwischen Schreiben und Sprechen',
+    connectionBody: 'Ein Aufsatz zwingt dich zu entscheiden: Was ist mein Hauptpunkt? Welche Belege unterstützen ihn? Was verbindet eine Idee mit der nächsten? Wenn du diese Fragen schriftlich beantwortest — langsam, mit Zeit zum Überarbeiten — trainierst du das Denkmuster. In einem Gespräch feuert dieses Muster dann automatisch. Du sprichst in strukturierten Absätzen, ohne überhaupt an Struktur zu denken.',
+    structureTitle: 'Die 5-Absatz-Aufsatzstruktur',
+    introLabel: 'Einleitung',
+    hookLabel: 'Einstieg',
+    hookDesc: 'Ein Eröffnungssatz, der Aufmerksamkeit weckt — eine Tatsache, eine Frage oder eine kurze Aussage.',
+    bgLabel: 'Hintergrund',
+    bgDesc: '1–2 Kontextsätze, die den Leser zu deinem Argument hinführen.',
+    thesisLabel: 'These',
+    thesisDesc: 'Ein klarer Satz, der deine Hauptthese formuliert.',
+    bodyLabel: 'Hauptabsätze (×3)',
+    bodySubLabel: 'Verwende die PEEL-Struktur für jeden Absatz',
+    peelItems: [
+      { letter: 'P', label: 'Point', description: 'Formuliere die Hauptidee des Absatzes in einem Satz.' },
+      { letter: 'E', label: 'Evidence / Example', description: 'Liefere eine Tatsache, Statistik oder ein konkretes Beispiel, das es stützt.' },
+      { letter: 'E', label: 'Explanation', description: 'Erkläre, wie der Beleg deinen Punkt stützt.' },
+      { letter: 'L', label: 'Link', description: 'Verknüpfe zurück zur These oder leite den nächsten Absatz ein.' },
+    ],
+    exampleParaLabel: 'Beispiel-Hauptabsatz',
+    conclusionLabel: 'Schluss',
+    restateLabel: 'These reformulieren',
+    restateDesc: 'Formuliere deine Hauptthese um — kopiere sie nicht Wort für Wort.',
+    summaryLabel: 'Zusammenfassung',
+    summaryDesc: 'Fasse die 3 Punkte der Hauptabsätze kurz in 2–3 Sätzen zusammen.',
+    finalLabel: 'Abschließender Gedanke',
+    finalDesc: 'Eine abschließende Beobachtung — breitere Implikation, Empfehlung oder Aufruf zur Reflexion.',
+    startersTitle: 'Satzanfänge nach Abschnitt',
+    starterSections: [
+      { section: 'Einleitung', phrases: ['In recent years, ...', 'It is widely believed that ...', 'One of the most significant ...', 'The question of ... has become increasingly important.'] },
+      { section: 'Hauptteil — Punkt', phrases: ['One key reason is ...', 'A major factor is ...', 'First and foremost, ...', 'Another important aspect is ...'] },
+      { section: 'Hauptteil — Beleg', phrases: ['For example, ...', 'For instance, ...', 'According to ...', 'Studies show that ...', 'Research suggests that ...'] },
+      { section: 'Schluss', phrases: ['In conclusion, ...', 'To summarize, ...', 'Overall, it is clear that ...', 'Having considered all the evidence, ...'] },
+    ],
+    exerciseTitle: 'Die wöchentliche Schreibübung',
+    exerciseDesc: 'Schreibe jede Woche einen kurzen Aufsatz (250–350 Wörter) über ein Thema, das dich interessiert. Folge der obigen Struktur. Verwende Konnektoren aus dem vorherigen Abschnitt. Füge Vokabular von den Nomen- und Verbseiten ein.',
+    exerciseSteps: [
+      'Montag: Wähle ein Thema und schreibe deine These.',
+      'Dienstag: Schreibe Hauptabsatz 1 (PEEL).',
+      'Mittwoch: Schreibe Hauptabsätze 2 und 3.',
+      'Donnerstag: Schreibe die Einleitung und den Schluss.',
+      'Freitag: Lies es laut vor — und sprich dann über dasselbe Thema in einer SpeakPath-Sitzung.',
+    ],
+    whyTitle: 'Warum das beim Sprechen hilft',
+    whyBody: 'Ein Aufsatz hat einen Anfang, eine Mitte und ein Ende. Genauso eine gute Antwort in einem Vorstellungsgespräch, einem Meeting oder einer lockeren Erklärung gegenüber einem Freund. Wenn du übst, deine Gedanken auf Papier zu strukturieren, hörst du auf, in Gesprächen zu mäandern. Du machst einen Punkt, stützt ihn und schließt ihn ab. Das ist das, was die Leute "gut sprechen" nennen — und es beginnt hier, im Schreiben, bevor es deine Stimme erreicht.',
+  },
+  pt: {
+    title: 'Modelo de redação',
+    intro: 'Estrutura não é só para escrever. Quando você sabe como organizar ideias em uma redação, pode fazer isso em tempo real — e é assim que a fala fluente parece de fora.',
+    connectionTitle: 'A conexão entre escrever e falar',
+    connectionBody: 'Uma redação te obriga a decidir: qual é meu ponto principal? Que evidências o sustentam? O que conecta uma ideia à próxima? Quando você responde essas perguntas por escrito — devagar, com tempo para revisar — você treina o padrão de pensamento. Então, em uma conversa, esse padrão dispara automaticamente. Você fala em parágrafos estruturados sem pensar na estrutura.',
+    structureTitle: 'A estrutura de redação em 5 parágrafos',
+    introLabel: 'Introdução',
+    hookLabel: 'Gancho',
+    hookDesc: 'Uma frase de abertura que captura a atenção — um fato, uma pergunta ou uma afirmação curta.',
+    bgLabel: 'Contexto',
+    bgDesc: '1-2 frases de contexto que guiam o leitor em direção ao seu argumento.',
+    thesisLabel: 'Tese',
+    thesisDesc: 'Uma frase clara que declara sua afirmação principal.',
+    bodyLabel: 'Parágrafos de desenvolvimento (×3)',
+    bodySubLabel: 'Use a estrutura PEEL em cada parágrafo',
+    peelItems: [
+      { letter: 'P', label: 'Point', description: 'Declare a ideia principal do parágrafo em uma frase.' },
+      { letter: 'E', label: 'Evidence / Example', description: 'Forneça um fato, estatística ou exemplo concreto que o sustente.' },
+      { letter: 'E', label: 'Explanation', description: 'Explique como a evidência sustenta seu ponto.' },
+      { letter: 'L', label: 'Link', description: 'Conecte de volta à tese ou leve ao próximo parágrafo.' },
+    ],
+    exampleParaLabel: 'Exemplo de parágrafo de desenvolvimento',
+    conclusionLabel: 'Conclusão',
+    restateLabel: 'Retomar a tese',
+    restateDesc: 'Reformule sua afirmação principal — não a copie palavra por palavra.',
+    summaryLabel: 'Resumo',
+    summaryDesc: 'Resuma brevemente os 3 pontos dos parágrafos de desenvolvimento em 2-3 frases.',
+    finalLabel: 'Reflexão final',
+    finalDesc: 'Uma observação final — implicação mais ampla, recomendação ou convite à reflexão.',
+    startersTitle: 'Inícios de frase por seção',
+    starterSections: [
+      { section: 'Introdução', phrases: ['In recent years, ...', 'It is widely believed that ...', 'One of the most significant ...', 'The question of ... has become increasingly important.'] },
+      { section: 'Desenvolvimento — Ponto', phrases: ['One key reason is ...', 'A major factor is ...', 'First and foremost, ...', 'Another important aspect is ...'] },
+      { section: 'Desenvolvimento — Evidência', phrases: ['For example, ...', 'For instance, ...', 'According to ...', 'Studies show that ...', 'Research suggests that ...'] },
+      { section: 'Conclusão', phrases: ['In conclusion, ...', 'To summarize, ...', 'Overall, it is clear that ...', 'Having considered all the evidence, ...'] },
+    ],
+    exerciseTitle: 'O exercício de escrita semanal',
+    exerciseDesc: 'Cada semana, escreva um ensaio curto (250–350 palavras) sobre qualquer tema que você se importe. Siga a estrutura acima. Use conectores da seção anterior. Inclua vocabulário das páginas de substantivos e verbos.',
+    exerciseSteps: [
+      'Segunda: Escolha um tema e escreva sua tese.',
+      'Terça: Escreva o parágrafo de desenvolvimento 1 (PEEL).',
+      'Quarta: Escreva os parágrafos de desenvolvimento 2 e 3.',
+      'Quinta: Escreva a introdução e a conclusão.',
+      'Sexta: Leia em voz alta — depois discuta o mesmo tema em uma sessão do SpeakPath.',
+    ],
+    whyTitle: 'Por que isso ajuda a falar',
+    whyBody: 'Uma redação tem começo, meio e fim. Assim como uma boa resposta em uma entrevista de emprego, uma reunião ou uma explicação casual a um amigo. Quando você pratica estruturar seus pensamentos no papel, para de divagar nas conversas. Você faz um ponto, sustenta e fecha. Isso é o que as pessoas chamam de "falar bem" — e começa aqui, na escrita, antes de chegar à sua voz.',
+  },
+};
+
+const copy = localizedCopy[currentLocale];
+---
+
+<h1 class="font-headline text-3xl md:text-4xl font-bold tracking-display text-on-surface mb-3">
+  {copy.title}
+</h1>
+<p class="text-on-surface-variant text-lg leading-relaxed mb-10 max-w-2xl">
+  {copy.intro}
+</p>
+
+<!-- The connection -->
+<section class="mb-10 p-6 rounded-2xl bg-surface-container border border-outline-variant/15">
+  <h2 class="font-headline font-semibold text-on-surface mb-3">{copy.connectionTitle}</h2>
+  <p class="text-on-surface-variant text-sm leading-relaxed">
+    {copy.connectionBody}
+  </p>
+</section>
+
+<!-- The 5-paragraph essay structure -->
+<section class="mb-12">
+  <h2 class="font-headline text-xl font-bold text-on-surface mb-6 flex items-center gap-2">
+    <span class="material-symbols-outlined text-primary" style="font-size:22px">description</span>
+    {copy.structureTitle}
+  </h2>
+
+  <div class="space-y-4">
+    <!-- Introduction -->
+    <div class="p-6 rounded-2xl bg-surface-container border-l-2 border-primary border border-outline-variant/15">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-sm font-headline shrink-0">I</span>
+        <h3 class="font-headline font-semibold text-on-surface text-lg">{copy.introLabel}</h3>
+      </div>
+      <div class="space-y-3 text-sm">
+        <div class="p-3 rounded-xl bg-surface-container-high">
+          <p class="text-on-surface-variant/60 text-xs uppercase tracking-wider font-semibold mb-1">{copy.hookLabel}</p>
+          <p class="text-on-surface-variant">{copy.hookDesc}</p>
+          <p class="text-primary/80 italic mt-1.5">"Every year, millions of people try to learn a new language — and most give up within three months."</p>
+        </div>
+        <div class="p-3 rounded-xl bg-surface-container-high">
+          <p class="text-on-surface-variant/60 text-xs uppercase tracking-wider font-semibold mb-1">{copy.bgLabel}</p>
+          <p class="text-on-surface-variant">{copy.bgDesc}</p>
+        </div>
+        <div class="p-3 rounded-xl bg-surface-container-high">
+          <p class="text-on-surface-variant/60 text-xs uppercase tracking-wider font-semibold mb-1">{copy.thesisLabel}</p>
+          <p class="text-on-surface-variant">{copy.thesisDesc}</p>
+          <p class="text-primary/80 italic mt-1.5">"Writing in a foreign language every day is the single most effective way to accelerate fluency."</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Body paragraphs (PEEL) -->
+    <div class="p-6 rounded-2xl bg-surface-container border-l-2 border-tertiary border border-outline-variant/15">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="w-7 h-7 rounded-full bg-tertiary text-on-primary flex items-center justify-center font-bold text-sm font-headline shrink-0">B</span>
+        <div>
+          <h3 class="font-headline font-semibold text-on-surface text-lg">{copy.bodyLabel}</h3>
+          <p class="text-xs text-on-surface-variant">{copy.bodySubLabel}</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm mb-4">
+        {copy.peelItems.map(item => (
+          <div class="p-3 rounded-xl bg-surface-container-high flex gap-3">
+            <span class="text-tertiary font-bold font-headline text-base w-5 shrink-0">{item.letter}</span>
+            <div>
+              <p class="text-on-surface font-semibold">{item.label}</p>
+              <p class="text-on-surface-variant text-xs mt-0.5">{item.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="p-4 rounded-xl bg-surface-container-high border border-outline-variant/10">
+        <p class="text-on-surface-variant/60 text-xs uppercase tracking-wider font-semibold mb-2">{copy.exampleParaLabel}</p>
+        <p class="text-on-surface-variant text-xs leading-relaxed italic">
+          <span class="text-tertiary not-italic font-semibold">[P]</span> Writing daily forces learners to actively recall grammar rules.
+          <span class="text-tertiary not-italic font-semibold"> [E]</span> Research from the University of Cambridge shows that active recall is 50% more effective than passive review.
+          <span class="text-tertiary not-italic font-semibold"> [E]</span> This means that a student who writes five sentences per day retains vocabulary faster than one who reads for an hour.
+          <span class="text-tertiary not-italic font-semibold"> [L]</span> This retention directly transfers to speed and accuracy when speaking.
+        </p>
+      </div>
+    </div>
+
+    <!-- Conclusion -->
+    <div class="p-6 rounded-2xl bg-surface-container border-l-2 border-primary border border-outline-variant/15">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-sm font-headline shrink-0">C</span>
+        <h3 class="font-headline font-semibold text-on-surface text-lg">{copy.conclusionLabel}</h3>
+      </div>
+      <div class="space-y-3 text-sm">
+        <div class="p-3 rounded-xl bg-surface-container-high">
+          <p class="text-on-surface-variant/60 text-xs uppercase tracking-wider font-semibold mb-1">{copy.restateLabel}</p>
+          <p class="text-on-surface-variant">{copy.restateDesc}</p>
+        </div>
+        <div class="p-3 rounded-xl bg-surface-container-high">
+          <p class="text-on-surface-variant/60 text-xs uppercase tracking-wider font-semibold mb-1">{copy.summaryLabel}</p>
+          <p class="text-on-surface-variant">{copy.summaryDesc}</p>
+        </div>
+        <div class="p-3 rounded-xl bg-surface-container-high">
+          <p class="text-on-surface-variant/60 text-xs uppercase tracking-wider font-semibold mb-1">{copy.finalLabel}</p>
+          <p class="text-on-surface-variant">{copy.finalDesc}</p>
+          <p class="text-primary/80 italic mt-1.5">"The pen is quieter than the voice, but it is often the writer who speaks most clearly."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Useful phrases for each section -->
+<section class="mb-12">
+  <h2 class="font-headline text-xl font-bold text-on-surface mb-6 flex items-center gap-2">
+    <span class="material-symbols-outlined text-primary" style="font-size:22px">format_quote</span>
+    {copy.startersTitle}
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+    {copy.starterSections.map(sec => (
+      <div class="p-5 rounded-2xl bg-surface-container border border-outline-variant/15">
+        <h3 class="font-headline font-semibold text-primary mb-3">{sec.section}</h3>
+        <ul class="space-y-1.5 text-on-surface-variant">
+          {sec.phrases.map(p => (
+            <li class="flex items-start gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+              <span class="italic">{p}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+</section>
+
+<!-- The practical exercise -->
+<section class="mb-12 p-6 rounded-2xl bg-surface-container border border-outline-variant/15">
+  <h2 class="font-headline font-semibold text-on-surface mb-3 flex items-center gap-2">
+    <span class="material-symbols-outlined text-primary" style="font-size:20px">edit_note</span>
+    {copy.exerciseTitle}
+  </h2>
+  <p class="text-on-surface-variant text-sm leading-relaxed mb-4">
+    {copy.exerciseDesc}
+  </p>
+  <ol class="space-y-2 text-sm text-on-surface-variant list-none">
+    {copy.exerciseSteps.map((step, i) => (
+      <li class="flex items-start gap-3">
+        <span class="text-primary font-bold font-headline shrink-0">{i + 1}.</span>
+        <span>{step}</span>
+      </li>
+    ))}
+  </ol>
+</section>
+
+<!-- Why it helps -->
+<section class="p-6 rounded-2xl bg-primary/5 border border-primary/15">
+  <h3 class="font-headline font-semibold text-primary mb-2 flex items-center gap-2">
+    <span class="material-symbols-outlined" style="font-size:18px">record_voice_over</span>
+    {copy.whyTitle}
+  </h3>
+  <p class="text-on-surface-variant leading-relaxed text-sm">
+    {copy.whyBody}
+  </p>
+</section>

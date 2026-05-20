@@ -1,0 +1,730 @@
+---
+interface Props {
+  locale?: string;
+}
+const { locale = 'en' } = Astro.props;
+type SupportedLocale = 'en' | 'es' | 'fr' | 'de' | 'pt';
+
+const currentLocale: SupportedLocale = ['en', 'es', 'fr', 'de', 'pt'].includes(locale)
+  ? (locale as SupportedLocale)
+  : 'en';
+
+const localizedCopy = {
+  en: {
+    title: 'Grammar',
+    introBefore: 'Grammar is not a list of tenses to memorize — it is a set of ',
+    introStrong: 'operator rules',
+    introAfter: '. Each rule manages a specific type of sentence. Learn which rule applies and the sentence builds itself.',
+    speakerNoteTitle: '',
+    speakerNote: '',
+    rulesTitle: 'Grammar Rules (Auxiliary Verbs)',
+    headers: ['Affirmative', 'Negative', 'Question', 'Neg. Question'],
+    noteLabel: 'Note:',
+    commonMistakesTitle: 'Common Mistakes to Fix',
+    articlesTitle: 'Articles: a, an, the',
+    articleHeaders: ['Article', 'Use', 'Example'],
+    articleUses: [
+      'First mention, singular, consonant sound',
+      'First mention, singular, vowel sound',
+      'Specific, already known, unique things',
+      'General statements, plural/uncountable nouns',
+    ],
+    noneLabel: '(none)',
+    articleNote: '',
+    whyTitle: 'Why this helps your speaking',
+    whyBody:
+      'When you know which rule manages your sentence, you stop guessing the structure mid-conversation. You identify the auxiliary verb first — then the rest of the sentence follows automatically. Write five sentences using each rule every day for one week. Then notice how naturally they come out when you speak.',
+    conjugationLabels: { present: 'Present', past: 'Past' },
+    beEquivalent: { present: '', past: '' },
+  },
+  es: {
+    title: 'Gramática',
+    introBefore: 'La gramática no es una lista de tiempos verbales para memorizar: es un conjunto de ',
+    introStrong: 'reglas operadoras',
+    introAfter: '. Cada regla maneja un tipo específico de oración. Aprende qué regla aplica y la oración se construye sola.',
+    speakerNoteTitle: 'Nota para hispanohablantes:',
+    speakerNote:
+      'Cada "regla" aquí es un verbo auxiliar que "maneja" un tipo de oración. La clave es identificar qué verbo auxiliar corresponde a tu oración según su significado. Cada regla tiene su propia forma de hacer negaciones, preguntas y preguntas negativas.',
+    rulesTitle: 'Reglas de gramática (verbos auxiliares)',
+    headers: ['Afirmativa', 'Negativa', 'Pregunta', 'Pregunta negativa'],
+    noteLabel: 'Nota:',
+    commonMistakesTitle: 'Errores comunes para corregir',
+    articlesTitle: 'Artículos: a, an, the',
+    articleHeaders: ['Artículo', 'Uso', 'Ejemplo'],
+    articleUses: [
+      'Primera mención, singular, sonido consonante',
+      'Primera mención, singular, sonido vocal',
+      'Cosas específicas, ya conocidas o únicas',
+      'Ideas generales, plurales o sustantivos incontables',
+    ],
+    noneLabel: '(ninguno)',
+    articleNote:
+      'En inglés no existe "un/una" para cosas ya conocidas — eso siempre es "the". Y no existe artículo para generalizaciones ("Dogs are loyal", no "The dogs are loyal" como generalización).',
+    whyTitle: 'Por qué esto ayuda a hablar',
+    whyBody:
+      'Cuando sabes qué regla maneja tu oración, dejas de adivinar la estructura en medio de la conversación. Primero identificas el verbo auxiliar y luego el resto de la oración sigue de forma automática. Escribe cinco oraciones con cada regla todos los días durante una semana. Después nota cómo empiezan a salir con más naturalidad cuando hablas.',
+    conjugationLabels: { present: 'Presente', past: 'Pasado' },
+    beEquivalent: { present: 'soy/estoy · es/está · somos/estamos', past: 'era/estaba · era/estaba · eran/estaban' },
+  },
+  fr: {
+    title: 'Grammaire',
+    introBefore: 'La grammaire n’est pas une liste de temps à mémoriser : c’est un ensemble de ',
+    introStrong: 'règles opératrices',
+    introAfter: '. Chaque règle gère un type précis de phrase. Apprenez quelle règle s’applique, et la phrase se construit plus facilement.',
+    speakerNoteTitle: 'Note pour les francophones :',
+    speakerNote:
+      'Chaque "règle" ici est un auxiliaire qui gère un type de phrase. L’objectif est d’identifier l’auxiliaire correct selon le sens de votre phrase. Chaque règle a sa propre façon de former les négations, les questions et les questions négatives.',
+    rulesTitle: 'Règles de grammaire (verbes auxiliaires)',
+    headers: ['Affirmatif', 'Négatif', 'Question', 'Question négative'],
+    noteLabel: 'Note :',
+    commonMistakesTitle: 'Erreurs fréquentes à corriger',
+    articlesTitle: 'Articles : a, an, the',
+    articleHeaders: ['Article', 'Usage', 'Exemple'],
+    articleUses: [
+      'Première mention, singulier, son consonne',
+      'Première mention, singulier, son voyelle',
+      'Chose précise, déjà connue ou unique',
+      'Idées générales, noms pluriels ou indénombrables',
+    ],
+    noneLabel: '(aucun)',
+    articleNote:
+      'En anglais, on n’utilise pas "a/an" pour une chose déjà connue : c’est "the". Pour les généralisations, il n’y a souvent pas d’article : "Dogs are loyal", pas "The dogs are loyal" comme généralisation.',
+    whyTitle: 'Pourquoi cela aide à parler',
+    whyBody:
+      'Quand vous savez quelle règle gère votre phrase, vous arrêtez de deviner la structure pendant la conversation. Identifiez d’abord l’auxiliaire, puis le reste de la phrase suit plus naturellement. Écrivez cinq phrases avec chaque règle chaque jour pendant une semaine, puis observez comment elles sortent plus facilement à l’oral.',
+    conjugationLabels: { present: 'Présent', past: 'Passé' },
+    beEquivalent: { present: 'suis · est · sommes/êtes/sont', past: 'étais/était · étions/étiez/étaient' },
+  },
+  de: {
+    title: 'Grammatik',
+    introBefore: 'Grammatik ist keine Liste von Zeiten zum Auswendiglernen, sondern ein System aus ',
+    introStrong: 'Operator-Regeln',
+    introAfter: '. Jede Regel steuert eine bestimmte Art von Satz. Wenn du erkennst, welche Regel passt, baut sich der Satz deutlich leichter auf.',
+    speakerNoteTitle: 'Hinweis für Deutschsprachige:',
+    speakerNote:
+      'Jede "Regel" hier ist ein Hilfsverb, das eine bestimmte Satzart steuert. Entscheidend ist, das passende Hilfsverb nach der Bedeutung deines Satzes zu erkennen. Jede Regel bildet Verneinungen, Fragen und negative Fragen auf ihre eigene Weise.',
+    rulesTitle: 'Grammatikregeln (Hilfsverben)',
+    headers: ['Aussage', 'Verneinung', 'Frage', 'Negative Frage'],
+    noteLabel: 'Hinweis:',
+    commonMistakesTitle: 'Häufige Fehler zum Korrigieren',
+    articlesTitle: 'Artikel: a, an, the',
+    articleHeaders: ['Artikel', 'Verwendung', 'Beispiel'],
+    articleUses: [
+      'Erste Erwähnung, Singular, Konsonantenlaut',
+      'Erste Erwähnung, Singular, Vokallaut',
+      'Bestimmte, bereits bekannte oder einzigartige Dinge',
+      'Allgemeine Aussagen, Plural oder nicht zählbare Nomen',
+    ],
+    noneLabel: '(kein Artikel)',
+    articleNote:
+      'Im Englischen verwendet man nicht "a/an" für etwas bereits Bekanntes : dafür nimmt man "the". Bei allgemeinen Aussagen steht oft kein Artikel: "Dogs are loyal", nicht "The dogs are loyal" als Verallgemeinerung.',
+    whyTitle: 'Warum das beim Sprechen hilft',
+    whyBody:
+      'Wenn du weißt, welche Regel deinen Satz steuert, musst du die Struktur mitten im Gespräch nicht mehr erraten. Erkenne zuerst das Hilfsverb; danach folgt der Rest des Satzes viel automatischer. Schreibe eine Woche lang jeden Tag fünf Sätze mit jeder Regel und achte darauf, wie natürlicher sie beim Sprechen herauskommen.',
+    conjugationLabels: { present: 'Präsens', past: 'Präteritum' },
+    beEquivalent: { present: 'bin · ist · sind/seid', past: 'war · war · waren/wart' },
+  },
+  pt: {
+    title: 'Gramática',
+    introBefore: 'Gramática não é uma lista de tempos verbais para memorizar: é um conjunto de ',
+    introStrong: 'regras operadoras',
+    introAfter: '. Cada regra controla um tipo específico de frase. Aprenda qual regra se aplica e a frase começa a se montar com mais naturalidade.',
+    speakerNoteTitle: 'Nota para falantes de português:',
+    speakerNote:
+      'Cada "regra" aqui é um verbo auxiliar que controla um tipo de frase. A chave é identificar qual auxiliar corresponde ao significado da sua frase. Cada regra tem sua própria forma de fazer negativas, perguntas e perguntas negativas.',
+    rulesTitle: 'Regras de gramática (verbos auxiliares)',
+    headers: ['Afirmativa', 'Negativa', 'Pergunta', 'Pergunta negativa'],
+    noteLabel: 'Nota:',
+    commonMistakesTitle: 'Erros comuns para corrigir',
+    articlesTitle: 'Artigos: a, an, the',
+    articleHeaders: ['Artigo', 'Uso', 'Exemplo'],
+    articleUses: [
+      'Primeira menção, singular, som de consoante',
+      'Primeira menção, singular, som de vogal',
+      'Coisas específicas, já conhecidas ou únicas',
+      'Ideias gerais, plurais ou substantivos incontáveis',
+    ],
+    noneLabel: '(nenhum)',
+    articleNote:
+      'Em inglês, não se usa "a/an" para algo que já é conhecido: isso normalmente é "the". Para generalizações, muitas vezes não há artigo: "Dogs are loyal", não "The dogs are loyal" como generalização.',
+    whyTitle: 'Por que isso ajuda a falar',
+    whyBody:
+      'Quando você sabe qual regra controla sua frase, para de adivinhar a estrutura no meio da conversa. Primeiro identifique o verbo auxiliar; depois o resto da frase vem com mais naturalidade. Escreva cinco frases com cada regra todos os dias por uma semana e perceba como elas começam a sair melhor quando você fala.',
+    conjugationLabels: { present: 'Presente', past: 'Passado' },
+    beEquivalent: { present: 'sou/estou · é/está · somos/estamos', past: 'era/estava · era/estava · eram/estavam' },
+  },
+};
+
+const copy = localizedCopy[currentLocale];
+
+const ruleDescriptions: Record<Exclude<SupportedLocale, 'en'>, Record<string, string>> = {
+  es: {
+    BE: 'Expresa estados, identidad o condición: "ser/estar" en presente y pasado.',
+    'DO / DOES': 'Maneja todos los verbos comunes: cualquier verbo que no sea BE ni HAVE como auxiliar.',
+    'HAVE / HAS': 'Tiene dos significados: TENER como verbo común y HABER para los tiempos perfectos.',
+    WILL: 'Futuro con certeza: intención fuerte, promesa o seguridad absoluta.',
+    'GOING TO': 'Plan futuro ya decidido, sin énfasis. WAS/WERE GOING TO = plan frustrado: algo estaba planeado pero no ocurrió.',
+    WOULD: 'Condicional: lo que pasaría con una condición explícita o implícita.',
+    SHOULD: 'Recomendación fuerte u obligación moral, pero con libre decisión.',
+    COULD: 'Pasado y condicional de CAN: habilidad pasada, petición educada o posibilidad.',
+    'CAN / BE ABLE TO': 'CAN = decisión o voluntad personal. BE ABLE TO = capacidad física o situacional.',
+    MAY: 'Probabilidad 50/50 o petición formal de permiso.',
+    MUST: 'Obligación fuerte con consecuencias si no se cumple. También se usa para deducción lógica.',
+  },
+  fr: {
+    BE: 'Exprime un état, une identité ou une condition : "être" au présent et au passé.',
+    'DO / DOES': 'Gère tous les verbes courants : tout verbe qui n’est ni BE ni HAVE comme auxiliaire.',
+    'HAVE / HAS': 'A deux sens : possession comme verbe courant, et auxiliaire des temps parfaits.',
+    WILL: 'Futur certain : intention forte, promesse ou certitude absolue.',
+    'GOING TO': 'Projet futur déjà décidé, sans emphase. WAS/WERE GOING TO = projet frustré : quelque chose était prévu mais n’a pas eu lieu.',
+    WOULD: 'Conditionnel : ce qui arriverait avec une condition explicite ou implicite.',
+    SHOULD: 'Recommandation forte ou obligation morale, mais avec liberté de choix.',
+    COULD: 'Passé et conditionnel de CAN : capacité passée, demande polie ou possibilité.',
+    'CAN / BE ABLE TO': 'CAN = décision ou volonté personnelle. BE ABLE TO = capacité physique ou liée à la situation.',
+    MAY: 'Probabilité 50/50 ou demande de permission formelle.',
+    MUST: 'Obligation forte avec conséquences si elle n’est pas respectée. Aussi utilisé pour une déduction logique.',
+  },
+  de: {
+    BE: 'Drückt Zustand, Identität oder Bedingung aus: "sein" in Gegenwart und Vergangenheit.',
+    'DO / DOES': 'Steuert alle normalen Verben: jedes Verb, das nicht BE oder HAVE als Hilfsverb ist.',
+    'HAVE / HAS': 'Hat zwei Bedeutungen: Besitz als normales Verb und Hilfsverb für Perfektformen.',
+    WILL: 'Sichere Zukunft: starke Absicht, Versprechen oder absolute Gewissheit.',
+    'GOING TO': 'Bereits beschlossener Zukunftsplan ohne besondere Betonung. WAS/WERE GOING TO = ein geplanter, aber nicht geschehener Ablauf.',
+    WOULD: 'Konditional: was mit einer ausdrücklichen oder mitgedachten Bedingung passieren würde.',
+    SHOULD: 'Starke Empfehlung oder moralische Pflicht, aber mit freier Entscheidung.',
+    COULD: 'Vergangenheit und Konditional von CAN: frühere Fähigkeit, höfliche Bitte oder Möglichkeit.',
+    'CAN / BE ABLE TO': 'CAN = persönliche Entscheidung oder Bereitschaft. BE ABLE TO = körperliche oder situative Fähigkeit.',
+    MAY: '50/50-Wahrscheinlichkeit oder formelle Bitte um Erlaubnis.',
+    MUST: 'Starke Verpflichtung mit Konsequenzen, wenn sie nicht erfüllt wird. Auch für logische Schlussfolgerungen.',
+  },
+  pt: {
+    BE: 'Expressa estado, identidade ou condição: "ser/estar" no presente e no passado.',
+    'DO / DOES': 'Controla todos os verbos comuns: qualquer verbo que não seja BE nem HAVE como auxiliar.',
+    'HAVE / HAS': 'Tem dois sentidos: posse como verbo comum e auxiliar dos tempos perfeitos.',
+    WILL: 'Futuro com certeza: intenção forte, promessa ou certeza absoluta.',
+    'GOING TO': 'Plano futuro já decidido, sem ênfase. WAS/WERE GOING TO = plano frustrado: algo estava planejado, mas não aconteceu.',
+    WOULD: 'Condicional: o que aconteceria com uma condição explícita ou implícita.',
+    SHOULD: 'Recomendação forte ou obrigação moral, mas com liberdade de decisão.',
+    COULD: 'Passado e condicional de CAN: habilidade passada, pedido educado ou possibilidade.',
+    'CAN / BE ABLE TO': 'CAN = decisão ou vontade pessoal. BE ABLE TO = capacidade física ou situacional.',
+    MAY: 'Probabilidade 50/50 ou pedido formal de permissão.',
+    MUST: 'Obrigação forte com consequências se não for cumprida. Também usado para dedução lógica.',
+  },
+};
+
+const getRuleDescription = (rule: { name: string; description: string }) =>
+  currentLocale === 'en' ? rule.description : ruleDescriptions[currentLocale][rule.name] ?? rule.description;
+
+const ruleNotes: Record<Exclude<SupportedLocale, 'en'>, Record<string, string>> = {
+  es: {
+    BE: "Úsalo SOLO cuando tu oración tiene un 'ser o estar' al lado del pronombre. Si no hay 'ser o estar', estás en otra regla. El 'NOT' siempre va después de la regla: IS NOT, ARE NOT, WAS NOT.",
+    'DO / DOES': "Esta regla maneja TODOS los verbos comunes (correr, comer, estudiar, trabajar...). Es INVISIBLE en la afirmación: el verbo aparece solo. Solo aparece en negación y pregunta. DO = I/You/We/They · DOES = He/She/It · DID = todos en pasado.",
+    'HAVE / HAS': "Tiene dos significados: TENER y HABER. Cuando es TENER, es verbo común y lo maneja DO/DOES. Cuando es HABER, lo maneja HAVE/HAS. HAD = pasado de ambos.",
+    WILL: "No lo traduzcas solo como '-ré'. Úsalo cuando eres 100% seguro: 'fijo que', 'de hecho que', 'en serio que'. Es dar tu palabra.",
+    'GOING TO': "Solo menciona el futuro sin énfasis: es el plan ya organizado. GOING TO siempre necesita BE: IS/AM/ARE going to o WAS/WERE going to. WAS/WERE GOING TO = futuro frustrado.",
+    WOULD: "Expresa lo que alguien haría en una condición. Siempre hay una condición implícita o explícita (si..., if...). También sirve para peticiones muy educadas.",
+    SHOULD: "'Debería' no es una orden. La persona puede no hacerlo, pero si no lo hace habrá consecuencias. Es una recomendación fuerte o compromiso moral.",
+    COULD: "'Podría, podía, pudo' es el pasado y condicional de CAN. Úsalo para habilidad en el pasado o peticiones educadas.",
+    'CAN / BE ABLE TO': "CAN = puedo porque quiero o decido hacerlo. BE ABLE TO = puedo porque estoy físicamente o situacionalmente habilitado.",
+    MAY: "Dos usos: probabilidad 50/50 ('talvez, quizás') o permiso formal ('May I...?'). Es más educado que CAN I...?",
+    MUST: "Deber imprescindible: no es una orden personal, es una norma. Si no se cumple, hay consecuencias. Para el pasado usa HAD TO.",
+  },
+  fr: {
+    BE: "Utilisez cette règle seulement quand la phrase contient l’idée de 'être' avec le sujet. S’il n’y a pas cette idée, vous êtes dans une autre règle. NOT vient après l’auxiliaire : IS NOT, ARE NOT, WAS NOT.",
+    'DO / DOES': "Cette règle gère tous les verbes courants (travailler, étudier, manger...). Elle est invisible dans l’affirmation et apparaît surtout dans les négations et les questions. DO = I/You/We/They · DOES = He/She/It · DID = passé.",
+    'HAVE / HAS': "HAVE peut être un verbe courant de possession ou un auxiliaire du parfait. Comme possession, il suit DO/DOES. Comme auxiliaire, il forme lui-même la négation et la question.",
+    WILL: "Ne le traduisez pas seulement comme un futur simple. Utilisez WILL quand l’intention, la promesse ou la certitude est forte.",
+    'GOING TO': "GOING TO présente un plan déjà décidé, sans emphase particulière. Il a toujours besoin de BE : IS/AM/ARE going to ou WAS/WERE going to. WAS/WERE GOING TO montre un plan qui n’a finalement pas eu lieu.",
+    WOULD: "WOULD exprime ce qui arriverait sous condition. La condition peut être dite clairement ou seulement sous-entendue. Il sert aussi à faire des demandes plus polies.",
+    SHOULD: "SHOULD est une recommandation forte, pas un ordre absolu. La personne peut refuser, mais il y a une conséquence ou une attente morale.",
+    COULD: "COULD est le passé ou le conditionnel de CAN. Utilisez-le pour une capacité passée, une possibilité ou une demande polie.",
+    'CAN / BE ABLE TO': "CAN parle souvent de volonté ou de possibilité personnelle. BE ABLE TO insiste davantage sur la capacité réelle, physique ou liée à la situation.",
+    MAY: "MAY indique une probabilité incertaine ou une permission formelle. Dans une question, MAY I...? est plus formel que CAN I...?",
+    MUST: "MUST exprime une obligation forte ou une déduction logique. Pour parler du passé, utilisez HAD TO.",
+  },
+  de: {
+    BE: "Nutze diese Regel nur, wenn dein Satz die Bedeutung von 'sein' mit dem Subjekt hat. Wenn diese Bedeutung fehlt, brauchst du eine andere Regel. NOT steht nach dem Hilfsverb: IS NOT, ARE NOT, WAS NOT.",
+    'DO / DOES': "Diese Regel steuert alle normalen Verben (arbeiten, lernen, essen...). In Aussagesätzen ist sie unsichtbar; in Verneinungen und Fragen wird sie sichtbar. DO = I/You/We/They · DOES = He/She/It · DID = Vergangenheit.",
+    'HAVE / HAS': "HAVE kann Besitz ausdrücken oder als Perfekt-Hilfsverb funktionieren. Als Besitzverb folgt es DO/DOES. Als Hilfsverb bildet HAVE/HAS selbst Frage und Verneinung.",
+    WILL: "Übersetze WILL nicht nur als Zukunft. Nutze es, wenn Absicht, Versprechen oder Gewissheit stark sind.",
+    'GOING TO': "GOING TO beschreibt einen bereits beschlossenen Plan ohne starke Betonung. Es braucht immer BE: IS/AM/ARE going to oder WAS/WERE going to. WAS/WERE GOING TO zeigt einen Plan, der nicht passiert ist.",
+    WOULD: "WOULD beschreibt, was unter einer Bedingung passieren würde. Die Bedingung kann ausgesprochen oder nur mitgedacht sein. Es macht Bitten auch höflicher.",
+    SHOULD: "SHOULD ist eine starke Empfehlung, kein absoluter Befehl. Die Person kann anders handeln, aber es gibt eine Folge oder moralische Erwartung.",
+    COULD: "COULD ist Vergangenheit oder Konditional von CAN. Nutze es für frühere Fähigkeit, Möglichkeit oder höfliche Bitten.",
+    'CAN / BE ABLE TO': "CAN beschreibt oft persönliche Bereitschaft oder Möglichkeit. BE ABLE TO betont stärker die echte körperliche oder situative Fähigkeit.",
+    MAY: "MAY bedeutet unsichere Wahrscheinlichkeit oder formelle Erlaubnis. In Fragen ist MAY I...? formeller als CAN I...?",
+    MUST: "MUST drückt starke Pflicht oder logische Schlussfolgerung aus. Für die Vergangenheit nutzt du HAD TO.",
+  },
+  pt: {
+    BE: "Use esta regra somente quando a frase tem a ideia de 'ser/estar' com o sujeito. Se essa ideia não existe, é outra regra. NOT vem depois do auxiliar: IS NOT, ARE NOT, WAS NOT.",
+    'DO / DOES': "Esta regra controla todos os verbos comuns (trabalhar, estudar, comer...). Ela fica invisível na afirmativa e aparece principalmente em negativas e perguntas. DO = I/You/We/They · DOES = He/She/It · DID = passado.",
+    'HAVE / HAS': "HAVE pode indicar posse ou funcionar como auxiliar dos tempos perfeitos. Como posse, segue DO/DOES. Como auxiliar, HAVE/HAS forma a própria pergunta e negativa.",
+    WILL: "Não traduza WILL apenas como futuro. Use quando a intenção, promessa ou certeza é forte.",
+    'GOING TO': "GOING TO mostra um plano já decidido, sem muita ênfase. Sempre precisa de BE: IS/AM/ARE going to ou WAS/WERE going to. WAS/WERE GOING TO mostra um plano que não aconteceu.",
+    WOULD: "WOULD expressa o que aconteceria com uma condição. A condição pode estar clara ou apenas implícita. Também deixa pedidos mais educados.",
+    SHOULD: "SHOULD é uma recomendação forte, não uma ordem absoluta. A pessoa pode não fazer, mas existe consequência ou expectativa moral.",
+    COULD: "COULD é o passado ou condicional de CAN. Use para habilidade no passado, possibilidade ou pedido educado.",
+    'CAN / BE ABLE TO': "CAN muitas vezes fala de vontade ou possibilidade pessoal. BE ABLE TO enfatiza capacidade real, física ou situacional.",
+    MAY: "MAY indica probabilidade incerta ou permissão formal. Em pergunta, MAY I...? é mais formal que CAN I...?",
+    MUST: "MUST expressa obrigação forte ou dedução lógica. Para o passado, use HAD TO.",
+  },
+};
+
+const getRuleNote = (ruleName: string) =>
+  currentLocale === 'en' ? '' : ruleNotes[currentLocale][ruleName] ?? '';
+
+const localizedAbbrevNotes: Record<Exclude<SupportedLocale, 'en'>, Record<string, string>> = {
+  es: {
+    'GOING TO': 'Preguntas y negaciones siempre se hacen con BE (is/are/was/were)',
+  },
+  fr: {
+    'GOING TO': 'Les questions et les négations se construisent toujours avec BE (is/are/was/were)',
+  },
+  de: {
+    'GOING TO': 'Fragen und Verneinungen werden immer mit BE gebildet (is/are/was/were)',
+  },
+  pt: {
+    'GOING TO': 'Perguntas e negativas sempre são feitas com BE (is/are/was/were)',
+  },
+};
+
+const getAbbrevNote = (rule: { name: string; abbrev: string }) =>
+  currentLocale === 'en' ? rule.abbrev : localizedAbbrevNotes[currentLocale][rule.name] ?? rule.abbrev;
+
+const beConjugation = {
+  present: 'I AM · He/She/It IS · You/We/They ARE',
+  past: 'I/He/She/It WAS · You/We/They WERE',
+};
+
+const rules = [
+  {
+    name: 'BE',
+    forms: 'am · is · are · was · were',
+    description: 'Expresses states of being — "to be" in present and past.',
+    rows: [
+      { tenseKey: 'present' as const, aff: 'She IS happy.', neg: 'She IS NOT happy.', q: 'IS she happy?', nq: "ISN'T she happy?" },
+      { tenseKey: 'past' as const, aff: 'They WERE late.', neg: 'They WERE NOT late.', q: 'WERE they late?', nq: "WEREN'T they late?" },
+    ],
+    examples: [
+      { en: 'She is a teacher.', es: 'Ella es maestra.', fr: 'Elle est professeure.', de: 'Sie ist Lehrerin.', pt: 'Ela é professora.' },
+      { en: 'He was tired.', es: 'Él estaba cansado.', fr: 'Il était fatigué.', de: 'Er war müde.', pt: 'Ele estava cansado.' },
+      { en: "Aren't you cold?", es: '¿No tienes frío?', fr: "Tu n’as pas froid ?", de: 'Ist dir nicht kalt?', pt: 'Você não está com frio?' },
+    ],
+    note: "Úsalo SOLO cuando tu oración tiene un 'ser o estar' al lado del pronombre. Si no hay 'ser o estar', estás en otra regla. El 'NOT' siempre va después de la regla: IS NOT, ARE NOT, WAS NOT.",
+    abbrev: 'AM NOT = AIN\'T · IS NOT = ISN\'T · ARE NOT = AREN\'T · WAS NOT = WASN\'T · WERE NOT = WEREN\'T',
+  },
+  {
+    name: 'DO / DOES',
+    forms: 'do · does · did',
+    description: 'Manages ALL common verbs — any verb that is not BE or HAVE used as auxiliary.',
+    rows: [
+      { aff: 'She WORKS here. (DO invisible)', neg: "She DOESN'T work here.", q: 'DOES she work here?', nq: "DOESN'T she work here?" },
+      { aff: 'They PLAYED well. (DID invisible)', neg: "They DIDN'T play well.", q: 'DID they play well?', nq: "DIDN'T they play well?" },
+    ],
+    examples: [
+      { en: 'My friend works here.', es: 'Mi amigo trabaja aquí.', fr: 'Mon ami travaille ici.', de: 'Mein Freund arbeitet hier.', pt: 'Meu amigo trabalha aqui.' },
+      { en: "Do you study English?", es: '¿Estudias inglés?', fr: 'Tu étudies l’anglais ?', de: 'Lernst du Englisch?', pt: 'Você estuda inglês?' },
+      { en: "She doesn't know.", es: 'Ella no sabe.', fr: 'Elle ne sait pas.', de: 'Sie weiß es nicht.', pt: 'Ela não sabe.' },
+    ],
+    note: "Esta regla maneja TODOS los verbos comunes (correr, comer, estudiar, trabajar...). Es INVISIBLE en la afirmación — el verbo aparece solo. Solo aparece en negación y pregunta. DO = I/You/We/They · DOES = He/She/It · DID = todos en pasado.",
+    abbrev: "DO NOT = DON'T · DOES NOT = DOESN'T · DID NOT = DIDN'T",
+  },
+  {
+    name: 'HAVE / HAS',
+    forms: 'have · has · had',
+    description: 'Two meanings: TENER (common verb — managed by DO) and HABER (perfect tense — managed by HAVE itself).',
+    rows: [
+      { aff: 'I HAVE SLEPT. (perfect)', neg: "I HAVEN'T slept.", q: 'HAVE I slept?', nq: "HAVEN'T I slept?" },
+      { aff: 'She HAS EATEN. (perfect)', neg: "She HASN'T eaten.", q: 'HAS she eaten?', nq: "HASN'T she eaten?" },
+    ],
+    examples: [
+      { en: 'I have lived here for 3 years.', es: 'He vivido aquí 3 años.', fr: 'J’habite ici depuis 3 ans.', de: 'Ich lebe seit 3 Jahren hier.', pt: 'Eu moro aqui há 3 anos.' },
+      { en: 'She has to work. → Does she have to work?', es: 'Ella tiene que trabajar. → ¿Tiene que trabajar?', fr: 'Elle doit travailler. → Est-ce qu’elle doit travailler ?', de: 'Sie muss arbeiten. → Muss sie arbeiten?', pt: 'Ela tem que trabalhar. → Ela tem que trabalhar?' },
+      { en: 'She had studied. vs. She has studied.', es: 'Ella había estudiado. vs. Ella ha estudiado.', fr: 'Elle avait étudié. vs. Elle a étudié.', de: 'Sie hatte gelernt. vs. Sie hat gelernt.', pt: 'Ela tinha estudado. vs. Ela estudou / tem estudado.' },
+    ],
+    note: "Tiene dos significados: TENER y HABER. Cuando es TENER, es verbo común → lo maneja DO/DOES (Do you have money? / She doesn't have to go). Cuando es HABER, lo maneja HAVE/HAS (Have you eaten? / She hasn't called). HAD = pasado de ambos: 'tenía/tuvo' (maneja DID) y 'había' (maneja HAD).",
+    abbrev: "HAVE NOT = HAVEN'T · HAS NOT = HASN'T · HAD NOT = HADN'T",
+  },
+  {
+    name: 'WILL',
+    forms: "will · won't",
+    description: 'Certain future — strong intention, promise, absolute certainty.',
+    rows: [
+      { aff: 'I WILL call you.', neg: "I WON'T call you.", q: 'WILL you call?', nq: "WON'T you call?" },
+    ],
+    examples: [
+      { en: 'I will call you later.', es: 'De hecho que te llamo más tarde.', fr: 'Je t’appellerai plus tard.', de: 'Ich rufe dich später an.', pt: 'Eu vou te ligar mais tarde.' },
+      { en: "He won't come today.", es: 'Fijo que no viene hoy.', fr: 'Il ne viendra pas aujourd’hui.', de: 'Er wird heute nicht kommen.', pt: 'Ele não vai vir hoje.' },
+      { en: "Won't you help me?", es: '¿En serio no me vas a ayudar?', fr: 'Tu ne vas vraiment pas m’aider ?', de: 'Willst du mir wirklich nicht helfen?', pt: 'Você não vai me ajudar mesmo?' },
+    ],
+    note: "No lo traduzcas solo como '-ré' (trabajaré, iré). Úsalo cuando eres 100% seguro: 'fijo que', 'de hecho que', 'en serio que', 'de todas formas que'. Es dar tu palabra. Si no estás completamente seguro, usa GOING TO o MIGHT.",
+    abbrev: "WILL NOT = WON'T",
+  },
+  {
+    name: 'GOING TO',
+    forms: 'is/am/are going to · was/were going to',
+    description: 'Pre-decided plans (no emphasis). WAS/WERE GOING TO = frustrated plan — something that was planned but did not happen.',
+    rows: [
+      { aff: 'She IS GOING TO work.', neg: "She ISN'T going to work.", q: 'IS she going to work?', nq: "ISN'T she going to work?" },
+      { aff: 'He WAS GOING TO call. (frustrated)', neg: "He WASN'T going to call.", q: 'WAS he going to call?', nq: "WASN'T he going to call?" },
+    ],
+    examples: [
+      { en: 'We are going to move next month.', es: 'Nos vamos a mudar el próximo mes.', fr: 'Nous allons déménager le mois prochain.', de: 'Wir werden nächsten Monat umziehen.', pt: 'Nós vamos nos mudar no próximo mês.' },
+      { en: 'She was going to call you.', es: 'Ella te iba a llamar. (pero no lo hizo)', fr: 'Elle allait t’appeler. (mais elle ne l’a pas fait)', de: 'Sie wollte dich anrufen. (aber sie hat es nicht getan)', pt: 'Ela ia te ligar. (mas não ligou)' },
+      { en: 'Is he going to travel?', es: '¿Él va a viajar?', fr: 'Est-ce qu’il va voyager ?', de: 'Wird er reisen?', pt: 'Ele vai viajar?' },
+    ],
+    note: "Solo menciona el futuro sin énfasis — es simplemente el plan ya organizado. IMPORTANTE: GOING TO siempre necesita el verbo BE: IS/AM/ARE going to (presente) · WAS/WERE going to (pasado). Nunca digas 'She GOING TO work' — falta el BE. WAS/WERE GOING TO = futuro frustrado: lo que iba a pasar pero no pasó.",
+    abbrev: 'Questions and negatives are always built with BE (is/are/was/were)',
+  },
+  {
+    name: 'WOULD',
+    forms: "would · wouldn't",
+    description: 'Conditional — what would happen (with an implied or explicit "if").',
+    rows: [
+      { aff: 'She WOULD listen.', neg: "She WOULDN'T listen.", q: 'WOULD she listen?', nq: "WOULDN'T she listen?" },
+    ],
+    examples: [
+      { en: 'She would listen to you (if you explained).', es: 'Ella te escucharía (si le explicaras).', fr: 'Elle t’écouterait (si tu expliquais).', de: 'Sie würde dir zuhören (wenn du es erklären würdest).', pt: 'Ela te escutaria (se você explicasse).' },
+      { en: "They wouldn't understand.", es: 'Ellos no entenderían.', fr: 'Ils ne comprendraient pas.', de: 'Sie würden es nicht verstehen.', pt: 'Eles não entenderiam.' },
+      { en: 'Would you help me?', es: '¿Me ayudarías?', fr: 'Pourrais-tu m’aider ?', de: 'Würdest du mir helfen?', pt: 'Você me ajudaria?' },
+    ],
+    note: "Expresa lo que alguien haría en una condición: 'haría, diría, iría, vendría...' Siempre hay una condición implícita o explícita (si..., if...). También se usa para peticiones muy educadas: 'Would you...?' es más formal que 'Can you...?'",
+    abbrev: "WOULD NOT = WOULDN'T",
+  },
+  {
+    name: 'SHOULD',
+    forms: "should · shouldn't",
+    description: 'Strong recommendation or moral obligation — but with free will. There are consequences if ignored, but it is not a command.',
+    rows: [
+      { aff: 'You SHOULD study.', neg: "You SHOULDN'T skip it.", q: 'SHOULD she study?', nq: "SHOULDN'T she study?" },
+    ],
+    examples: [
+      { en: 'They should come with you.', es: 'Ellos deberían venir contigo.', fr: 'Ils devraient venir avec toi.', de: 'Sie sollten mit dir kommen.', pt: 'Eles deveriam vir com você.' },
+      { en: "She shouldn't stop studying.", es: 'Ella no debería dejar de estudiar.', fr: 'Elle ne devrait pas arrêter d’étudier.', de: 'Sie sollte nicht aufhören zu lernen.', pt: 'Ela não deveria parar de estudar.' },
+      { en: "Shouldn't he work harder?", es: '¿No debería esforzarse más?', fr: 'Ne devrait-il pas travailler plus dur ?', de: 'Sollte er nicht härter arbeiten?', pt: 'Ele não deveria se esforçar mais?' },
+    ],
+    note: "'Debería' — no es una orden ni una obligación forzada. Existe libre albedrío: la persona puede no hacerlo. Pero si no lo hace, habrá consecuencias. Es un compromiso moral fuerte, no una imposición. Solo en presente — no tiene forma de pasado directo.",
+    abbrev: "SHOULD NOT = SHOULDN'T",
+  },
+  {
+    name: 'COULD',
+    forms: "could · couldn't",
+    description: 'Past and conditional of CAN — past ability, polite requests, possibility.',
+    rows: [
+      { aff: 'She COULD help.', neg: "She COULDN'T help.", q: 'COULD she help?', nq: "COULDN'T she help?" },
+    ],
+    examples: [
+      { en: "She couldn't come yesterday.", es: 'Ella no pudo venir ayer.', fr: 'Elle n’a pas pu venir hier.', de: 'Sie konnte gestern nicht kommen.', pt: 'Ela não pôde vir ontem.' },
+      { en: 'Could you call me tomorrow?', es: '¿Podrías llamarme mañana?', fr: 'Pourrais-tu m’appeler demain ?', de: 'Könntest du mich morgen anrufen?', pt: 'Você poderia me ligar amanhã?' },
+      { en: "I could help you (if you asked).", es: 'Yo podría ayudarte (si me lo pidieras).', fr: 'Je pourrais t’aider (si tu me le demandais).', de: 'Ich könnte dir helfen (wenn du fragen würdest).', pt: 'Eu poderia te ajudar (se você pedisse).' },
+    ],
+    note: "'Podría, podía, pudo' — es el pasado y condicional de CAN. Úsalo para hablar de habilidad en el pasado ('she couldn't come') o para peticiones educadas ('could you...?'). Es más cortés que CAN para preguntas.",
+    abbrev: "COULD NOT = COULDN'T",
+  },
+  {
+    name: 'CAN / BE ABLE TO',
+    forms: "can · can't · be able to",
+    description: 'CAN = personal decision or willingness to act. BE ABLE TO = physical or situational capacity.',
+    rows: [
+      { aff: 'I CAN help.', neg: "I CAN'T help.", q: 'CAN you help?', nq: "CAN'T you help?" },
+      { aff: 'I AM ABLE TO work.', neg: 'I AM NOT ABLE TO work.', q: 'Are you able to work?', nq: '' },
+    ],
+    examples: [
+      { en: "I can't work like this!", es: '¡No puedo trabajar así! (No quiero / no me da la gana)', fr: 'Je ne peux pas travailler comme ça ! (volonté / refus)', de: 'So kann ich nicht arbeiten! (Wille / Ablehnung)', pt: 'Eu não consigo trabalhar assim! (vontade / recusa)' },
+      { en: 'I am not able to work like this.', es: 'No puedo trabajar así. (Estoy físicamente incapacitado)', fr: 'Je ne suis pas capable de travailler comme ça. (capacité réelle)', de: 'Ich bin nicht in der Lage, so zu arbeiten. (echte Fähigkeit)', pt: 'Eu não sou capaz de trabalhar assim. (capacidade real)' },
+      { en: 'Are you going to be able to come?', es: '¿Vas a poder venir? (¿Estarás en condiciones?)', fr: 'Est-ce que tu vas pouvoir venir ? (seras-tu en mesure de venir ?)', de: 'Wirst du kommen können? (wirst du dazu in der Lage sein?)', pt: 'Você vai conseguir vir? (vai estar em condições?)' },
+    ],
+    note: "CAN = 'puedo' porque quiero / decido hacerlo. Expresa poder por decisión personal — incluso cuando en realidad no pueda. BE ABLE TO = 'puedo' porque estoy físicamente apto o habilitado. La situación o el cuerpo me habilita. La diferencia es sutil pero real: CAN es de la voluntad, BE ABLE TO es de la capacidad.",
+    abbrev: "CAN NOT = CAN'T",
+  },
+  {
+    name: 'MAY',
+    forms: 'may · may not',
+    description: '50/50 probability OR formal permission request.',
+    rows: [
+      { aff: 'They MAY call.', neg: 'They MAY NOT call.', q: 'MAY I come in?', nq: '—' },
+    ],
+    examples: [
+      { en: 'They may call you tomorrow.', es: 'Talvez te llamen mañana. (50/50)', fr: 'Ils t’appelleront peut-être demain. (50/50)', de: 'Vielleicht rufen sie dich morgen an. (50/50)', pt: 'Talvez eles te liguem amanhã. (50/50)' },
+      { en: 'We may not come tonight.', es: 'Quizás no vengamos esta noche.', fr: 'Il se peut que nous ne venions pas ce soir.', de: 'Vielleicht kommen wir heute Abend nicht.', pt: 'Talvez não venhamos hoje à noite.' },
+      { en: 'May I come in?', es: '¿Me permite entrar? (muy formal)', fr: 'Puis-je entrer ? (très formel)', de: 'Darf ich hereinkommen? (sehr formell)', pt: 'Posso entrar? (muito formal)' },
+    ],
+    note: "Dos usos: (1) Probabilidad 50/50 — 'talvez, quizás'. No estás seguro ni en contra. (2) Pregunta formal de permiso: MAY I...? es mucho más educado que CAN I...? — úsalo con personas de alta autoridad o cuando necesitas ser muy respetuoso. También: 'May you and your family have a great year' = un deseo formal, escrito.",
+    abbrev: 'MAY NOT (no contraction)',
+  },
+  {
+    name: 'MUST',
+    forms: "must · must not",
+    description: 'Strong obligation — there will be consequences if not done. Also logical deduction.',
+    rows: [
+      { aff: 'You MUST study.', neg: 'You MUST NOT skip it. (prohibition)', q: '—', nq: '—' },
+    ],
+    examples: [
+      { en: 'You must study for the exam tomorrow.', es: 'Debes estudiar para el examen mañana.', fr: 'Tu dois étudier pour l’examen demain.', de: 'Du musst für die Prüfung morgen lernen.', pt: 'Você deve estudar para a prova amanhã.' },
+      { en: 'She must not stop studying.', es: 'Ella no debe dejar de estudiar.', fr: 'Elle ne doit pas arrêter d’étudier.', de: 'Sie darf nicht aufhören zu lernen.', pt: 'Ela não deve parar de estudar.' },
+      { en: "He must be tired. (deduction)", es: 'Debe estar cansado. (deducción lógica)', fr: 'Il doit être fatigué. (déduction logique)', de: 'Er muss müde sein. (logische Schlussfolgerung)', pt: 'Ele deve estar cansado. (dedução lógica)' },
+    ],
+    note: "'Deber imprescindible' — no es una orden de alguien más, es una norma. Si no la cumples, habrá consecuencias. No confundas con SHOULD (recomendación con libre albedrío) ni con HAVE TO (obligación externa que te imponen). MUST solo existe en presente. Para el pasado: usa HAD TO.",
+    abbrev: 'MUST NOT = MUSTN\'T (prohibition, stronger than SHOULD NOT)',
+  },
+];
+
+const getExampleTranslation = (example: Record<string, string>) =>
+  currentLocale === 'en' ? '' : example[currentLocale] ?? '';
+
+const mistakeNoteKeys = {
+  es: 'noteEs',
+  fr: 'noteFr',
+  de: 'noteDe',
+  pt: 'notePt',
+} as const;
+
+const getMistakeNote = (item: Record<string, string>) =>
+  currentLocale === 'en' ? item.note : item[mistakeNoteKeys[currentLocale]] ?? item.note;
+---
+
+<h1 class="font-headline text-3xl md:text-4xl font-bold tracking-display text-on-surface mb-3">
+  {copy.title}
+</h1>
+<p class="text-on-surface-variant text-lg leading-relaxed mb-10 max-w-2xl">
+  {copy.introBefore}<strong class="text-on-surface font-semibold">{copy.introStrong}</strong>{copy.introAfter}
+</p>
+
+{currentLocale !== 'en' && (
+  <div class="mb-10 p-4 rounded-2xl bg-primary/8 border border-primary/20 text-sm text-on-surface-variant">
+    <span class="text-primary font-semibold">{copy.speakerNoteTitle}</span> {copy.speakerNote}
+  </div>
+)}
+
+<!-- Auxiliary verb rules -->
+<section class="mb-12">
+  <h2 class="font-headline text-xl font-bold text-on-surface mb-6 flex items-center gap-2">
+    <span class="material-symbols-outlined text-primary" style="font-size:22px">rule</span>
+    {copy.rulesTitle}
+  </h2>
+
+  <div class="space-y-5">
+    {rules.map((rule) => (
+      <div class="rounded-2xl bg-surface-container border border-outline-variant/15 overflow-hidden">
+        <!-- Rule header -->
+        <div class="px-5 pt-5 pb-3 flex items-start gap-3">
+          <span class="text-primary font-bold font-headline text-base bg-primary/10 px-3 py-1.5 rounded-lg shrink-0 leading-snug">
+            {rule.name}
+          </span>
+          <div class="pt-1 min-w-0">
+            <p class="text-on-surface text-sm font-medium leading-snug">{getRuleDescription(rule)}</p>
+            <p class="text-on-surface-variant/60 text-xs mt-0.5">{rule.forms}</p>
+          </div>
+        </div>
+
+        <!-- BE conjugation breakdown -->
+        {rule.name === 'BE' && (
+          <div class="px-5 pb-3">
+            <div class="flex gap-2 text-xs">
+              <div class="flex-1 p-2.5 rounded-lg bg-surface-container-high border border-outline-variant/10">
+                <span class="text-on-surface-variant/60 font-medium block mb-1">{copy.conjugationLabels.present}</span>
+                <span class="text-on-surface font-mono">{beConjugation.present}</span>
+                {copy.beEquivalent.present && (
+                  <span class="block text-primary/70 mt-1">{copy.beEquivalent.present}</span>
+                )}
+              </div>
+              <div class="flex-1 p-2.5 rounded-lg bg-surface-container-high border border-outline-variant/10">
+                <span class="text-on-surface-variant/60 font-medium block mb-1">{copy.conjugationLabels.past}</span>
+                <span class="text-on-surface font-mono">{beConjugation.past}</span>
+                {copy.beEquivalent.past && (
+                  <span class="block text-primary/70 mt-1">{copy.beEquivalent.past}</span>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        <!-- Quick reference table -->
+        <div class="px-5 pb-3 overflow-x-auto">
+          <table class="w-full text-xs text-left border-collapse min-w-[520px]">
+            <thead>
+              <tr class="border-b border-outline-variant/20">
+                <th class="py-1.5 pr-4 text-on-surface-variant/60 font-medium">{copy.headers[0]}</th>
+                <th class="py-1.5 pr-4 text-on-surface-variant/60 font-medium">{copy.headers[1]}</th>
+                <th class="py-1.5 pr-4 text-on-surface-variant/60 font-medium">{copy.headers[2]}</th>
+                <th class="py-1.5 text-on-surface-variant/60 font-medium">{copy.headers[3]}</th>
+              </tr>
+            </thead>
+            <tbody class="text-on-surface-variant">
+              {rule.rows.map((row) => (
+                <tr class="border-b border-outline-variant/10 last:border-none">
+                  <td class="py-2 pr-4">
+                    {'tenseKey' in row && row.tenseKey && (
+                      <span class="block text-[10px] text-primary/60 font-semibold uppercase tracking-wider mb-0.5">
+                        {copy.conjugationLabels[row.tenseKey]}
+                      </span>
+                    )}
+                    {row.aff}
+                  </td>
+                  <td class="py-2 pr-4">{row.neg}</td>
+                  <td class="py-2 pr-4">{row.q}</td>
+                  <td class="py-2">{row.nq}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Examples -->
+        <div class="px-5 pb-3 space-y-1.5">
+          {rule.examples.map((ex) => (
+            <div class="flex gap-2 text-sm">
+              <span class="text-primary shrink-0">→</span>
+              <span class="text-on-surface-variant">
+                <span class="text-on-surface">{ex.en}</span>
+                {getExampleTranslation(ex) && (
+                  <span class="text-on-surface-variant/50 ml-2">— {getExampleTranslation(ex)}</span>
+                )}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <!-- Abbreviations -->
+        <div class="px-5 pb-3">
+          <p class="text-on-surface-variant/50 text-xs">{getAbbrevNote(rule)}</p>
+        </div>
+
+        <!-- Native-language note -->
+        {getRuleNote(rule.name) && (
+          <div class="mx-5 mb-4 p-3 rounded-xl bg-primary/5 border border-primary/15 text-xs text-on-surface-variant/80 leading-relaxed">
+            <span class="text-primary font-semibold">{copy.noteLabel} </span>{getRuleNote(rule.name)}
+          </div>
+        )}
+      </div>
+    ))}
+  </div>
+</section>
+
+<!-- Common Mistakes -->
+<section class="mb-12">
+  <h2 class="font-headline text-xl font-bold text-on-surface mb-6 flex items-center gap-2">
+    <span class="material-symbols-outlined text-primary" style="font-size:22px">error</span>
+    {copy.commonMistakesTitle}
+  </h2>
+  <div class="space-y-3">
+    {[
+      {
+        wrong: 'I am agree with you.',
+        right: 'I agree with you.',
+        note: '"Agree" is a verb, not an adjective — no "am" needed.',
+        noteEs: '"Agree" es un verbo común → lo maneja DO. No hay "ser o estar" en la oración.',
+        noteFr: '"Agree" est un verbe courant : il est géré par DO. Il n’y a pas l’idée de "être" dans cette phrase.',
+        noteDe: '"Agree" ist ein normales Verb und wird von DO gesteuert. In diesem Satz gibt es keine "sein"-Bedeutung.',
+        notePt: '"Agree" é um verbo comum: ele é controlado por DO. Não existe ideia de "ser/estar" nessa frase.',
+      },
+      {
+        wrong: "She don't know the answer.",
+        right: "She doesn't know the answer.",
+        note: 'Third-person singular (he/she/it) uses "doesn\'t" in the negative.',
+        noteEs: "He/She/It usa DOES, no DO. Negativo: DOESN'T.",
+        noteFr: 'He/She/It utilise DOES, pas DO. À la forme négative : DOESN’T.',
+        noteDe: 'He/She/It nutzt DOES, nicht DO. In der Verneinung: DOESN’T.',
+        notePt: 'He/She/It usa DOES, não DO. Na negativa: DOESN’T.',
+      },
+      {
+        wrong: 'I have went to the market.',
+        right: 'I have gone to the market.',
+        note: 'Present perfect (HABER) requires the past participle, not the simple past.',
+        noteEs: 'HAVE + participio pasado (gone, eaten, slept). "Went" es pasado simple, no participio.',
+        noteFr: 'HAVE + participe passé (gone, eaten, slept). "Went" est le prétérit, pas le participe passé.',
+        noteDe: 'HAVE + Partizip Perfekt (gone, eaten, slept). "Went" ist einfache Vergangenheit, nicht das Partizip.',
+        notePt: 'HAVE + particípio passado (gone, eaten, slept). "Went" é passado simples, não particípio.',
+      },
+      {
+        wrong: 'Yesterday I have seen him.',
+        right: 'Yesterday I saw him.',
+        note: '"Yesterday" signals a specific past time — use past simple (DID rule), not present perfect.',
+        noteEs: '"Yesterday" indica tiempo pasado específico → usa DO/DID (pasado simple), no HAVE.',
+        noteFr: '"Yesterday" indique un moment précis du passé : utilisez le prétérit avec DID, pas le present perfect.',
+        noteDe: '"Yesterday" zeigt einen konkreten Zeitpunkt in der Vergangenheit: nutze Simple Past mit DID, nicht Present Perfect.',
+        notePt: '"Yesterday" indica um tempo passado específico: use passado simples com DID, não present perfect.',
+      },
+      {
+        wrong: 'He is more taller than her.',
+        right: 'He is taller than her.',
+        note: 'Never use "more" with -er comparatives.',
+        noteEs: 'Con adjetivos cortos + "-er": solo usa el comparativo. "More" es para adjetivos largos.',
+        noteFr: 'Avec les adjectifs courts en "-er", n’ajoutez pas "more". "More" sert aux adjectifs plus longs.',
+        noteDe: 'Bei kurzen Adjektiven mit "-er" nutzt du kein "more". "More" ist für längere Adjektive.',
+        notePt: 'Com adjetivos curtos + "-er", não use "more". "More" é para adjetivos mais longos.',
+      },
+    ].map((item) => (
+      <div class="p-4 rounded-xl bg-surface-container border border-outline-variant/15 text-sm">
+        <div class="flex gap-3 items-start">
+          <span class="text-error font-bold shrink-0 mt-0.5">✗</span>
+          <span class="text-on-surface-variant line-through">{item.wrong}</span>
+        </div>
+        <div class="flex gap-3 items-start mt-1">
+          <span class="text-primary font-bold shrink-0 mt-0.5">✓</span>
+          <span class="text-on-surface font-medium">{item.right}</span>
+        </div>
+        <p class="text-on-surface-variant/70 text-xs mt-2 ml-6">
+          {getMistakeNote(item)}
+        </p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<!-- Articles -->
+<section class="mb-12">
+  <h2 class="font-headline text-xl font-bold text-on-surface mb-6 flex items-center gap-2">
+    <span class="material-symbols-outlined text-primary" style="font-size:22px">article</span>
+    {copy.articlesTitle}
+  </h2>
+  <div class="overflow-x-auto">
+    <table class="w-full text-sm text-left border-collapse">
+      <thead>
+        <tr class="border-b border-outline-variant/20">
+          <th class="py-2 pr-6 text-on-surface-variant font-medium">{copy.articleHeaders[0]}</th>
+          <th class="py-2 pr-6 text-on-surface-variant font-medium">{copy.articleHeaders[1]}</th>
+          <th class="py-2 text-on-surface-variant font-medium">{copy.articleHeaders[2]}</th>
+        </tr>
+      </thead>
+      <tbody class="text-on-surface-variant">
+        <tr class="border-b border-outline-variant/10">
+          <td class="py-2.5 pr-6 text-primary font-bold">a</td>
+          <td class="py-2.5 pr-6">{copy.articleUses[0]}</td>
+          <td class="py-2.5">I saw <em class="text-on-surface not-italic">a</em> cat.</td>
+        </tr>
+        <tr class="border-b border-outline-variant/10">
+          <td class="py-2.5 pr-6 text-primary font-bold">an</td>
+          <td class="py-2.5 pr-6">{copy.articleUses[1]}</td>
+          <td class="py-2.5">She ate <em class="text-on-surface not-italic">an</em> apple.</td>
+        </tr>
+        <tr class="border-b border-outline-variant/10">
+          <td class="py-2.5 pr-6 text-primary font-bold">the</td>
+          <td class="py-2.5 pr-6">{copy.articleUses[2]}</td>
+          <td class="py-2.5"><em class="text-on-surface not-italic">The</em> cat is on the roof.</td>
+        </tr>
+        <tr>
+          <td class="py-2.5 pr-6 text-on-surface-variant/60 italic">{copy.noneLabel}</td>
+          <td class="py-2.5 pr-6">{copy.articleUses[3]}</td>
+          <td class="py-2.5"><em class="text-on-surface not-italic">Dogs</em> are loyal animals.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  {currentLocale !== 'en' && copy.articleNote && (
+    <p class="text-on-surface-variant/70 text-xs mt-3 p-3 rounded-xl bg-surface-container border border-outline-variant/10">
+      <span class="text-primary font-semibold">{copy.noteLabel}</span> {copy.articleNote}
+    </p>
+  )}
+</section>
+
+<!-- Why it helps -->
+<section class="p-6 rounded-2xl bg-primary/5 border border-primary/15">
+  <h3 class="font-headline font-semibold text-primary mb-2 flex items-center gap-2">
+    <span class="material-symbols-outlined" style="font-size:18px">record_voice_over</span>
+    {copy.whyTitle}
+  </h3>
+  <p class="text-on-surface-variant leading-relaxed text-sm">
+    {copy.whyBody}
+  </p>
+</section>

@@ -1,35 +1,39 @@
-# SpeakPath — Landing Page Architecture
-
-Technical blueprint for building and deploying the SpeakPath landing page.  
-See `personal-website-architecture.md` for the general pattern this follows.
-
+---
+date: 2026-04-05
+last-reviewed: 2026-05-18
+status: promoted
+roadmap: speakpath-landing-scaffold
+tags: [architecture, infrastructure, landing-page]
 ---
 
-## Stack Decision
+# SpeakPath — Landing Page Architecture
+
+## Summary
+
+Technical blueprint for building and deploying the SpeakPath landing page as a separate
+Astro static site on Netlify, decoupled from the Fly.io app. Covers stack decision, repo
+structure, DNS routing, and deploy steps.
+
+## Details
+
+### Stack
 
 | Layer | Tech | Host | Cost |
 |---|---|---|---|
-| Landing page (`speakpath.com`) | Astro (static) | Netlify or Vercel | Free |
-| App (`app.speakpath.com`) | Node/Express + React/Vite | Fly.io | Existing |
+| Landing page (`speakpath.dev`) | Astro (static) | Netlify | Free |
+| App (`app.speakpath.dev`) | Node/Express + React/Vite | Fly.io | Existing |
 
-**Why Astro:**
-- Ships near-zero JavaScript — perfect Lighthouse scores
-- MDX support for future blog posts ("How to practice Spanish at home")
-- Free hosting on Netlify with custom domain + HTTPS
-- Independent deploy cycle from the app — landing page changes never touch Fly.io
+**Why Astro:** near-zero JS ships → perfect Lighthouse scores; MDX for future blog posts;
+free Netlify hosting; independent deploy cycle — landing page changes never touch Fly.io.
 
----
-
-## Repository Structure
-
-Separate repo from the app to avoid config conflicts and keep independent deploy cycles.
+### Repository structure
 
 ```
-repo: speakpath-landing       -> Netlify
+repo: agentVoiceWeb  (this repo)  -> Netlify
 ├── astro.config.mjs
 ├── src/
 │   ├── pages/
-│   │   └── index.astro       -> Main landing page
+│   │   └── index.astro
 │   ├── layouts/
 │   │   └── Base.astro
 │   └── components/
@@ -42,44 +46,42 @@ repo: speakpath-landing       -> Netlify
 └── package.json
 ```
 
----
-
-## DNS Setup
-
-One domain, subdomain routing:
+### DNS setup
 
 ```
-speakpath.com        -> Netlify  (landing page)
-app.speakpath.com    -> Fly.io   (AgentVoice app)
+speakpath.dev        -> Netlify  (landing page)
+app.speakpath.dev    -> Fly.io   (app)
 ```
 
-If using Cloudflare for DNS: proxy both records through Cloudflare for DDoS protection and analytics. For the Fly.io subdomain, see `fly-custom-domain-oauth` skill for the WebSocket gotcha.
+Cloudflare proxies both records. For the Fly.io subdomain WebSocket gotcha, see the
+`fly-custom-domain-oauth` skill.
 
----
+### Deploy steps (original plan, now completed)
 
-## Deploy Steps
-
-1. Register domain (`speakpath.com` or `speakpath.app`)
-2. Create `speakpath-landing` repo and scaffold Astro project (`npm create astro@latest`)
+1. Register `speakpath.dev`
+2. Scaffold Astro project
 3. Build components from `speakpath-landing-content.md`
-4. Connect repo to Netlify — auto-deploys on push to `main`
-5. Point DNS: `speakpath.com → Netlify`, `app.speakpath.com → Fly.io`
-6. Add "Try SpeakPath" CTA inside the AgentVoice app linking back to `speakpath.com`
+4. Connect to Netlify — auto-deploys on push to `main`
+5. Point DNS: `speakpath.dev → Netlify`, `app.speakpath.dev → Fly.io`
+6. Add "Try SpeakPath" CTA in the app linking back to `speakpath.dev`
 
-## Live URLs
+### Live URLs
 
 | What | URL |
 |---|---|
-| Production (Netlify default) | https://speakpath.netlify.app |
-| Custom domain (once DNS is set) | https://speakpath.dev |
-| Netlify project dashboard | https://app.netlify.com/projects/speakpath |
+| Production | https://speakpath.dev |
+| Netlify dashboard | https://app.netlify.com/projects/speakpath |
 
----
-
-## Future Evolution
+### Future evolution
 
 | Trigger | Action |
 |---|---|
-| Want to write posts from phone/browser | Add Decap CMS (free, stores `.md` in same repo) |
-| Need live data on the landing page | Switch Astro to SSR mode |
+| Write posts from phone/browser | Add Decap CMS (stores `.md` in same repo) |
+| Need live data on landing page | Switch Astro to SSR mode |
 | Blog grows large | Add content collections with tag filtering |
+
+## Open Questions
+
+## Next Step
+
+Promote to roadmap

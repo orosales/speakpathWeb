@@ -18,3 +18,9 @@ const locale = langParam as Locale;
 ---
 
 <LandingPage locale={locale} copy={getLocaleCopy(locale)} />
+
+<script define:vars={{ locale }}>
+  try {
+    localStorage.setItem('speakpath_ui_lang', locale);
+  } catch (_) {}
+</script>

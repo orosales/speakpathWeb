@@ -4,3 +4,6 @@ import { defaultLocale, getLocaleCopy } from '../i18n/site';
 ---
 
 <LandingPage locale={defaultLocale} copy={getLocaleCopy(defaultLocale)} />
+<script>
+  try { localStorage.setItem('speakpath_ui_lang', 'en'); } catch (_) {}
+</script>

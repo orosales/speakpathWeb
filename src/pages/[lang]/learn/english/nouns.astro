@@ -1,0 +1,23 @@
+---
+import LearnLayout from '../../../../layouts/LearnLayout.astro';
+import NounsContent from '../../../../components/learn/NounsContent.astro';
+import { locales, isLocale, type Locale } from '../../../../i18n/site';
+
+export function getStaticPaths() {
+  return locales
+    .filter((l) => l !== 'en')
+    .map((l) => ({ params: { lang: l } }));
+}
+
+const { lang } = Astro.params;
+if (!isLocale(lang) || lang === 'en') throw new Error(`Unsupported locale: ${lang}`);
+const locale = lang as Locale;
+---
+<LearnLayout
+  title="Core English Nouns for Real Conversations | SpeakPath"
+  description="The high-frequency English nouns that appear in every real conversation — organized by category for easy learning."
+  currentSlug="nouns"
+  locale={locale}
+>
+  <NounsContent locale={locale} />
+</LearnLayout>

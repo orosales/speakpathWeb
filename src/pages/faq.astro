@@ -1,0 +1,6 @@
+---
+import FAQPage from '../components/FAQPage.astro';
+import { defaultLocale, getLocaleCopy } from '../i18n/site';
+---
+
+<FAQPage locale={defaultLocale} copy={getLocaleCopy(defaultLocale)} />

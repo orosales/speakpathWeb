@@ -1,0 +1,76 @@
+---
+import { defaultLocale, type LocalizedPageCopy, type Locale } from '../i18n/site';
+
+interface Props {
+  copy: LocalizedPageCopy['writeToSpeak'];
+  locale?: Locale;
+}
+
+const { copy, locale = defaultLocale } = Astro.props;
+const ctaHref = locale === defaultLocale ? '/learn/' : `/${locale}/learn/`;
+
+const stepIcons = ['menu_book', 'bolt', 'link', 'swap_horiz', 'category', 'description'];
+---
+
+<section class="px-6 py-24 md:px-12">
+  <div class="max-w-7xl mx-auto">
+    <!-- Section header -->
+    <div class="mb-16 text-center">
+      <p class="text-tertiary text-xs font-headline tracking-[0.2em] uppercase font-semibold mb-4">
+        {copy.eyebrow}
+      </p>
+      <h2 class="font-headline text-3xl md:text-4xl font-bold tracking-display mb-6">
+        {copy.title.line1}<br class="hidden md:inline" />
+        <span class="text-primary"> {copy.title.accent}</span>
+      </h2>
+      <p class="text-on-surface-variant text-lg leading-relaxed max-w-xl mx-auto">
+        {copy.description}
+      </p>
+    </div>
+
+    <!-- Two-column layout: methodology + steps -->
+    <div class="flex flex-col lg:flex-row gap-12 items-center mb-14">
+      <!-- Left: methodology explanation -->
+      <div class="flex-1 max-w-lg">
+        <div class="space-y-5 text-on-surface-variant leading-relaxed">
+          <p>{copy.body1}</p>
+          <p>{copy.body2}</p>
+        </div>
+      </div>
+
+      <!-- Right: 6-step path visual -->
+      <div class="flex-1 w-full max-w-md">
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          {copy.steps.map((label, i) => (
+            <div class="flex flex-col items-center gap-2 p-4 rounded-2xl bg-surface-container border border-outline-variant/15 hover:border-primary/30 hover:bg-surface-container-high transition-all duration-200 group">
+              <div class="flex items-center justify-center w-9 h-9 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                <span class="material-symbols-outlined text-primary" style="font-size:18px">{stepIcons[i]}</span>
+              </div>
+              <div class="text-center">
+                <span class="text-on-surface-variant/50 text-xs font-headline">{i + 1}</span>
+                <p class="text-on-surface text-xs font-semibold font-headline leading-tight">{label}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center">
+      <a
+        href={ctaHref}
+        class="btn-primary inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-semibold font-headline text-base"
+      >
+        {copy.cta}
+        <span class="material-symbols-outlined" style="font-size:20px">arrow_forward</span>
+      </a>
+      <p class="text-on-surface-variant text-xs mt-4">
+        {copy.ctaNote}
+      </p>
+      <p class="text-on-surface-variant/60 text-xs mt-2 italic">
+        {copy.langNote}
+      </p>
+    </div>
+  </div>
+</section>

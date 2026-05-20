@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../layouts/Base.astro';
+import type { LocalizedPageCopy, Locale } from '../i18n/site';
+
+interface Props {
+  locale: Locale;
+  copy: LocalizedPageCopy;
+}
+
+const { locale, copy } = Astro.props;
+const { privacy } = copy;
+---
+
+<BaseLayout
+  title={privacy.meta.title}
+  description={privacy.meta.description}
+  locale={locale}
+  ogLocale={copy.meta.ogLocale}
+  nav={copy.nav}
+  footer={copy.footer}
+  languageAlternatePath="/privacy/"
+>
+  <main class="max-w-3xl mx-auto px-6 py-20 text-on-surface">
+
+    <div class="mb-12">
+      <p class="text-primary text-sm font-label uppercase tracking-widest mb-3">{privacy.eyebrow}</p>
+      <h1 class="text-4xl font-bold font-headline text-on-surface mb-4">{privacy.title}</h1>
+      <p class="text-on-surface-variant text-sm">{privacy.lastUpdated}</p>
+    </div>
+
+    <div class="space-y-10 text-on-surface-variant leading-relaxed">
+
+      <section>
+        <h2 class="text-xl font-semibold text-on-surface mb-3">{privacy.s1.heading}</h2>
+        <p>{privacy.s1.body}</p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-semibold text-on-surface mb-3">{privacy.s2.heading}</h2>
+        <ul class="space-y-4 list-none">
+          {privacy.s2.items.map((item) => (
+            <li>
+              <span class="text-on-surface font-medium">{item.label}</span>{' '}{item.text}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-semibold text-on-surface mb-3">{privacy.s3.heading}</h2>
+        <ul class="space-y-2 list-disc list-inside">
+          {privacy.s3.items.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+        <p class="mt-4">
+          <strong class="text-on-surface">{privacy.s3.note}</strong>
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-semibold text-on-surface mb-3">{privacy.s4.heading}</h2>
+        <p>{privacy.s4.body}</p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-semibold text-on-surface mb-3">{privacy.s5.heading}</h2>
+        <p>{privacy.s5.body}</p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-semibold text-on-surface mb-3">{privacy.s6.heading}</h2>
+        <p>{privacy.s6.body}</p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-semibold text-on-surface mb-3">{privacy.s7.heading}</h2>
+        <p>{privacy.s7.body}</p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-semibold text-on-surface mb-3">{privacy.s8.heading}</h2>
+        <p>{privacy.s8.body}</p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-semibold text-on-surface mb-3">{privacy.s9.heading}</h2>
+        <p>{privacy.s9.body}</p>
+      </section>
+
+    </div>
+
+    <div class="mt-16 pt-8 border-t border-outline-variant/20">
+      <a href={locale === 'en' ? '/' : `/${locale}/`} class="text-primary hover:underline text-sm">
+        {privacy.back}
+      </a>
+    </div>
+
+  </main>
+</BaseLayout>

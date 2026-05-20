@@ -1,0 +1,173 @@
+---
+import BaseLayout from '../layouts/Base.astro';
+import { defaultLocale, getLocaleCopy, type Locale } from '../i18n/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = getLocaleCopy(locale);
+
+const pickerCopy: Record<Locale, {
+  title: string;
+  description: string;
+  eyebrow: string;
+  heading: string;
+  body: string;
+  home: string;
+  current: string;
+  available: string;
+  comingSoon: string;
+  moreSoon: string;
+  practice: string;
+}> = {
+  en: {
+    title: 'Choose a Language to Learn | SpeakPath',
+    description: 'Pick the language you want to learn. Start your structured path to fluency — grammar, vocabulary, and speaking practice in one place.',
+    eyebrow: 'Your Learning Path',
+    heading: 'What language do you want to learn?',
+    body: "Pick your target language. You'll get a structured path through grammar, vocabulary, and speaking practice — explained in a way that makes sense to you.",
+    home: 'Home',
+    current: 'Learn',
+    available: 'Available now',
+    comingSoon: 'Coming soon',
+    moreSoon: 'More languages coming soon.',
+    practice: 'Practice Speaking',
+  },
+  es: {
+    title: 'Elige un idioma para aprender | SpeakPath',
+    description: 'Elige el idioma que quieres aprender. Empieza un camino estructurado hacia la fluidez con gramatica, vocabulario y practica oral.',
+    eyebrow: 'Tu ruta de aprendizaje',
+    heading: '¿Qué idioma quieres aprender?',
+    body: 'Elige tu idioma objetivo. Tendrás una ruta estructurada con gramática, vocabulario y práctica oral, explicada de una forma que tenga sentido para ti.',
+    home: 'Inicio',
+    current: 'Aprender',
+    available: 'Disponible ahora',
+    comingSoon: 'Próximamente',
+    moreSoon: 'Más idiomas próximamente.',
+    practice: 'Practicar hablando',
+  },
+  fr: {
+    title: 'Choisissez une langue à apprendre | SpeakPath',
+    description: 'Choisissez la langue que vous voulez apprendre. Commencez un parcours structure vers la fluidite avec grammaire, vocabulaire et pratique orale.',
+    eyebrow: 'Votre parcours d apprentissage',
+    heading: 'Quelle langue voulez-vous apprendre ?',
+    body: 'Choisissez votre langue cible. Vous aurez un parcours structure avec grammaire, vocabulaire et pratique orale, explique d une facon qui a du sens pour vous.',
+    home: 'Accueil',
+    current: 'Apprendre',
+    available: 'Disponible maintenant',
+    comingSoon: 'Bientôt',
+    moreSoon: 'Plus de langues bientôt.',
+    practice: 'Pratiquer à l oral',
+  },
+  de: {
+    title: 'Sprache zum Lernen auswählen | SpeakPath',
+    description: 'Wähle die Sprache, die du lernen möchtest. Starte deinen strukturierten Weg zur Sprachflüssigkeit mit Grammatik, Wortschatz und Sprechpraxis.',
+    eyebrow: 'Dein Lernpfad',
+    heading: 'Welche Sprache möchtest du lernen?',
+    body: 'Wähle deine Zielsprache. Du bekommst einen strukturierten Weg durch Grammatik, Wortschatz und Sprechpraxis, so erklärt, dass es für dich Sinn ergibt.',
+    home: 'Start',
+    current: 'Lernen',
+    available: 'Jetzt verfügbar',
+    comingSoon: 'Bald verfügbar',
+    moreSoon: 'Weitere Sprachen folgen bald.',
+    practice: 'Sprechen üben',
+  },
+  pt: {
+    title: 'Escolha um idioma para aprender | SpeakPath',
+    description: 'Escolha o idioma que voce quer aprender. Comece um caminho estruturado para fluencia com gramatica, vocabulario e pratica oral.',
+    eyebrow: 'Seu caminho de aprendizagem',
+    heading: 'Qual idioma você quer aprender?',
+    body: 'Escolha seu idioma-alvo. Você terá um caminho estruturado com gramática, vocabulário e prática oral, explicado de um jeito que faz sentido para você.',
+    home: 'Início',
+    current: 'Aprender',
+    available: 'Disponível agora',
+    comingSoon: 'Em breve',
+    moreSoon: 'Mais idiomas em breve.',
+    practice: 'Praticar fala',
+  },
+};
+
+const text = pickerCopy[locale];
+const englishPath = locale === defaultLocale ? '/learn/english/' : `/${locale}/learn/english/`;
+const homePath = locale === defaultLocale ? '/' : `/${locale}/`;
+
+const languages = [
+  { flag: '🇺🇸', name: locale === 'en' ? 'English' : copy.languages.cards[0].name, code: 'en', active: true, path: englishPath },
+  { flag: '🇪🇸', name: copy.languages.cards[1].name, code: 'es', active: false },
+  { flag: '🇫🇷', name: copy.languages.cards[2].name, code: 'fr', active: false },
+  { flag: '🇩🇪', name: copy.languages.cards[3].name, code: 'de', active: false },
+  { flag: '🇧🇷', name: locale === 'pt' ? 'Português' : 'Portuguese', code: 'pt', active: false },
+];
+---
+
+<BaseLayout
+  title={text.title}
+  description={text.description}
+  locale={locale}
+  ogLocale={copy.meta.ogLocale}
+  nav={copy.nav}
+  footer={copy.footer}
+  languageAlternatePath="/learn/"
+>
+  <section class="min-h-screen flex items-start justify-center px-6 md:px-8 py-16">
+    <div class="max-w-2xl w-full mx-auto">
+      <div class="flex items-center gap-2 text-xs text-on-surface-variant mb-10">
+        <a href={homePath} class="hover:text-primary transition-colors">{text.home}</a>
+        <span class="material-symbols-outlined" style="font-size:14px">chevron_right</span>
+        <span class="text-on-surface">{text.current}</span>
+      </div>
+
+      <p class="text-primary text-xs font-headline tracking-[0.2em] uppercase font-semibold mb-4">
+        {text.eyebrow}
+      </p>
+      <h1 class="font-headline text-3xl md:text-4xl font-bold tracking-display text-on-surface mb-4 leading-tight">
+        {text.heading}
+      </h1>
+      <p class="text-on-surface-variant mb-12 leading-relaxed">
+        {text.body}
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {languages.map((lang) => (
+          lang.active ? (
+            <a
+              href={lang.path}
+              data-lang-code={lang.code}
+              class="group flex items-center gap-4 p-5 rounded-2xl bg-surface-container border border-primary/30 hover:border-primary hover:bg-surface-container-high transition-all duration-200 no-underline"
+            >
+              <span class="text-3xl" aria-hidden="true">{lang.flag}</span>
+              <div class="flex-1 min-w-0">
+                <h3 class="font-headline font-bold text-on-surface group-hover:text-primary transition-colors">{lang.name}</h3>
+                <p class="text-primary text-xs font-semibold font-headline mt-0.5">{text.available}</p>
+              </div>
+              <span class="material-symbols-outlined text-primary/60 group-hover:text-primary transition-colors shrink-0" style="font-size:20px">
+                arrow_forward
+              </span>
+            </a>
+          ) : (
+            <div
+              class="flex items-center gap-4 p-5 rounded-2xl bg-surface-container border border-outline-variant/10 opacity-60 cursor-not-allowed"
+              aria-disabled="true"
+            >
+              <span class="text-3xl" aria-hidden="true">{lang.flag}</span>
+              <div class="flex-1 min-w-0">
+                <h3 class="font-headline font-bold text-on-surface-variant">{lang.name}</h3>
+                <p class="text-on-surface-variant/60 text-xs font-semibold font-headline mt-0.5">{text.comingSoon}</p>
+              </div>
+              <span class="material-symbols-outlined text-on-surface-variant/30 shrink-0" style="font-size:20px">
+                lock
+              </span>
+            </div>
+          )
+        ))}
+      </div>
+
+      <p class="mt-8 text-on-surface-variant text-sm flex items-center gap-2">
+        <span class="material-symbols-outlined text-sm">schedule</span>
+        {text.moreSoon}
+      </p>
+    </div>
+  </section>
+</BaseLayout>

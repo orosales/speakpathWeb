@@ -1,0 +1,270 @@
+---
+interface Props {
+  locale?: string;
+}
+const { locale = 'en' } = Astro.props;
+type SupportedLocale = 'en' | 'es' | 'fr' | 'de' | 'pt';
+
+const currentLocale: SupportedLocale = ['en', 'es', 'fr', 'de', 'pt'].includes(locale)
+  ? (locale as SupportedLocale)
+  : 'en';
+
+const localizedCopy = {
+  en: {
+    title: 'Connectors',
+    intro: 'Connectors are the glue between your ideas. Without them, you have sentences. With them, you have speech that flows — and a listener who can follow you easily.',
+    connectorHeader: 'Connector',
+    exampleHeader: 'Example',
+    formalTitle: 'Formal vs. Conversational',
+    formalLabel: 'Formal / Written',
+    conversationalLabel: 'Conversational / Spoken',
+    registerNote: 'Know both registers. Use formal connectors when presenting ideas — use conversational openers when chatting.',
+    whyTitle: 'Why this helps your speaking',
+    whyBody: 'Connectors make your speech sound planned, even when it isn\'t. When you start sentences with "However," or "The thing is," you signal to the listener that you know where you are going. That confidence comes through. Practice speaking with one new connector each day — consciously work it into your SpeakPath sessions until it feels automatic.',
+  },
+  es: {
+    title: 'Conectores',
+    intro: 'Los conectores son el pegamento entre tus ideas. Sin ellos, tienes oraciones. Con ellos, tienes un discurso fluido que el oyente puede seguir con facilidad.',
+    connectorHeader: 'Conector',
+    exampleHeader: 'Ejemplo',
+    formalTitle: 'Formal vs. Conversacional',
+    formalLabel: 'Formal / Escrito',
+    conversationalLabel: 'Conversacional / Hablado',
+    registerNote: 'Conoce ambos registros. Usa conectores formales cuando presentas ideas; usa iniciadores conversacionales cuando charlas.',
+    whyTitle: 'Por qué esto ayuda a hablar',
+    whyBody: 'Los conectores hacen que tu habla suene planificada, aunque no lo esté. Cuando empiezas oraciones con "However," o "The thing is," le señalas al oyente que sabes adónde vas. Esa confianza se nota. Practica con un conector nuevo cada día: incorpóralo conscientemente en tus sesiones de SpeakPath hasta que salga solo.',
+  },
+  fr: {
+    title: 'Connecteurs',
+    intro: 'Les connecteurs sont la colle entre vos idées. Sans eux, vous avez des phrases. Avec eux, vous avez un discours qui coule — et un auditeur qui peut vous suivre facilement.',
+    connectorHeader: 'Connecteur',
+    exampleHeader: 'Exemple',
+    formalTitle: 'Formel vs. conversationnel',
+    formalLabel: 'Formel / Écrit',
+    conversationalLabel: 'Conversationnel / Oral',
+    registerNote: 'Maîtrisez les deux registres. Utilisez des connecteurs formels quand vous présentez des idées — utilisez des lanceurs conversationnels quand vous bavardez.',
+    whyTitle: 'Pourquoi cela aide à parler',
+    whyBody: 'Les connecteurs donnent l\'impression que votre discours est structuré, même quand il ne l\'est pas. Quand vous commencez des phrases par "However," ou "The thing is," vous signalez à l\'auditeur que vous savez où vous allez. Cette assurance transparaît. Pratiquez avec un nouveau connecteur par jour — incorporez-le consciemment dans vos sessions SpeakPath jusqu\'à ce qu\'il vienne naturellement.',
+  },
+  de: {
+    title: 'Konnektoren',
+    intro: 'Konnektoren sind der Klebstoff zwischen deinen Ideen. Ohne sie hast du Sätze. Mit ihnen hast du einen fließenden Redefluss — und einen Zuhörer, der dir leicht folgen kann.',
+    connectorHeader: 'Konnektor',
+    exampleHeader: 'Beispiel',
+    formalTitle: 'Formal vs. Umgangssprachlich',
+    formalLabel: 'Formal / Schriftlich',
+    conversationalLabel: 'Umgangssprachlich / Gesprochen',
+    registerNote: 'Kenne beide Register. Verwende formelle Konnektoren beim Präsentieren von Ideen — und umgangssprachliche Gesprächseinstiege beim Plaudern.',
+    whyTitle: 'Warum das beim Sprechen hilft',
+    whyBody: 'Konnektoren lassen deine Sprache geplant klingen, auch wenn sie es nicht ist. Wenn du Sätze mit "However," oder "The thing is," beginnst, signalisierst du dem Zuhörer, dass du weißt, wo du hinwillst. Diese Sicherheit kommt an. Übe jeden Tag mit einem neuen Konnektor — baue ihn bewusst in deine SpeakPath-Sitzungen ein, bis er sich natürlich anfühlt.',
+  },
+  pt: {
+    title: 'Conectores',
+    intro: 'Os conectores são a cola entre suas ideias. Sem eles, você tem frases. Com eles, você tem um discurso que flui — e um ouvinte que pode acompanhar você com facilidade.',
+    connectorHeader: 'Conector',
+    exampleHeader: 'Exemplo',
+    formalTitle: 'Formal vs. Conversacional',
+    formalLabel: 'Formal / Escrito',
+    conversationalLabel: 'Conversacional / Falado',
+    registerNote: 'Conheça ambos os registros. Use conectores formais ao apresentar ideias — use abridores conversacionais ao conversar.',
+    whyTitle: 'Por que isso ajuda a falar',
+    whyBody: 'Os conectores fazem seu discurso soar planejado, mesmo quando não está. Quando você começa frases com "However," ou "The thing is," você sinaliza ao ouvinte que sabe para onde está indo. Essa confiança transparece. Pratique com um conector novo por dia — incorpore-o conscientemente nas suas sessões do SpeakPath até que saia automaticamente.',
+  },
+};
+
+const copy = localizedCopy[currentLocale];
+
+type CategoryLabel = { en: string; es: string; fr: string; de: string; pt: string };
+
+const categories: { label: CategoryLabel; color: string; items: { connector: string; example: string }[] }[] = [
+  {
+    label: {
+      en: 'To add information',
+      es: 'Para agregar información',
+      fr: 'Pour ajouter des informations',
+      de: 'Informationen hinzufügen',
+      pt: 'Para acrescentar informação',
+    },
+    color: 'primary',
+    items: [
+      { connector: 'In addition,', example: 'In addition, the report showed a 20% improvement.' },
+      { connector: 'Furthermore,', example: 'Furthermore, this approach saves time.' },
+      { connector: 'Moreover,', example: 'Moreover, the cost was lower than expected.' },
+      { connector: 'Also,', example: 'Also, I wanted to mention the deadline.' },
+      { connector: 'Besides,', example: 'Besides, we have other options to consider.' },
+    ],
+  },
+  {
+    label: {
+      en: 'To contrast',
+      es: 'Para contrastar',
+      fr: 'Pour contraster',
+      de: 'Zum Kontrastieren',
+      pt: 'Para contrastar',
+    },
+    color: 'tertiary',
+    items: [
+      { connector: 'However,', example: 'However, the results were not what we expected.' },
+      { connector: 'Nevertheless,', example: 'Nevertheless, we continued with the plan.' },
+      { connector: 'On the other hand,', example: 'On the other hand, there are clear benefits.' },
+      { connector: 'Although', example: 'Although it was difficult, we managed.' },
+      { connector: 'Even though', example: 'Even though it rained, we went out.' },
+      { connector: 'Despite the fact that', example: 'Despite the fact that I was tired, I finished.' },
+    ],
+  },
+  {
+    label: {
+      en: 'To give reasons',
+      es: 'Para dar razones',
+      fr: 'Pour donner des raisons',
+      de: 'Gründe nennen',
+      pt: 'Para dar razões',
+    },
+    color: 'primary',
+    items: [
+      { connector: 'Because', example: 'I left early because I had a meeting.' },
+      { connector: 'Since', example: 'Since it was late, we decided to stop.' },
+      { connector: 'As', example: 'As the team was ready, we started immediately.' },
+      { connector: 'Due to', example: 'Due to the weather, the event was postponed.' },
+      { connector: 'As a result of', example: 'As a result of the feedback, we made changes.' },
+    ],
+  },
+  {
+    label: {
+      en: 'To show results',
+      es: 'Para mostrar resultados',
+      fr: 'Pour montrer des résultats',
+      de: 'Ergebnisse zeigen',
+      pt: 'Para mostrar resultados',
+    },
+    color: 'tertiary',
+    items: [
+      { connector: 'Therefore,', example: 'Therefore, we need to act quickly.' },
+      { connector: 'As a result,', example: 'As a result, sales improved by 30%.' },
+      { connector: 'Consequently,', example: 'Consequently, the project was delayed.' },
+      { connector: 'So,', example: 'I was late, so I missed the introduction.' },
+      { connector: 'Thus,', example: 'Thus, we reached a different conclusion.' },
+    ],
+  },
+  {
+    label: {
+      en: 'To sequence',
+      es: 'Para secuenciar',
+      fr: 'Pour séquencer',
+      de: 'Für Abfolgen',
+      pt: 'Para sequenciar',
+    },
+    color: 'primary',
+    items: [
+      { connector: 'First,', example: 'First, let me explain the background.' },
+      { connector: 'Then,', example: 'Then, we moved to the main topic.' },
+      { connector: 'After that,', example: 'After that, we discussed the next steps.' },
+      { connector: 'Finally,', example: 'Finally, we agreed on a date.' },
+      { connector: 'To begin with,', example: 'To begin with, I would like to thank everyone.' },
+    ],
+  },
+  {
+    label: {
+      en: 'Conversation openers',
+      es: 'Iniciadores de conversación',
+      fr: 'Lanceurs de conversation',
+      de: 'Gesprächseinstiege',
+      pt: 'Abridores de conversa',
+    },
+    color: 'tertiary',
+    items: [
+      { connector: 'Honestly,', example: 'Honestly, I was surprised by the result.' },
+      { connector: 'To be honest,', example: "To be honest, I hadn't thought about it." },
+      { connector: 'Actually,', example: "Actually, that's a good point." },
+      { connector: 'In fact,', example: 'In fact, we already tried that.' },
+      { connector: 'The thing is,', example: "The thing is, it's more complicated than it looks." },
+      { connector: 'You know what,', example: "You know what, let's try a different approach." },
+    ],
+  },
+];
+
+const getCategoryLabel = (label: CategoryLabel) => label[currentLocale];
+---
+
+<h1 class="font-headline text-3xl md:text-4xl font-bold tracking-display text-on-surface mb-3">
+  {copy.title}
+</h1>
+<p class="text-on-surface-variant text-lg leading-relaxed mb-10 max-w-2xl">
+  {copy.intro}
+</p>
+
+<!-- Categories -->
+{categories.map((cat) => (
+  <section class="mb-10">
+    <h2 class="font-headline text-lg font-bold text-on-surface mb-4 flex items-center gap-2">
+      <span class={`w-2 h-2 rounded-full bg-${cat.color} shrink-0`} />
+      {getCategoryLabel(cat.label)}
+    </h2>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm text-left border-collapse">
+        <thead>
+          <tr class="border-b border-outline-variant/20">
+            <th class="py-2 pr-6 text-on-surface-variant font-medium w-44">{copy.connectorHeader}</th>
+            <th class="py-2 text-on-surface-variant font-medium">{copy.exampleHeader}</th>
+          </tr>
+        </thead>
+        <tbody class="text-on-surface-variant">
+          {cat.items.map((item, i) => (
+            <tr class:list={['border-b border-outline-variant/10', i === cat.items.length - 1 ? 'border-none' : '']}>
+              <td class={`py-2.5 pr-6 text-${cat.color} font-semibold font-headline whitespace-nowrap`}>
+                {item.connector}
+              </td>
+              <td class="py-2.5 italic text-on-surface-variant">{item.example}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+))}
+
+<!-- Formal vs. informal -->
+<section class="mb-12">
+  <h2 class="font-headline text-xl font-bold text-on-surface mb-6 flex items-center gap-2">
+    <span class="material-symbols-outlined text-primary" style="font-size:22px">tune</span>
+    {copy.formalTitle}
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="p-5 rounded-2xl bg-surface-container border border-outline-variant/15">
+      <h3 class="font-headline font-semibold text-primary mb-3">{copy.formalLabel}</h3>
+      <ul class="space-y-1.5 text-sm text-on-surface-variant">
+        {['Furthermore,', 'Nevertheless,', 'Therefore,', 'Consequently,', 'Moreover,', 'In addition,', 'Thus,'].map(c => (
+          <li class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+            {c}
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div class="p-5 rounded-2xl bg-surface-container border border-outline-variant/15">
+      <h3 class="font-headline font-semibold text-tertiary mb-3">{copy.conversationalLabel}</h3>
+      <ul class="space-y-1.5 text-sm text-on-surface-variant">
+        {['Also,', 'But,', 'So,', 'You know,', 'Actually,', 'The thing is,', 'Honestly,'].map(c => (
+          <li class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-tertiary shrink-0" />
+            {c}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+  <p class="text-on-surface-variant text-sm mt-3 italic">
+    {copy.registerNote}
+  </p>
+</section>
+
+<!-- Why it helps -->
+<section class="p-6 rounded-2xl bg-primary/5 border border-primary/15">
+  <h3 class="font-headline font-semibold text-primary mb-2 flex items-center gap-2">
+    <span class="material-symbols-outlined" style="font-size:18px">record_voice_over</span>
+    {copy.whyTitle}
+  </h3>
+  <p class="text-on-surface-variant leading-relaxed text-sm">
+    {copy.whyBody}
+  </p>
+</section>

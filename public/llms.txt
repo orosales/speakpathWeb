@@ -1,23 +1,26 @@
 # SpeakPath
 
-> AI-powered conversational language practice — speak and improve, no downloads required.
+> AI-powered conversational language practice — speak, get grammar feedback, study the theory, speak again.
 
-SpeakPath is a web application that helps language learners build real conversational fluency through AI-driven voice conversations. Unlike flashcard or grammar-drill apps, SpeakPath puts learners in live spoken exchanges with an AI that listens, responds naturally, and gives targeted feedback. No download required. Free to start.
+SpeakPath is a web application that helps language learners build real conversational fluency through AI-driven voice conversations. Unlike flashcard or grammar-drill apps, SpeakPath puts learners in live spoken exchanges with an AI that listens, responds naturally, and gives targeted grammar feedback after each session. No download required. Free to start.
 
 ## What SpeakPath Does
 
 - **Voice-first practice**: Users speak aloud; the AI listens and responds in the target language in real time.
-- **Supported languages**: English, Spanish, French, German (more coming: Portuguese, Italian, Japanese, Mandarin).
+- **Supported languages**: English, Spanish, French, German.
 - **Skill levels**: Beginner through Advanced — conversations adapt to the learner's current level.
-- **Instant feedback**: Pronunciation hints, vocabulary suggestions, and fluency notes after each exchange.
+- **Grammar feedback loop**: After each session, SpeakPath identifies grammar patterns the user struggled with and links directly to theory pages to study the issue — then the user comes back and speaks again.
+- **Theory pages**: Free reference content at speakpath.dev/learn covering grammar, key verbs, connectors, phrasal verbs, nouns, and essay structure for English learners.
 - **No install needed**: Runs entirely in the browser at https://app.speakpath.dev.
-- **Private by design**: Voice recordings are never stored longer than needed.
+- **Private by design**: Voice recordings are never stored after a session ends.
 
 ## How It Works
 
 1. Choose your target language and proficiency level.
 2. Start talking — the AI listens and responds naturally in real time.
-3. Review grammar insights, vocabulary notes, and progress after each session.
+3. After the session, review grammar mistakes and the exact topics to work on.
+4. Study the relevant theory page at speakpath.dev/learn.
+5. Come back and speak again — that closed loop is where fluency builds.
 
 ## Who It's For
 
@@ -25,20 +28,24 @@ Language learners who already know some basics and want to break through the "I 
 
 ## Languages
 
+Practice languages supported in the app:
 - English (Business & everyday fluency)
 - Spanish (500M+ native speakers)
 - French (Romance language, culture, opportunity)
 - German (Precision, science, career growth)
-- More coming soon: Portuguese, Italian, Japanese, Mandarin
+
+The landing page (speakpath.dev) is available in English, Spanish, French, German, and Portuguese.
 
 ## Pricing
 
-Free tier available. No credit card required to start.
+Free to start. No credit card required.
 
 ## Key URLs
 
 - Landing page: https://speakpath.dev
 - App: https://app.speakpath.dev
+- Theory / Learn: https://speakpath.dev/learn
+- FAQ: https://speakpath.dev/faq
 - Sign in: https://app.speakpath.dev/login
 
 ## About

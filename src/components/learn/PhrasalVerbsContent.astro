@@ -1,0 +1,249 @@
+---
+interface Props {
+  locale?: string;
+}
+const { locale = 'en' } = Astro.props;
+type SupportedLocale = 'en' | 'es' | 'fr' | 'de' | 'pt';
+
+const currentLocale: SupportedLocale = ['en', 'es', 'fr', 'de', 'pt'].includes(locale)
+  ? (locale as SupportedLocale)
+  : 'en';
+
+const localizedCopy = {
+  en: {
+    title: 'Phrasal Verbs',
+    intro: 'Phrasal verbs are the combinations native speakers use constantly — and what advanced learners avoid because they feel unpredictable. They are not. Learn them by category and in context, and they become second nature.',
+    howWorkTitle: 'How they work',
+    howWorkBody: 'A phrasal verb is a verb combined with a preposition or adverb (particle) that creates a new meaning different from the original verb.',
+    howWorkFooter: 'Same base verb, three completely different meanings — the particle changes everything.',
+    separableTitle: 'Separable vs. Inseparable',
+    separableLabel: 'Separable — the object can go in the middle',
+    inseparableLabel: 'Inseparable — object always comes after',
+    pvHeader: 'Phrasal Verb',
+    meaningHeader: 'Meaning',
+    exampleHeader: 'Example',
+    whyTitle: 'Why this helps your speaking',
+    whyBody: 'Avoiding phrasal verbs makes your English sound textbook-formal and slightly unnatural. Native speakers use them constantly, often without thinking. When you use "give up" instead of "abandon the attempt", you sound like someone who has actually lived in the language. Pick 5 phrasal verbs this week, write one sentence for each, and then try to use them in your next SpeakPath session.',
+  },
+  es: {
+    title: 'Verbos frasales',
+    intro: 'Los verbos frasales son las combinaciones que los nativos usan constantemente, y que los estudiantes avanzados evitan porque parecen impredecibles. No lo son. Apréndelos por categoría y en contexto, y se vuelven algo natural.',
+    howWorkTitle: 'Cómo funcionan',
+    howWorkBody: 'Un verbo frasal es un verbo combinado con una preposición o un adverbio (partícula) que crea un nuevo significado diferente del verbo original.',
+    howWorkFooter: 'El mismo verbo base, tres significados completamente diferentes — la partícula lo cambia todo.',
+    separableTitle: 'Separables vs. inseparables',
+    separableLabel: 'Separables — el objeto puede ir en el medio',
+    inseparableLabel: 'Inseparables — el objeto siempre va después',
+    pvHeader: 'Phrasal Verb',
+    meaningHeader: 'Significado',
+    exampleHeader: 'Ejemplo',
+    whyTitle: 'Por qué esto ayuda a hablar',
+    whyBody: 'Evitar los verbos frasales hace que tu inglés suene demasiado formal y un poco artificial. Los nativos los usan constantemente, a menudo sin pensarlo. Cuando usas "give up" en lugar de "abandon the attempt", suenas como alguien que realmente ha vivido el idioma. Escoge 5 verbos frasales esta semana, escribe una oración con cada uno y luego intenta usarlos en tu próxima sesión de SpeakPath.',
+  },
+  fr: {
+    title: 'Verbes à particule',
+    intro: 'Les verbes à particule sont les combinaisons que les natifs utilisent constamment — et que les apprenants avancés évitent car ils semblent imprévisibles. Ils ne le sont pas. Apprenez-les par catégorie et en contexte, et ils deviennent une seconde nature.',
+    howWorkTitle: 'Comment ils fonctionnent',
+    howWorkBody: 'Un verbe à particule est un verbe combiné avec une préposition ou un adverbe (particule) qui crée un sens nouveau, différent du verbe d\'origine.',
+    howWorkFooter: 'Le même verbe de base, trois sens complètement différents — la particule change tout.',
+    separableTitle: 'Séparables vs. inséparables',
+    separableLabel: 'Séparables — le complément peut se placer au milieu',
+    inseparableLabel: 'Inséparables — le complément vient toujours après',
+    pvHeader: 'Verbe à particule',
+    meaningHeader: 'Sens',
+    exampleHeader: 'Exemple',
+    whyTitle: 'Pourquoi cela aide à parler',
+    whyBody: 'Éviter les verbes à particule rend votre anglais trop formel et légèrement artificiel. Les natifs les utilisent constamment, souvent sans y penser. Quand vous utilisez "give up" plutôt que "abandon the attempt", vous sonnez comme quelqu\'un qui a vraiment vécu dans la langue. Choisissez 5 verbes à particule cette semaine, écrivez une phrase pour chacun, et essayez de les utiliser dans votre prochaine session SpeakPath.',
+  },
+  de: {
+    title: 'Phrasal Verbs',
+    intro: 'Phrasal Verbs sind die Kombinationen, die Muttersprachler ständig verwenden — und die fortgeschrittene Lernende meiden, weil sie unberechenbar wirken. Sind sie aber nicht. Lerne sie nach Kategorie und im Kontext, und sie werden zur zweiten Natur.',
+    howWorkTitle: 'Wie sie funktionieren',
+    howWorkBody: 'Ein Phrasal Verb ist ein Verb, das mit einer Präposition oder einem Adverb (Partikel) kombiniert wird und eine neue Bedeutung erhält, die sich vom ursprünglichen Verb unterscheidet.',
+    howWorkFooter: 'Dasselbe Grundverb, drei völlig verschiedene Bedeutungen — das Partikel verändert alles.',
+    separableTitle: 'Trennbar vs. untrennbar',
+    separableLabel: 'Trennbar — das Objekt kann in die Mitte treten',
+    inseparableLabel: 'Untrennbar — das Objekt kommt immer danach',
+    pvHeader: 'Phrasal Verb',
+    meaningHeader: 'Bedeutung',
+    exampleHeader: 'Beispiel',
+    whyTitle: 'Warum das beim Sprechen hilft',
+    whyBody: 'Phrasal Verbs zu vermeiden lässt dein Englisch zu buchförmig-förmlich und leicht unnatürlich wirken. Muttersprachler verwenden sie ständig, oft ohne darüber nachzudenken. Wenn du "give up" statt "abandon the attempt" sagst, klingst du wie jemand, der wirklich in der Sprache gelebt hat. Wähle diese Woche 5 Phrasal Verbs aus, schreibe einen Satz mit jedem und versuche, sie in deiner nächsten SpeakPath-Sitzung zu verwenden.',
+  },
+  pt: {
+    title: 'Verbos frasais',
+    intro: 'Verbos frasais são as combinações que os nativos usam constantemente — e que os aprendizes avançados evitam porque parecem imprevisíveis. Não são. Aprenda-os por categoria e em contexto, e eles se tornam algo natural.',
+    howWorkTitle: 'Como funcionam',
+    howWorkBody: 'Um verbo frasal é um verbo combinado com uma preposição ou advérbio (partícula) que cria um novo significado diferente do verbo original.',
+    howWorkFooter: 'O mesmo verbo base, três significados completamente diferentes — a partícula muda tudo.',
+    separableTitle: 'Separáveis vs. inseparáveis',
+    separableLabel: 'Separáveis — o objeto pode ir no meio',
+    inseparableLabel: 'Inseparáveis — o objeto sempre vem depois',
+    pvHeader: 'Phrasal Verb',
+    meaningHeader: 'Significado',
+    exampleHeader: 'Exemplo',
+    whyTitle: 'Por que isso ajuda a falar',
+    whyBody: 'Evitar verbos frasais faz seu inglês soar formal demais e um pouco artificial. Falantes nativos os usam constantemente, muitas vezes sem pensar. Quando você usa "give up" em vez de "abandon the attempt", você soa como alguém que realmente viveu o idioma. Escolha 5 verbos frasais esta semana, escreva uma frase para cada um e tente usá-los na sua próxima sessão do SpeakPath.',
+  },
+};
+
+const copy = localizedCopy[currentLocale];
+
+type LocaleMap = { en: string; es: string; fr: string; de: string; pt: string };
+
+type PhrasalItem = { pv: string; meaning: LocaleMap; example: string };
+type Category = { label: LocaleMap; items: PhrasalItem[] };
+
+const categories: Category[] = [
+  {
+    label: { en: 'Movement & Direction', es: 'Movimiento y dirección', fr: 'Mouvement et direction', de: 'Bewegung und Richtung', pt: 'Movimento e direção' },
+    items: [
+      { pv: 'go back', meaning: { en: 'return', es: 'volver', fr: 'retourner', de: 'zurückgehen', pt: 'voltar' }, example: 'I need to go back to the office.' },
+      { pv: 'come in', meaning: { en: 'enter', es: 'entrar', fr: 'entrer', de: 'eintreten', pt: 'entrar' }, example: 'Come in, the door is open.' },
+      { pv: 'move on', meaning: { en: 'continue to the next thing', es: 'seguir adelante', fr: 'passer à la suite', de: 'weitermachen', pt: 'seguir em frente' }, example: "Let's move on to the next point." },
+      { pv: 'get out', meaning: { en: 'leave', es: 'salir', fr: 'partir', de: 'herausgehen', pt: 'sair' }, example: 'We got out of there as fast as possible.' },
+      { pv: 'run away', meaning: { en: 'escape', es: 'huir', fr: 's\'enfuir', de: 'weglaufen', pt: 'fugir' }, example: 'He ran away from his problems.' },
+    ],
+  },
+  {
+    label: { en: 'Starting & Stopping', es: 'Empezar y parar', fr: 'Commencer et s\'arrêter', de: 'Beginnen und Aufhören', pt: 'Começar e parar' },
+    items: [
+      { pv: 'set up', meaning: { en: 'arrange / establish', es: 'organizar / establecer', fr: 'organiser / établir', de: 'einrichten / etablieren', pt: 'organizar / estabelecer' }, example: 'She set up her own company.' },
+      { pv: 'start over', meaning: { en: 'begin again', es: 'empezar de nuevo', fr: 'recommencer', de: 'von vorn anfangen', pt: 'recomeçar' }, example: 'We had to start over from the beginning.' },
+      { pv: 'give up', meaning: { en: 'stop trying', es: 'rendirse', fr: 'abandonner', de: 'aufgeben', pt: 'desistir' }, example: "Don't give up — you're almost there." },
+      { pv: 'carry on', meaning: { en: 'continue', es: 'continuar', fr: 'continuer', de: 'weitermachen', pt: 'continuar' }, example: "Carry on — I'm listening." },
+      { pv: 'cut off', meaning: { en: 'stop abruptly', es: 'cortar abruptamente', fr: 'interrompre brusquement', de: 'abrupt abbrechen', pt: 'interromper abruptamente' }, example: 'He was cut off in the middle of his sentence.' },
+      { pv: 'put off', meaning: { en: 'postpone', es: 'posponer', fr: 'remettre à plus tard', de: 'verschieben', pt: 'adiar' }, example: 'She put off the meeting until Friday.' },
+    ],
+  },
+  {
+    label: { en: 'Understanding & Finding Out', es: 'Entender y descubrir', fr: 'Comprendre et découvrir', de: 'Verstehen und Herausfinden', pt: 'Entender e descobrir' },
+    items: [
+      { pv: 'figure out', meaning: { en: 'understand / solve', es: 'entender / resolver', fr: 'comprendre / résoudre', de: 'herausfinden / lösen', pt: 'entender / resolver' }, example: 'I finally figured out the problem.' },
+      { pv: 'find out', meaning: { en: 'discover information', es: 'descubrir información', fr: 'découvrir une information', de: 'herausfinden', pt: 'descobrir informação' }, example: 'Did you find out what happened?' },
+      { pv: 'look into', meaning: { en: 'investigate', es: 'investigar', fr: 'enquêter', de: 'untersuchen', pt: 'investigar' }, example: 'We are looking into the issue.' },
+      { pv: 'work out', meaning: { en: 'solve / understand', es: 'resolver / entender', fr: 'résoudre / comprendre', de: 'herausfinden / verstehen', pt: 'resolver / entender' }, example: 'It took me a while to work it out.' },
+      { pv: 'come across', meaning: { en: 'encounter unexpectedly', es: 'encontrar por casualidad', fr: 'tomber sur', de: 'zufällig begegnen', pt: 'encontrar por acaso' }, example: 'I came across an interesting article.' },
+    ],
+  },
+  {
+    label: { en: 'Relationships & Interaction', es: 'Relaciones e interacción', fr: 'Relations et interaction', de: 'Beziehungen und Interaktion', pt: 'Relacionamentos e interação' },
+    items: [
+      { pv: 'get along (with)', meaning: { en: 'have a good relationship', es: 'llevarse bien (con)', fr: 'bien s\'entendre (avec)', de: 'gut auskommen (mit)', pt: 'se dar bem (com)' }, example: 'We get along really well.' },
+      { pv: 'look up to', meaning: { en: 'admire', es: 'admirar', fr: 'admirer', de: 'bewundern', pt: 'admirar' }, example: 'I really look up to her.' },
+      { pv: 'look after', meaning: { en: 'take care of', es: 'cuidar de', fr: 's\'occuper de', de: 'sich kümmern um', pt: 'cuidar de' }, example: 'Can you look after my dog this weekend?' },
+      { pv: 'bring up', meaning: { en: 'mention / raise a child', es: 'mencionar / criar', fr: 'mentionner / élever', de: 'erwähnen / aufziehen', pt: 'mencionar / criar' }, example: 'She brought up an important point.' },
+      { pv: 'fall out (with)', meaning: { en: 'argue and stop being friends', es: 'pelearse y distanciarse', fr: 'se brouiller (avec)', de: 'sich zerstreiten (mit)', pt: 'brigar e se afastar' }, example: 'They fell out over money.' },
+      { pv: 'make up', meaning: { en: 'reconcile', es: 'reconciliarse', fr: 'se réconcilier', de: 'sich versöhnen', pt: 'se reconciliar' }, example: 'They argued but made up the next day.' },
+    ],
+  },
+  {
+    label: { en: 'Everyday Actions', es: 'Acciones cotidianas', fr: 'Actions quotidiennes', de: 'Alltägliche Handlungen', pt: 'Ações cotidianas' },
+    items: [
+      { pv: 'pick up', meaning: { en: 'learn / collect', es: 'aprender / recoger', fr: 'apprendre / récupérer', de: 'lernen / abholen', pt: 'aprender / pegar' }, example: 'I picked up a lot from that class.' },
+      { pv: 'turn up', meaning: { en: 'arrive / appear', es: 'aparecer / llegar', fr: 'apparaître / arriver', de: 'auftauchen / ankommen', pt: 'aparecer / chegar' }, example: 'He turned up an hour late.' },
+      { pv: 'turn down', meaning: { en: 'refuse / reduce volume', es: 'rechazar / bajar el volumen', fr: 'refuser / baisser le volume', de: 'ablehnen / Lautstärke verringern', pt: 'recusar / diminuir o volume' }, example: 'She turned down the offer.' },
+      { pv: 'show up', meaning: { en: 'appear / arrive', es: 'aparecer / llegar', fr: 'apparaître / arriver', de: 'erscheinen / ankommen', pt: 'aparecer / chegar' }, example: 'He always shows up on time.' },
+      { pv: 'hold on', meaning: { en: 'wait', es: 'esperar', fr: 'attendre', de: 'warten', pt: 'esperar' }, example: "Hold on, I'll be right back." },
+      { pv: 'run out of', meaning: { en: 'have none left', es: 'quedarse sin', fr: 'manquer de', de: 'aufgebraucht haben', pt: 'ficar sem' }, example: 'We ran out of time.' },
+    ],
+  },
+];
+
+const getCategoryLabel = (label: LocaleMap) => label[currentLocale];
+const getMeaning = (meaning: LocaleMap) => meaning[currentLocale];
+---
+
+<h1 class="font-headline text-3xl md:text-4xl font-bold tracking-display text-on-surface mb-3">
+  {copy.title}
+</h1>
+<p class="text-on-surface-variant text-lg leading-relaxed mb-10 max-w-2xl">
+  {copy.intro}
+</p>
+
+<!-- What are phrasal verbs -->
+<section class="mb-10 p-5 rounded-2xl bg-surface-container border border-outline-variant/15">
+  <h2 class="font-headline font-semibold text-on-surface mb-3">{copy.howWorkTitle}</h2>
+  <p class="text-on-surface-variant text-sm leading-relaxed mb-3">
+    {copy.howWorkBody}
+  </p>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+    <div class="p-3 rounded-xl bg-surface-container-high text-center">
+      <div class="text-on-surface-variant">look <span class="text-primary font-bold">up</span></div>
+      <div class="text-xs text-on-surface-variant/60 mt-1">search for information</div>
+    </div>
+    <div class="p-3 rounded-xl bg-surface-container-high text-center">
+      <div class="text-on-surface-variant">look <span class="text-primary font-bold">into</span></div>
+      <div class="text-xs text-on-surface-variant/60 mt-1">investigate</div>
+    </div>
+    <div class="p-3 rounded-xl bg-surface-container-high text-center">
+      <div class="text-on-surface-variant">look <span class="text-primary font-bold">after</span></div>
+      <div class="text-xs text-on-surface-variant/60 mt-1">take care of</div>
+    </div>
+  </div>
+  <p class="text-on-surface-variant/70 text-xs mt-3">
+    {copy.howWorkFooter}
+  </p>
+</section>
+
+<!-- Separable vs Inseparable note -->
+<section class="mb-10 p-5 rounded-2xl bg-surface-container border border-outline-variant/15">
+  <h2 class="font-headline font-semibold text-on-surface mb-3">{copy.separableTitle}</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+    <div>
+      <p class="text-primary font-semibold mb-2">{copy.separableLabel}</p>
+      <div class="space-y-1 text-on-surface-variant">
+        <p>Turn <em class="text-on-surface">it</em> off. ✓</p>
+        <p>Turn off <em class="text-on-surface">the light</em>. ✓</p>
+      </div>
+    </div>
+    <div>
+      <p class="text-tertiary font-semibold mb-2">{copy.inseparableLabel}</p>
+      <div class="space-y-1 text-on-surface-variant">
+        <p>Look after <em class="text-on-surface">the children</em>. ✓</p>
+        <p class="line-through text-on-surface-variant/50">Look the children after. ✗</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Categories -->
+{categories.map((cat) => (
+  <section class="mb-10">
+    <h2 class="font-headline text-lg font-bold text-on-surface mb-4 flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-primary shrink-0" />
+      {getCategoryLabel(cat.label)}
+    </h2>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm text-left border-collapse">
+        <thead>
+          <tr class="border-b border-outline-variant/20">
+            <th class="py-2 pr-4 text-on-surface-variant font-medium w-36">{copy.pvHeader}</th>
+            <th class="py-2 pr-4 text-on-surface-variant font-medium w-40">{copy.meaningHeader}</th>
+            <th class="py-2 text-on-surface-variant font-medium">{copy.exampleHeader}</th>
+          </tr>
+        </thead>
+        <tbody class="text-on-surface-variant">
+          {cat.items.map((item, i) => (
+            <tr class:list={['border-b border-outline-variant/10', i === cat.items.length - 1 ? 'border-none' : '']}>
+              <td class="py-2.5 pr-4 text-primary font-semibold font-headline">{item.pv}</td>
+              <td class="py-2.5 pr-4">{getMeaning(item.meaning)}</td>
+              <td class="py-2.5 italic">{item.example}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+))}
+
+<!-- Why it helps -->
+<section class="p-6 rounded-2xl bg-primary/5 border border-primary/15">
+  <h3 class="font-headline font-semibold text-primary mb-2 flex items-center gap-2">
+    <span class="material-symbols-outlined" style="font-size:18px">record_voice_over</span>
+    {copy.whyTitle}
+  </h3>
+  <p class="text-on-surface-variant leading-relaxed text-sm">
+    {copy.whyBody}
+  </p>
+</section>

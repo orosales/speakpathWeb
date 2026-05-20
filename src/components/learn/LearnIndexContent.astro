@@ -1,0 +1,236 @@
+---
+interface Props {
+  locale?: string;
+}
+const { locale = 'en' } = Astro.props;
+
+const basePath = locale === 'en' ? '/learn/english' : `/${locale}/learn/english`;
+const localized = {
+  en: {
+    eyebrow: 'Write Better to Speak Better',
+    titleTop: 'The Foundation of',
+    titleAccent: 'Fluent English',
+    intro:
+      'A six-step foundation for learners who want to speak confidently. Built on the core structures of English, so the words are there when you need them.',
+    method: 'The Method',
+    paragraphs: [
+      'Real fluency happens in conversation. When you open your mouth, the words are already there. That is what SpeakPath is built for. But to speak without thinking, you need patterns in place first.',
+      'Writing is how you build those patterns. When you write a sentence, slow it down, and fix it. You are not learning to write for its own sake. You are loading the structure into memory so it comes out automatically when you speak.',
+      'If you are starting from zero, or if grammar has always felt confusing, these lessons are built for you. Work through each section in order. Read the material, write the examples in a notebook to lock the patterns in, and when you feel confident, bring it into SpeakPath and practice speaking until those patterns feel natural in your voice.',
+    ],
+    pathTitle: 'The 6-Step Path',
+    ctaTitle: 'Start at Step 1',
+    ctaBody: 'Grammar is the foundation. Everything else builds on it.',
+    begin: 'Begin with Grammar',
+    practice: 'Practice Speaking',
+    steps: [
+      { title: 'Grammar', description: 'Tenses, sentence structure, and the rules that hold everything together.' },
+      { title: 'Key Verbs', description: 'The 30 most-used verbs in English. Master these and you can say almost anything.' },
+      { title: 'Connectors', description: 'Openers and linkers that make your sentences flow like a native speaker.' },
+      { title: 'Phrasal Verbs', description: 'The combinations native speakers use constantly, and learners often avoid.' },
+      { title: 'Core Nouns', description: 'The high-frequency vocabulary that comes up in every real conversation.' },
+      { title: 'Essay Template', description: 'A structure for putting it all together. Written clarity that becomes spoken fluency.' },
+    ],
+  },
+  es: {
+    eyebrow: 'Escribe mejor para hablar mejor',
+    titleTop: 'La base del',
+    titleAccent: 'inglés fluido',
+    intro:
+      'Una base de seis pasos para quienes quieren hablar con confianza, construida sobre las estructuras principales del inglés, para que las palabras estén ahí cuando las necesites.',
+    method: 'El método',
+    paragraphs: [
+      'La fluidez real ocurre en la conversación. Cuando abres la boca, las palabras ya están ahí. Para eso existe SpeakPath. Pero para hablar sin pensar, primero necesitas tener los patrones en su lugar.',
+      'Escribir es la manera de construir esos patrones. Cuando escribes una oración, la desaceleradas y la corriges, no estás aprendiendo a escribir solo por escribir. Estás cargando la estructura en la memoria para que salga sola cuando hablas.',
+      'Si estás empezando desde cero, o si la gramática siempre te ha resultado confusa, estas lecciones están hechas para ti. Avanza por cada sección en orden. Lee el material, escribe los ejemplos en una libreta para fijar los patrones, y cuando te sientas con confianza, llévalo a SpeakPath y practica hablando hasta que esos patrones se sientan naturales en tu voz.',
+    ],
+    pathTitle: 'La ruta de 6 pasos',
+    ctaTitle: 'Empieza en el paso 1',
+    ctaBody: 'La gramática es la base. Todo lo demás se construye sobre ella.',
+    begin: 'Empezar con gramática',
+    practice: 'Practicar hablando',
+    steps: [
+      { title: 'Gramática', description: 'Tiempos verbales, estructura de la oración y las reglas que sostienen todo.' },
+      { title: 'Verbos clave', description: 'Los verbos más usados en inglés: domina estos patrones y podrás decir mucho más.' },
+      { title: 'Conectores', description: 'Inicios y enlaces que hacen que tus ideas fluyan con naturalidad.' },
+      { title: 'Phrasal verbs', description: 'Combinaciones que los hablantes nativos usan constantemente y que muchos estudiantes evitan.' },
+      { title: 'Sustantivos esenciales', description: 'Vocabulario frecuente que aparece en conversaciones reales.' },
+      { title: 'Plantilla de ensayo', description: 'Una estructura para unirlo todo: claridad al escribir que se transforma en fluidez al hablar.' },
+    ],
+  },
+  fr: {
+    eyebrow: 'Écrire mieux pour mieux parler',
+    titleTop: 'La base de',
+    titleAccent: 'l anglais fluide',
+    intro:
+      'Une base en six étapes pour les apprenants qui veulent parler avec confiance, construite sur les structures essentielles de l anglais, pour que les mots soient là quand vous en avez besoin.',
+    method: 'La méthode',
+    paragraphs: [
+      'La vraie fluidité se produit dans la conversation. Quand vous ouvrez la bouche, les mots sont déjà là. C est pour ça que SpeakPath existe. Mais pour parler sans réfléchir, vous devez d abord avoir des schémas en place.',
+      'Écrire est la façon de construire ces schémas. Quand vous écrivez une phrase, ralentissez et corrigez-la. Vous n apprenez pas à écrire pour écrire. Vous chargez la structure dans votre mémoire pour qu elle sorte automatiquement quand vous parlez.',
+      'Si vous débutez de zéro, ou si la grammaire vous a toujours posé des difficultés, ces leçons sont faites pour vous. Avancez section par section. Lisez le matériel, écrivez les exemples dans un cahier pour ancrer les structures, et quand vous vous sentez prêt, entraînez-vous dans SpeakPath jusqu à ce que ces schémas semblent naturels dans votre voix.',
+    ],
+    pathTitle: 'Le parcours en 6 étapes',
+    ctaTitle: 'Commencer par l étape 1',
+    ctaBody: 'La grammaire est la base. Tout le reste se construit dessus.',
+    begin: 'Commencer par la grammaire',
+    practice: 'Pratiquer à l oral',
+    steps: [
+      { title: 'Grammaire', description: 'Temps, structure de phrase et règles qui soutiennent tout le reste.' },
+      { title: 'Verbes clés', description: 'Les verbes les plus utilisés en anglais : maîtrisez-les pour dire beaucoup plus.' },
+      { title: 'Connecteurs', description: 'Des débuts de phrase et des liens pour faire circuler vos idées naturellement.' },
+      { title: 'Verbes à particule', description: 'Les combinaisons utilisées sans cesse par les natifs, souvent évitées par les apprenants.' },
+      { title: 'Noms essentiels', description: 'Le vocabulaire fréquent qui revient dans les vraies conversations.' },
+      { title: 'Plan de rédaction', description: 'Une structure pour tout assembler : la clarté écrite devient fluidité orale.' },
+    ],
+  },
+  de: {
+    eyebrow: 'Besser schreiben, besser sprechen',
+    titleTop: 'Die Grundlage für',
+    titleAccent: 'flüssiges Englisch',
+    intro:
+      'Eine sechsstufige Grundlage für Lernende, die sicher sprechen möchten. Aufgebaut auf den Kernstrukturen des Englischen, damit die Wörter da sind, wenn du sie brauchst.',
+    method: 'Die Methode',
+    paragraphs: [
+      'Echte Flüssigkeit entsteht im Gespräch. Wenn du den Mund öffnest, sind die Wörter schon bereit. Dafür ist SpeakPath gemacht. Aber um ohne Nachdenken zu sprechen, brauchst du zuerst Muster.',
+      'Schreiben ist die Art, diese Muster aufzubauen. Wenn du einen Satz schreibst, ihn verlangsamst und korrigierst, lernst du nicht des Schreibens wegen zu schreiben. Du lädst die Struktur ins Gedächtnis, damit sie beim Sprechen automatisch herauskommt.',
+      'Wenn du bei null anfängst, oder wenn Grammatik sich immer schwierig angefühlt hat, sind diese Lektionen genau für dich. Arbeite die Abschnitte der Reihe nach durch. Lies das Material, schreibe die Beispiele in ein Notizbuch, um die Muster zu festigen, und wenn du dich bereit fühlst, übe in SpeakPath, bis sich diese Muster in deiner Stimme natürlich anfühlen.',
+    ],
+    pathTitle: 'Der 6-Schritte-Pfad',
+    ctaTitle: 'Beginne mit Schritt 1',
+    ctaBody: 'Grammatik ist die Grundlage. Alles andere baut darauf auf.',
+    begin: 'Mit Grammatik beginnen',
+    practice: 'Sprechen üben',
+    steps: [
+      { title: 'Grammatik', description: 'Zeitformen, Satzstruktur und die Regeln, die alles zusammenhalten.' },
+      { title: 'Schlüsselverben', description: 'Die wichtigsten englischen Verben: Wenn du sie beherrschst, kannst du viel ausdrücken.' },
+      { title: 'Konnektoren', description: 'Satzanfänge und Verbindungen, die deine Gedanken natürlich fließen lassen.' },
+      { title: 'Phrasal Verbs', description: 'Kombinationen, die Muttersprachler ständig verwenden und Lernende oft vermeiden.' },
+      { title: 'Kernnomen', description: 'Häufiger Wortschatz, der in echten Gesprächen immer wieder vorkommt.' },
+      { title: 'Aufsatzvorlage', description: 'Eine Struktur, die alles verbindet: schriftliche Klarheit wird zu mündlicher Flüssigkeit.' },
+    ],
+  },
+  pt: {
+    eyebrow: 'Escreva melhor para falar melhor',
+    titleTop: 'A base do',
+    titleAccent: 'inglês fluente',
+    intro:
+      'Uma base em seis etapas para quem quer falar com confiança, construída sobre as estruturas essenciais do inglês, para que as palavras estejam lá quando você precisar.',
+    method: 'O método',
+    paragraphs: [
+      'A verdadeira fluência acontece na conversa. Quando você abre a boca, as palavras já estão lá. É para isso que o SpeakPath existe. Mas para falar sem pensar, você precisa primeiro ter padrões no lugar.',
+      'Escrever é a maneira de construir esses padrões. Quando você escreve uma frase, desacelera e corrige. Você não está aprendendo a escrever pelo simples ato de escrever. Você está carregando a estrutura na memória para que ela saia automaticamente quando você falar.',
+      'Se você está começando do zero, ou se a gramática sempre foi um desafio, estas lições foram feitas para você. Siga cada seção em ordem. Leia o material, escreva os exemplos em um caderno para fixar os padrões, e quando se sentir confiante, pratique no SpeakPath até que esses padrões se sintam naturais na sua voz.',
+    ],
+    pathTitle: 'O caminho em 6 etapas',
+    ctaTitle: 'Comece pelo passo 1',
+    ctaBody: 'A gramática é a base. Todo o resto se constrói sobre ela.',
+    begin: 'Começar com gramática',
+    practice: 'Praticar fala',
+    steps: [
+      { title: 'Gramática', description: 'Tempos verbais, estrutura da frase e as regras que sustentam tudo.' },
+      { title: 'Verbos-chave', description: 'Os verbos mais usados em inglês: domine esses padrões e você conseguirá dizer muito mais.' },
+      { title: 'Conectores', description: 'Aberturas e ligações que fazem suas ideias fluírem com naturalidade.' },
+      { title: 'Phrasal verbs', description: 'Combinações que nativos usam o tempo todo e que estudantes costumam evitar.' },
+      { title: 'Substantivos essenciais', description: 'Vocabulário frequente que aparece em conversas reais.' },
+      { title: 'Modelo de redação', description: 'Uma estrutura para juntar tudo: clareza na escrita que vira fluência na fala.' },
+    ],
+  },
+};
+
+const copy = localized[locale as keyof typeof localized] ?? localized.en;
+
+const slugs = ['grammar', 'key-verbs', 'connectors', 'phrasal-verbs', 'nouns', 'essay-template'];
+const icons = ['menu_book', 'bolt', 'link', 'swap_horiz', 'category', 'description'];
+const steps = copy.steps.map((step, index) => ({
+  number: index + 1,
+  slug: slugs[index],
+  path: `${basePath}/${slugs[index]}`,
+  title: step.title,
+  description: step.description,
+  icon: icons[index],
+}));
+---
+
+<!-- Hero -->
+<div class="mb-14">
+  <p class="text-primary text-xs font-headline tracking-[0.2em] uppercase font-semibold mb-4">
+    {copy.eyebrow}
+  </p>
+  <h1 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold tracking-display text-on-surface mb-6 leading-tight">
+    {copy.titleTop}<br />
+    <span class="text-primary">{copy.titleAccent}</span>
+  </h1>
+  <p class="text-on-surface-variant text-lg leading-relaxed max-w-2xl">
+    {copy.intro}
+  </p>
+</div>
+
+<!-- Personal story -->
+<div class="mb-14 p-8 rounded-2xl bg-surface-container border border-outline-variant/15 relative overflow-hidden">
+  <div class="absolute top-0 right-0 w-48 h-48 rounded-full bg-primary/5 -translate-y-1/2 translate-x-1/2 blur-2xl pointer-events-none" />
+  <p class="text-on-surface-variant text-xs font-headline tracking-[0.16em] uppercase font-semibold mb-5">
+    {copy.method}
+  </p>
+  <div class="space-y-4 text-on-surface-variant leading-relaxed relative">
+    {copy.paragraphs.map((paragraph) => (
+      <p>{paragraph}</p>
+    ))}
+  </div>
+</div>
+
+<!-- 6-step overview -->
+<div>
+  <h2 class="font-headline text-xl font-bold mb-6 text-on-surface">
+    {copy.pathTitle}
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    {steps.map((step) => (
+      <a
+        href={step.path}
+        class="group flex gap-4 p-5 rounded-2xl bg-surface-container border border-outline-variant/15 hover:border-primary/30 hover:bg-surface-container-high transition-all duration-200 no-underline"
+      >
+        <div class="shrink-0 flex flex-col items-center gap-2">
+          <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm font-headline">
+            {step.number}
+          </span>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="material-symbols-outlined text-primary" style="font-size:18px">{step.icon}</span>
+            <h3 class="font-headline font-semibold text-on-surface group-hover:text-primary transition-colors duration-200">
+              {step.title}
+            </h3>
+          </div>
+          <p class="text-on-surface-variant text-sm leading-relaxed">
+            {step.description}
+          </p>
+        </div>
+        <span class="material-symbols-outlined text-on-surface-variant/40 group-hover:text-primary/60 self-center transition-colors shrink-0" style="font-size:20px">
+          arrow_forward
+        </span>
+      </a>
+    ))}
+  </div>
+</div>
+
+<!-- CTA to start -->
+<div class="mt-12 text-center p-8 rounded-2xl bg-surface-container-low border border-outline-variant/10">
+  <h3 class="font-headline font-bold text-lg text-on-surface mb-2">{copy.ctaTitle}</h3>
+  <p class="text-on-surface-variant text-sm mb-6">{copy.ctaBody}</p>
+  <div class="flex flex-col sm:flex-row gap-3 justify-center">
+    <a href={`${basePath}/grammar`} class="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold font-headline">
+      {copy.begin}
+      <span class="material-symbols-outlined" style="font-size:18px">arrow_forward</span>
+    </a>
+    <a
+      href="https://app.speakpath.dev"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-surface-container border border-outline-variant/20 text-on-surface-variant hover:text-on-surface hover:border-outline-variant/40 font-semibold font-headline text-sm transition-all duration-200"
+    >
+      {copy.practice}
+      <span class="material-symbols-outlined" style="font-size:18px">open_in_new</span>
+    </a>
+  </div>
+</div>

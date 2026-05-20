@@ -1,0 +1,44 @@
+---
+import LearnLayout from '../../../../layouts/LearnLayout.astro';
+import LearnIndexContent from '../../../../components/learn/LearnIndexContent.astro';
+import { locales, isLocale, type Locale } from '../../../../i18n/site';
+
+export function getStaticPaths() {
+  return locales
+    .filter((l) => l !== 'en')
+    .map((l) => ({ params: { lang: l } }));
+}
+
+const { lang } = Astro.params;
+if (!isLocale(lang) || lang === 'en') throw new Error(`Unsupported locale: ${lang}`);
+const locale = lang as Locale;
+
+const meta = {
+  es: {
+    title: 'Escribe mejor para hablar mejor — Ruta de inglés | SpeakPath',
+    description: 'Una ruta estructurada de teoría en inglés explicada en español: gramática, vocabulario y práctica oral para construir fluidez.',
+  },
+  fr: {
+    title: 'Écrire mieux pour mieux parler — Parcours anglais | SpeakPath',
+    description: 'Un parcours structuré de théorie anglaise expliqué en français : grammaire, vocabulaire et pratique orale pour construire la fluidité.',
+  },
+  de: {
+    title: 'Besser schreiben, besser sprechen — Englisch-Lernpfad | SpeakPath',
+    description: 'Ein strukturierter Englisch-Theoriepfad auf Deutsch erklärt: Grammatik, Wortschatz und Sprechpraxis für mehr Sprachflüssigkeit.',
+  },
+  pt: {
+    title: 'Escreva melhor para falar melhor — Caminho de inglês | SpeakPath',
+    description: 'Um caminho estruturado de teoria em inglês explicado em português: gramática, vocabulário e prática oral para construir fluência.',
+  },
+};
+
+const pageMeta = meta[locale];
+---
+<LearnLayout
+  title={pageMeta.title}
+  description={pageMeta.description}
+  currentSlug=""
+  locale={locale}
+>
+  <LearnIndexContent locale={locale} />
+</LearnLayout>

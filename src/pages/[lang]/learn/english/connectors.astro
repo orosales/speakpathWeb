@@ -1,0 +1,23 @@
+---
+import LearnLayout from '../../../../layouts/LearnLayout.astro';
+import ConnectorsContent from '../../../../components/learn/ConnectorsContent.astro';
+import { locales, isLocale, type Locale } from '../../../../i18n/site';
+
+export function getStaticPaths() {
+  return locales
+    .filter((l) => l !== 'en')
+    .map((l) => ({ params: { lang: l } }));
+}
+
+const { lang } = Astro.params;
+if (!isLocale(lang) || lang === 'en') throw new Error(`Unsupported locale: ${lang}`);
+const locale = lang as Locale;
+---
+<LearnLayout
+  title="English Connectors and Sentence Openers | SpeakPath"
+  description="The openers, linkers, and transition phrases that make your English sound natural and well-organized."
+  currentSlug="connectors"
+  locale={locale}
+>
+  <ConnectorsContent locale={locale} />
+</LearnLayout>

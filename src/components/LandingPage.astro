@@ -5,6 +5,7 @@ import Languages from './Languages.astro';
 import HowItWorks from './HowItWorks.astro';
 import Levels from './Levels.astro';
 import Features from './Features.astro';
+import WriteToSpeak from './WriteToSpeak.astro';
 import ComingSoon from './ComingSoon.astro';
 import CTA from './CTA.astro';
 import type { LocalizedPageCopy, Locale } from '../i18n/site';
@@ -23,6 +24,7 @@ const { locale, copy } = Astro.props;
   <HowItWorks copy={copy.howItWorks} />
   <Levels copy={copy.levels} />
   <Features copy={copy.features} />
+  <WriteToSpeak copy={copy.writeToSpeak} locale={locale} />
   <ComingSoon copy={copy.comingSoon} />
   <CTA copy={copy.cta} />
 </Base>

@@ -1,0 +1,23 @@
+---
+import LearnLayout from '../../../../layouts/LearnLayout.astro';
+import EssayTemplateContent from '../../../../components/learn/EssayTemplateContent.astro';
+import { locales, isLocale, type Locale } from '../../../../i18n/site';
+
+export function getStaticPaths() {
+  return locales
+    .filter((l) => l !== 'en')
+    .map((l) => ({ params: { lang: l } }));
+}
+
+const { lang } = Astro.params;
+if (!isLocale(lang) || lang === 'en') throw new Error(`Unsupported locale: ${lang}`);
+const locale = lang as Locale;
+---
+<LearnLayout
+  title="English Essay Template — Write Better to Speak Better | SpeakPath"
+  description="A clear essay structure that becomes a speech structure. Learn to organize your ideas on paper so they flow naturally when you speak."
+  currentSlug="essay-template"
+  locale={locale}
+>
+  <EssayTemplateContent locale={locale} />
+</LearnLayout>

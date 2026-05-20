@@ -1,38 +1,50 @@
-# SpeakPath — Landing Page Content
-
-Copy and structure ready to hand off to a designer or drop into any builder (Astro, Webflow, Framer, etc.).
-
+---
+date: 2026-04-05
+last-reviewed: 2026-05-18
+status: promoted
+roadmap: speakpath-landing-content-sections
+tags: [copy, content, landing-page]
 ---
 
-## Section 1: Hero
+# SpeakPath — Landing Page Content
+
+## Summary
+
+Copy and section structure for the entire SpeakPath landing page: hero, languages, how it
+works, levels, features, coming soon, and CTA footer. Includes design direction (palette,
+typography, motion, tone). Ready to hand off to a designer or drop into any site builder.
+
+## Details
+
+### Section 1 — Hero
 
 **Headline:** Speak. Learn. Improve.
 
-**Subheadline:** Practice real conversations in English, Spanish, French, or German — with an AI that listens, responds, and helps you grow.
+**Subheadline:** Practice real conversations in English, Spanish, French, or German — with
+an AI that listens, responds, and helps you grow.
 
-**CTA button:** Start Practicing Free →  
-**CTA destination:** app.speakpath.com
+**CTA:** Start Practicing Free → `app.speakpath.dev`
 
-**Visual:** Animated waveform or subtle looping audio visualization to convey voice interaction.
+**Visual:** Animated waveform or subtle looping audio visualization.
 
 ---
 
-## Section 2: Languages
+### Section 2 — Languages
 
 **Heading:** Pick Your Language
 
-| Flag | Language | Tagline |
-|---|---|---|
-| 🇺🇸 | English | The world's business language |
-| 🇪🇸 | Spanish | 500 million native speakers |
-| 🇫🇷 | French | Romance, culture, opportunity |
-| 🇩🇪 | German | Precision, science, career growth |
+| Language | Tagline |
+|---|---|
+| English | The world's business language |
+| Spanish | 500 million native speakers |
+| French | Romance, culture, opportunity |
+| German | Precision, science, career growth |
 
-**Footer note:** More languages coming soon.
+Footer note: More languages coming soon.
 
 ---
 
-## Section 3: How It Works
+### Section 3 — How It Works
 
 **Heading:** As easy as having a conversation
 
@@ -42,7 +54,7 @@ Copy and structure ready to hand off to a designer or drop into any builder (Ast
 
 ---
 
-## Section 4: Conversation Levels
+### Section 4 — Conversation Levels
 
 **Heading:** Your pace. Your level.
 
@@ -52,16 +64,16 @@ Copy and structure ready to hand off to a designer or drop into any builder (Ast
 | Intermediate | Flowing dialogue. Wider vocabulary. |
 | Advanced | Nuanced discussion. Idiomatic language. |
 
-**Note:** Levels adjust difficulty, vocabulary complexity, and AI response depth automatically.
+Levels adjust difficulty, vocabulary complexity, and AI response depth automatically.
 
 ---
 
-## Section 5: Key Features
+### Section 5 — Key Features
 
 **Heading:** Built for real improvement
 
 - **Voice-first** — No typing. Speak and be heard.
-- **Real-time AI responses** — Natural back-and-forth conversation, not scripted drills.
+- **Real-time AI responses** — Natural back-and-forth, not scripted drills.
 - **Grammar analysis** — Session summary highlights what to work on.
 - **Multi-language** — Switch languages anytime.
 - **No downloads** — Runs in your browser.
@@ -69,7 +81,7 @@ Copy and structure ready to hand off to a designer or drop into any builder (Ast
 
 ---
 
-## Section 6: What's Coming
+### Section 6 — Coming Soon
 
 **Heading:** This is just the beginning
 
@@ -82,23 +94,28 @@ Copy and structure ready to hand off to a designer or drop into any builder (Ast
 
 ---
 
-## Section 7: CTA / Footer
+### Section 7 — CTA / Footer
 
 **Heading:** Ready to start speaking?
 
 **Subtext:** No credit card. No setup. Just open it and talk.
 
-**Button:** Try SpeakPath Free →  
-**Button destination:** app.speakpath.com
+**Button:** Try SpeakPath Free → `app.speakpath.dev`
 
 **Footer links:** Privacy · Contact · GitHub
 
 ---
 
-## Design Direction
+### Design direction
 
-- **Palette:** Deep navy + electric teal accent — trust, tech, energy
-- **Typography:** Inter or Plus Jakarta Sans (clean sans-serif)
+- **Palette:** Deep navy + electric teal accent
+- **Typography:** Inter or Plus Jakarta Sans
 - **Motion:** Waveform animation on hero, hover states on cards. No autoplay video.
 - **Tone:** Direct, encouraging, human. Not corporate.
-- **Mobile-first layout**
+- **Layout:** Mobile-first
+
+## Open Questions
+
+## Next Step
+
+Promote to roadmap

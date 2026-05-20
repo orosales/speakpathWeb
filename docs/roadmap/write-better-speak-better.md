@@ -1,7 +1,7 @@
 ---
-status: proposal
+status: completed
 created: 2026-05-04
-completed:
+completed: 2026-05-19
 depends-on: []
 ---
 
@@ -50,7 +50,7 @@ No links from the feedback panel to external content exist today.
 
 ### Landing page
 
-- A new **"Write Better to Speak Better"** section on the homepage acts as the entry point
+- A new **"Build Your Speaking Foundation"** section on the homepage acts as the entry point
   to the theory content, with a CTA pointing to `/learn/english`.
 - Seven new pages under `/learn/english/*` covering the full learning path:
 
@@ -132,11 +132,16 @@ can be placeholder text — the structure ships first.
 
 - **File:** `src/components/LandingPage.astro`
 - **Change:** Add a new `<WriteToSpeak />` section between `Features` and `ComingSoon`.
-  Section includes a heading ("Write Better to Speak Better"), 2–3 line explanation of the
+  Section includes a heading ("Build Your Speaking Foundation"), 2–3 line explanation of the
   methodology, and a CTA button: "Explore the Foundation →" linking to `/learn/english`.
 
 - **File:** `src/components/WriteToSpeak.astro` *(new)*
 - **Change:** The section component itself, styled consistently with the landing page.
+- **Note (fixed 2026-05-06):** Original implementation had all text hardcoded in English.
+  Fixed by adding `writeToSpeak` to `LocalizedPageCopy` interface, adding translations for
+  all 5 locales (en/es/fr/de/pt) in `site.ts`, converting the component to accept a `copy`
+  prop, and passing `copy.writeToSpeak` from `LandingPage.astro`. CTA href also corrected
+  from `/learn/english` to `/learn/` (the locale-aware picker).
 
 ---
 
@@ -164,6 +169,12 @@ For each of the 6 topic pages, the content follows this structure:
 
 - 2–3 paragraphs explaining the "write to speak" methodology from personal experience.
 - Should feel like advice from a mentor, not marketing copy.
+- **Messaging direction (revised 2026-05-17):** Speaking in real conversations is the goal
+  and the most important skill — SpeakPath exists for exactly that. Writing and grammar study
+  are the accelerator, not the destination. The framing must never imply that speaking less is
+  better than speaking more. Pattern: (1) real fluency = speaking naturally → that is what
+  SpeakPath is for; (2) writing builds patterns that come out automatically when you speak;
+  (3) use both together — study here, then practice speaking in SpeakPath.
 
 ---
 
@@ -215,7 +226,7 @@ export function getTheoryUrl(category: string, baseUrl: string): string | null {
 
 #### 4.1 — End-to-end verification
 
-- Visit `speakpath.dev` → click "Write Better to Speak Better" → navigate all 6 theory
+- Visit `speakpath.dev` → click "Build Your Speaking Foundation" → navigate all 6 theory
   pages using sidebar and prev/next → click "Practice Speaking" → land on `app.speakpath.dev`
 - Complete an English session in the app → open Grammar Report → verify persistent issues
   show theory links → click a link → opens correct theory page in new tab
@@ -289,7 +300,7 @@ export function getTheoryUrl(category: string, baseUrl: string): string | null {
 1. `speakpath.dev/learn/english` loads and displays the personal story intro and 6-step overview
 2. All 6 topic pages load with content, correct sidebar navigation, and working prev/next buttons
 3. "Practice Speaking →" on any theory page opens `https://app.speakpath.dev` in a new tab
-4. "Write Better to Speak Better" section is visible on the speakpath.dev homepage with a working CTA
+4. "Build Your Speaking Foundation" section is visible on the speakpath.dev homepage with a working CTA
 5. After an English session in the app, persistent grammar issues with a mapped category show a "Study this topic →" link
 6. Clicking a theory link from the app opens the correct speakpath.dev page in a new tab
 7. No theory links appear after a Spanish, French, or German session

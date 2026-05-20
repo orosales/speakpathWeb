@@ -1,0 +1,366 @@
+---
+interface Props {
+  locale?: string;
+}
+const { locale = 'en' } = Astro.props;
+type SupportedLocale = 'en' | 'es' | 'fr' | 'de' | 'pt';
+
+const currentLocale: SupportedLocale = ['en', 'es', 'fr', 'de', 'pt'].includes(locale)
+  ? (locale as SupportedLocale)
+  : 'en';
+
+const localizedCopy = {
+  en: {
+    title: 'Key Verbs',
+    intro: 'You do not need 5,000 words to speak English well. You need the right 30 verbs used correctly, in the right patterns, at the right moment. Here they are.',
+    coreVerbsTitle: 'The Core Verbs',
+    makeVsDoTitle: 'make vs. do — the classic confusion',
+    makeLabel: 'Use make for...',
+    doLabel: 'Use do for...',
+    makeDoNote: '"make" produces something (a result, an object, a feeling). "do" performs an activity.',
+    makeDoNotePrefix: 'Rule of thumb:',
+    stativeTitle: 'Verbs that don\'t use -ing (Stative Verbs)',
+    stativeDesc: 'These verbs describe states, not actions. They are not normally used in continuous tenses.',
+    whyTitle: 'Why this helps your speaking',
+    whyBody: 'In real conversations, 80% of what you say relies on fewer than 50 verbs. When you know the natural patterns around "get", "make", "do", and "take", you stop searching for the perfect word and start speaking. Write five sentences using each of these verbs in different tenses this week — then listen for them when you speak in the app.',
+  },
+  es: {
+    title: 'Verbos clave',
+    intro: 'No necesitas 5.000 palabras para hablar bien inglés. Necesitas los 30 verbos correctos, usados bien, en los patrones adecuados, en el momento preciso. Aquí están.',
+    coreVerbsTitle: 'Los verbos principales',
+    makeVsDoTitle: 'make vs. do — la confusión clásica',
+    makeLabel: 'Usa make para...',
+    doLabel: 'Usa do para...',
+    makeDoNote: '"make" produce algo (un resultado, un objeto, un sentimiento). "do" realiza una actividad.',
+    makeDoNotePrefix: 'Regla básica:',
+    stativeTitle: 'Verbos que no usan -ing (verbos estativos)',
+    stativeDesc: 'Estos verbos describen estados, no acciones. Normalmente no se usan en tiempos continuos.',
+    whyTitle: 'Por qué esto ayuda a hablar',
+    whyBody: 'En conversaciones reales, el 80% de lo que dices se basa en menos de 50 verbos. Cuando conoces los patrones naturales de "get", "make", "do" y "take", dejas de buscar la palabra perfecta y empiezas a hablar. Escribe cinco oraciones usando cada uno de estos verbos en tiempos distintos esta semana; luego escúchalos cuando hables en la app.',
+  },
+  fr: {
+    title: 'Verbes clés',
+    intro: 'Vous n\'avez pas besoin de 5 000 mots pour bien parler anglais. Il vous faut les 30 bons verbes, utilisés correctement, dans les bons schémas, au bon moment. Les voici.',
+    coreVerbsTitle: 'Les verbes fondamentaux',
+    makeVsDoTitle: 'make vs. do — la confusion classique',
+    makeLabel: 'Utilisez make pour...',
+    doLabel: 'Utilisez do pour...',
+    makeDoNote: '"make" produit quelque chose (un résultat, un objet, un sentiment). "do" réalise une activité.',
+    makeDoNotePrefix: 'Règle générale :',
+    stativeTitle: 'Verbes qui ne prennent pas -ing (verbes d\'état)',
+    stativeDesc: 'Ces verbes décrivent des états, pas des actions. Ils ne s\'utilisent normalement pas aux temps progressifs.',
+    whyTitle: 'Pourquoi cela aide à parler',
+    whyBody: 'Dans les conversations réelles, 80 % de ce que vous dites repose sur moins de 50 verbes. Quand vous connaissez les schémas naturels autour de "get", "make", "do" et "take", vous arrêtez de chercher le mot parfait et commencez à parler. Écrivez cinq phrases avec chacun de ces verbes à des temps différents cette semaine — puis écoutez-les quand vous parlez dans l\'application.',
+  },
+  de: {
+    title: 'Schlüsselverben',
+    intro: 'Du brauchst keine 5.000 Wörter, um gut Englisch zu sprechen. Du brauchst die richtigen 30 Verben, korrekt eingesetzt, in den richtigen Mustern, im richtigen Moment. Hier sind sie.',
+    coreVerbsTitle: 'Die Kernverben',
+    makeVsDoTitle: 'make vs. do — die klassische Verwechslung',
+    makeLabel: 'Verwende make für...',
+    doLabel: 'Verwende do für...',
+    makeDoNote: '"make" erzeugt etwas (ein Ergebnis, ein Objekt, ein Gefühl). "do" führt eine Aktivität aus.',
+    makeDoNotePrefix: 'Faustregel:',
+    stativeTitle: 'Verben ohne -ing (Zustandsverben)',
+    stativeDesc: 'Diese Verben beschreiben Zustände, keine Handlungen. Sie werden normalerweise nicht in Verlaufszeiten verwendet.',
+    whyTitle: 'Warum das beim Sprechen hilft',
+    whyBody: 'In echten Gesprächen basiert 80 % dessen, was du sagst, auf weniger als 50 Verben. Wenn du die natürlichen Muster rund um "get", "make", "do" und "take" kennst, hörst du auf, nach dem perfekten Wort zu suchen, und fängst einfach an zu sprechen. Schreibe diese Woche fünf Sätze mit jedem dieser Verben in verschiedenen Zeiten — und achte dann darauf, wenn du sie in der App verwendest.',
+  },
+  pt: {
+    title: 'Verbos essenciais',
+    intro: 'Você não precisa de 5.000 palavras para falar inglês bem. Você precisa dos 30 verbos certos, usados corretamente, nos padrões certos, no momento certo. Aqui estão.',
+    coreVerbsTitle: 'Os verbos principais',
+    makeVsDoTitle: 'make vs. do — a confusão clássica',
+    makeLabel: 'Use make para...',
+    doLabel: 'Use do para...',
+    makeDoNote: '"make" produz algo (um resultado, um objeto, um sentimento). "do" realiza uma atividade.',
+    makeDoNotePrefix: 'Regra geral:',
+    stativeTitle: 'Verbos que não usam -ing (verbos estativos)',
+    stativeDesc: 'Esses verbos descrevem estados, não ações. Normalmente não são usados em tempos contínuos.',
+    whyTitle: 'Por que isso ajuda a falar',
+    whyBody: 'Em conversas reais, 80% do que você diz depende de menos de 50 verbos. Quando você conhece os padrões naturais de "get", "make", "do" e "take", para de procurar a palavra perfeita e começa a falar. Escreva cinco frases usando cada um desses verbos em tempos diferentes esta semana — depois preste atenção neles quando falar no app.',
+  },
+};
+
+const copy = localizedCopy[currentLocale];
+
+type VerbNote = { en: string; es: string; fr: string; de: string; pt: string };
+
+const verbs: { verb: string; patterns: string[]; note: VerbNote }[] = [
+  {
+    verb: 'be',
+    patterns: ['I am tired.', 'It was a long day.', 'She is a teacher.'],
+    note: {
+      en: 'Used to describe states and identities. The most irregular verb in English.',
+      es: 'Se usa para describir estados e identidades. Es el verbo más irregular del inglés.',
+      fr: 'Utilisé pour décrire des états et des identités. C\'est le verbe le plus irrégulier en anglais.',
+      de: 'Wird verwendet, um Zustände und Identitäten zu beschreiben. Das unregelmäßigste Verb im Englischen.',
+      pt: 'Usado para descrever estados e identidades. O verbo mais irregular do inglês.',
+    },
+  },
+  {
+    verb: 'have',
+    patterns: ['I have a question.', 'She has been working all day.', 'We had a great time.'],
+    note: {
+      en: 'Both a main verb (possession) and an auxiliary verb (perfect tenses).',
+      es: 'Tanto verbo principal (posesión) como auxiliar (tiempos perfectos).',
+      fr: 'À la fois verbe principal (possession) et auxiliaire (temps parfaits).',
+      de: 'Sowohl Hauptverb (Besitz) als auch Hilfsverb (Perfektzeiten).',
+      pt: 'Tanto verbo principal (posse) quanto auxiliar (tempos perfeitos).',
+    },
+  },
+  {
+    verb: 'do',
+    patterns: ['I do yoga every morning.', 'Do you understand?', "I don't think so."],
+    note: {
+      en: 'Also the main auxiliary for questions and negatives in present/past simple.',
+      es: 'También es el auxiliar principal para preguntas y negaciones en presente/pasado simple.',
+      fr: 'C\'est aussi l\'auxiliaire principal pour les questions et négations au présent/passé simple.',
+      de: 'Auch das Haupthilfsverb für Fragen und Verneinungen im Simple Present/Past.',
+      pt: 'Também é o auxiliar principal para perguntas e negativas no presente/passado simples.',
+    },
+  },
+  {
+    verb: 'get',
+    patterns: ['I get it now.', 'She got home late.', 'Can I get a coffee?', 'Things will get better.'],
+    note: {
+      en: 'One of the most versatile verbs — means receive, understand, arrive, or become.',
+      es: 'Uno de los verbos más versátiles: significa recibir, entender, llegar o convertirse.',
+      fr: 'L\'un des verbes les plus polyvalents — signifie recevoir, comprendre, arriver ou devenir.',
+      de: 'Eines der vielseitigsten Verben — bedeutet empfangen, verstehen, ankommen oder werden.',
+      pt: 'Um dos verbos mais versáteis — significa receber, entender, chegar ou tornar-se.',
+    },
+  },
+  {
+    verb: 'make',
+    patterns: ['She made a decision.', 'He makes me laugh.', 'I made a mistake.'],
+    note: {
+      en: '"Make" focuses on creating or producing a result. Contrast with "do" (activities).',
+      es: '"Make" se enfoca en crear o producir un resultado. Contrasta con "do" (actividades).',
+      fr: '"Make" porte sur la création ou la production d\'un résultat. À distinguer de "do" (activités).',
+      de: '"Make" konzentriert sich auf das Erschaffen oder Erzeugen eines Ergebnisses. Kontrast zu "do" (Aktivitäten).',
+      pt: '"Make" foca em criar ou produzir um resultado. Contrasta com "do" (atividades).',
+    },
+  },
+  {
+    verb: 'go',
+    patterns: ["Let's go.", 'How did it go?', 'Things are going well.'],
+    note: {
+      en: 'Used for movement, progress, and how events unfold.',
+      es: 'Se usa para movimiento, progreso y cómo se desarrollan los eventos.',
+      fr: 'Utilisé pour le mouvement, la progression et le déroulement des événements.',
+      de: 'Wird für Bewegung, Fortschritt und den Ablauf von Ereignissen verwendet.',
+      pt: 'Usado para movimento, progresso e como os eventos se desenrolam.',
+    },
+  },
+  {
+    verb: 'think',
+    patterns: ['I think so.', 'What do you think?', 'I was thinking about it.'],
+    note: {
+      en: 'Essential for expressing opinions. "I think" is how native speakers soften statements.',
+      es: 'Esencial para expresar opiniones. "I think" es como los nativos suavizan sus afirmaciones.',
+      fr: 'Indispensable pour exprimer des opinions. "I think" est la façon dont les natifs adoucissent leurs affirmations.',
+      de: 'Unverzichtbar zum Ausdrücken von Meinungen. "I think" ist die Art, wie Muttersprachler Aussagen abschwächen.',
+      pt: 'Essencial para expressar opiniões. "I think" é como os falantes nativos suavizam afirmações.',
+    },
+  },
+  {
+    verb: 'know',
+    patterns: ['I know.', 'Do you know what I mean?', 'She knows the answer.'],
+    note: {
+      en: 'Not used in continuous: say "I know" not "I am knowing".',
+      es: 'No se usa en continuo: di "I know", no "I am knowing".',
+      fr: 'Ne s\'utilise pas à la forme progressive : dites "I know", pas "I am knowing".',
+      de: 'Wird nicht in der Verlaufsform verwendet: Sag "I know", nicht "I am knowing".',
+      pt: 'Não se usa na forma contínua: diga "I know", não "I am knowing".',
+    },
+  },
+  {
+    verb: 'come',
+    patterns: ['Come in.', 'It came as a surprise.', 'Where does this come from?'],
+    note: {
+      en: 'Used for movement toward the speaker (opposite of "go").',
+      es: 'Se usa para movimiento hacia el hablante (opuesto de "go").',
+      fr: 'Utilisé pour un mouvement vers le locuteur (opposé de "go").',
+      de: 'Wird für Bewegung in Richtung des Sprechers verwendet (Gegenteil von "go").',
+      pt: 'Usado para movimento em direção ao falante (oposto de "go").',
+    },
+  },
+  {
+    verb: 'take',
+    patterns: ['It takes time.', 'Take a look at this.', 'She took notes.'],
+    note: {
+      en: 'Frequently used in set expressions: take a break, take part, take care.',
+      es: 'Se usa frecuentemente en expresiones fijas: take a break, take part, take care.',
+      fr: 'Fréquemment utilisé dans des expressions figées : take a break, take part, take care.',
+      de: 'Häufig in festen Ausdrücken: take a break, take part, take care.',
+      pt: 'Frequentemente usado em expressões fixas: take a break, take part, take care.',
+    },
+  },
+  {
+    verb: 'give',
+    patterns: ['Give me a second.', 'She gave a presentation.', 'He gave up.'],
+    note: {
+      en: 'Often used in phrasal verbs (give up, give in, give away).',
+      es: 'Se usa a menudo en verbos frasales (give up, give in, give away).',
+      fr: 'Souvent utilisé dans des verbes à particule (give up, give in, give away).',
+      de: 'Häufig in Phrasal Verbs (give up, give in, give away).',
+      pt: 'Frequentemente usado em verbos frasais (give up, give in, give away).',
+    },
+  },
+  {
+    verb: 'say / tell',
+    patterns: ['She said hello.', 'He told me to wait.', 'What did you say?'],
+    note: {
+      en: '"Say" is used alone or with "that". "Tell" always needs a person object (tell me, tell him).',
+      es: '"Say" se usa solo o con "that". "Tell" siempre necesita un objeto persona (tell me, tell him).',
+      fr: '"Say" s\'utilise seul ou avec "that". "Tell" nécessite toujours un objet personne (tell me, tell him).',
+      de: '"Say" wird allein oder mit "that" verwendet. "Tell" braucht immer ein Personenobjekt (tell me, tell him).',
+      pt: '"Say" é usado sozinho ou com "that". "Tell" sempre precisa de um objeto pessoa (tell me, tell him).',
+    },
+  },
+  {
+    verb: 'want',
+    patterns: ['I want to improve.', 'What do you want?', 'She wanted more time.'],
+    note: {
+      en: 'Not normally used in continuous. Say "I want" not "I am wanting".',
+      es: 'Normalmente no se usa en continuo. Di "I want", no "I am wanting".',
+      fr: 'Normalement, ne s\'utilise pas à la forme progressive. Dites "I want", pas "I am wanting".',
+      de: 'Wird normalerweise nicht in der Verlaufsform verwendet. Sag "I want", nicht "I am wanting".',
+      pt: 'Normalmente não se usa na forma contínua. Diga "I want", não "I am wanting".',
+    },
+  },
+  {
+    verb: 'look',
+    patterns: ['It looks good.', 'Look at this.', "I'm looking for my keys."],
+    note: {
+      en: '"Look + adjective" describes appearance. "Look at" means direct your eyes. "Look for" means search.',
+      es: '"Look + adjetivo" describe apariencia. "Look at" significa dirigir la mirada. "Look for" significa buscar.',
+      fr: '"Look + adjectif" décrit l\'apparence. "Look at" signifie diriger les yeux. "Look for" signifie chercher.',
+      de: '"Look + Adjektiv" beschreibt das Erscheinungsbild. "Look at" bedeutet die Augen richten. "Look for" bedeutet suchen.',
+      pt: '"Look + adjetivo" descreve aparência. "Look at" significa direcionar o olhar. "Look for" significa procurar.',
+    },
+  },
+  {
+    verb: 'feel',
+    patterns: ['I feel great.', 'How do you feel?', 'It feels strange.'],
+    note: {
+      en: 'Used for emotions and physical sensations. Often followed by an adjective.',
+      es: 'Se usa para emociones y sensaciones físicas. A menudo va seguido de un adjetivo.',
+      fr: 'Utilisé pour les émotions et les sensations physiques. Souvent suivi d\'un adjectif.',
+      de: 'Wird für Gefühle und körperliche Empfindungen verwendet. Oft gefolgt von einem Adjektiv.',
+      pt: 'Usado para emoções e sensações físicas. Muitas vezes seguido de um adjetivo.',
+    },
+  },
+];
+
+const getNote = (note: VerbNote) => note[currentLocale];
+---
+
+<h1 class="font-headline text-3xl md:text-4xl font-bold tracking-display text-on-surface mb-3">
+  {copy.title}
+</h1>
+<p class="text-on-surface-variant text-lg leading-relaxed mb-10 max-w-2xl">
+  {copy.intro}
+</p>
+
+<!-- High-frequency verbs -->
+<section class="mb-12">
+  <h2 class="font-headline text-xl font-bold text-on-surface mb-6 flex items-center gap-2">
+    <span class="material-symbols-outlined text-primary" style="font-size:22px">bolt</span>
+    {copy.coreVerbsTitle}
+  </h2>
+  <div class="space-y-4">
+    {verbs.map((item) => (
+      <div class="p-5 rounded-2xl bg-surface-container border border-outline-variant/15">
+        <div class="flex items-start gap-3 mb-3">
+          <span class="text-primary font-bold font-headline text-base bg-primary/10 px-2.5 py-1 rounded-lg shrink-0">
+            {item.verb}
+          </span>
+          <p class="text-on-surface-variant text-sm leading-relaxed">{getNote(item.note)}</p>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          {item.patterns.map((p) => (
+            <span class="text-sm text-on-surface bg-surface-container-high px-3 py-1.5 rounded-lg italic">
+              "{p}"
+            </span>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<!-- Make vs Do -->
+<section class="mb-12">
+  <h2 class="font-headline text-xl font-bold text-on-surface mb-6 flex items-center gap-2">
+    <span class="material-symbols-outlined text-primary" style="font-size:22px">compare_arrows</span>
+    {copy.makeVsDoTitle}
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="p-5 rounded-2xl bg-surface-container border border-outline-variant/15">
+      <h3 class="font-headline font-semibold text-primary mb-3">{copy.makeLabel}</h3>
+      <ul class="space-y-1.5 text-sm text-on-surface-variant">
+        {['make a decision', 'make a mistake', 'make progress', 'make a plan', 'make an effort', 'make a suggestion', 'make a difference', 'make money'].map(e => (
+          <li class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+            {e}
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div class="p-5 rounded-2xl bg-surface-container border border-outline-variant/15">
+      <h3 class="font-headline font-semibold text-tertiary mb-3">{copy.doLabel}</h3>
+      <ul class="space-y-1.5 text-sm text-on-surface-variant">
+        {['do homework', 'do the dishes', 'do research', 'do exercise', 'do your best', 'do a favor', 'do the right thing', 'do nothing'].map(e => (
+          <li class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-tertiary shrink-0" />
+            {e}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+  <p class="text-on-surface-variant text-sm mt-3 italic">
+    <strong class="text-on-surface not-italic">{copy.makeDoNotePrefix}</strong> {copy.makeDoNote}
+  </p>
+</section>
+
+<!-- Stative verbs -->
+<section class="mb-12">
+  <h2 class="font-headline text-xl font-bold text-on-surface mb-6 flex items-center gap-2">
+    <span class="material-symbols-outlined text-primary" style="font-size:22px">block</span>
+    {copy.stativeTitle}
+  </h2>
+  <p class="text-on-surface-variant text-sm mb-4 leading-relaxed">
+    {copy.stativeDesc}
+  </p>
+  <div class="flex flex-wrap gap-2">
+    {['know', 'think (opinion)', 'believe', 'understand', 'want', 'need', 'love', 'hate', 'prefer', 'seem', 'appear', 'remember', 'forget', 'own', 'belong', 'contain'].map(v => (
+      <span class="px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/20 text-sm text-on-surface-variant font-medium">
+        {v}
+      </span>
+    ))}
+  </div>
+  <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+    <div class="p-4 rounded-xl bg-error/5 border border-error/20 text-sm">
+      <span class="text-error font-bold">✗</span>
+      <span class="text-on-surface-variant ml-2 line-through">I am knowing the answer.</span>
+    </div>
+    <div class="p-4 rounded-xl bg-primary/5 border border-primary/15 text-sm">
+      <span class="text-primary font-bold">✓</span>
+      <span class="text-on-surface ml-2">I know the answer.</span>
+    </div>
+  </div>
+</section>
+
+<!-- Why it helps -->
+<section class="p-6 rounded-2xl bg-primary/5 border border-primary/15">
+  <h3 class="font-headline font-semibold text-primary mb-2 flex items-center gap-2">
+    <span class="material-symbols-outlined" style="font-size:18px">record_voice_over</span>
+    {copy.whyTitle}
+  </h3>
+  <p class="text-on-surface-variant leading-relaxed text-sm">
+    {copy.whyBody}
+  </p>
+</section>

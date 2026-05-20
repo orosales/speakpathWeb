@@ -7,12 +7,15 @@ interface Props {
   description?: string;
   locale?: Locale;
   ogLocale?: string;
+  includeLanguageAlternates?: boolean;
+  languageAlternatePath?: string;
   nav?: {
     signIn: string;
     languageSwitcherLabel: string;
   };
   footer?: {
     tagline: string;
+    faq?: string;
     privacy: string;
     contact: string;
   };
@@ -23,12 +26,15 @@ const {
   description = 'Practice real conversations in English, Spanish, French, or German with an AI that listens, responds, and helps you grow. Start free, no download needed.',
   locale      = defaultLocale,
   ogLocale    = 'en_US',
+  includeLanguageAlternates = true,
+  languageAlternatePath,
   nav = {
     signIn: 'Sign In',
     languageSwitcherLabel: 'Choose site language',
   },
   footer = {
     tagline: 'Precision Audio Engineering for Fluency.',
+    faq: 'FAQ',
     privacy: 'Privacy',
     contact: 'Contact',
   },
@@ -36,11 +42,25 @@ const {
 
 const appName = 'SpeakPath';
 const siteUrl = (Astro.site?.href ?? 'https://speakpath.dev').replace(/\/$/, '');
+
+function getLocalizedRoute(localeCode: Locale, path?: string): string {
+  if (!path) return getLocalizedPath(localeCode);
+
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+  const routePath = normalizedPath.endsWith('/') ? normalizedPath : `${normalizedPath}/`;
+  return localeCode === defaultLocale ? routePath : `/${localeCode}${routePath}`;
+}
+
 const languageLinks = locales.map((code) => ({
   ...localeLabels[code],
   code,
-  href: getLocalizedPath(code),
+  href: getLocalizedRoute(code, languageAlternatePath),
 }));
+
+const xDefaultHref = languageAlternatePath
+  ? `${siteUrl}${getLocalizedRoute(defaultLocale, languageAlternatePath)}`
+  : siteUrl;
+const localizedFaqHref = getLocalizedRoute(locale, '/faq/');
 ---
 
 <!doctype html>
@@ -52,6 +72,11 @@ const languageLinks = locales.map((code) => ({
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#010e24" />
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
     <!-- Canonical URL -->
     <link rel="canonical" href={Astro.url.href} />
@@ -73,14 +98,14 @@ const languageLinks = locales.map((code) => ({
         <meta property="og:locale:alternate" content={localeOgLocales[code]} />
       ))}
 
-    {languageLinks.map((link) => (
+    {includeLanguageAlternates && languageLinks.map((link) => (
       <link
         rel="alternate"
         hreflang={link.code}
         href={`${siteUrl}${link.href === '/' ? '' : link.href}`}
       />
     ))}
-    <link rel="alternate" hreflang="x-default" href={siteUrl} />
+    {includeLanguageAlternates && <link rel="alternate" hreflang="x-default" href={xDefaultHref} />}
 
     <!-- Twitter / X Card -->
     <meta name="twitter:card"        content="summary_large_image" />
@@ -157,10 +182,18 @@ const languageLinks = locales.map((code) => ({
       "sameAs": []
     })} />
 
-    <!-- Material Symbols (icons only — acceptable CDN dependency) -->
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T4CNRLSJ9G"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-T4CNRLSJ9G');
+    </script>
+
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block"
     />
   </head>
 
@@ -247,6 +280,9 @@ const languageLinks = locales.map((code) => ({
           </p>
         </div>
         <div class="flex gap-8">
+          <a href={localizedFaqHref} class="text-on-surface-variant text-sm font-label hover:text-tertiary underline-offset-4 hover:underline transition-colors">
+            {footer.faq ?? 'FAQ'}
+          </a>
           <a href="/privacy" class="text-on-surface-variant text-sm font-label hover:text-tertiary underline-offset-4 hover:underline transition-colors">
             {footer.privacy}
           </a>

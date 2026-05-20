@@ -1,0 +1,23 @@
+---
+import LearnLayout from '../../../../layouts/LearnLayout.astro';
+import PhrasalVerbsContent from '../../../../components/learn/PhrasalVerbsContent.astro';
+import { locales, isLocale, type Locale } from '../../../../i18n/site';
+
+export function getStaticPaths() {
+  return locales
+    .filter((l) => l !== 'en')
+    .map((l) => ({ params: { lang: l } }));
+}
+
+const { lang } = Astro.params;
+if (!isLocale(lang) || lang === 'en') throw new Error(`Unsupported locale: ${lang}`);
+const locale = lang as Locale;
+---
+<LearnLayout
+  title="Common English Phrasal Verbs — Write Better to Speak Better | SpeakPath"
+  description="The phrasal verbs native speakers use constantly — with meanings and real examples for natural English conversation."
+  currentSlug="phrasal-verbs"
+  locale={locale}
+>
+  <PhrasalVerbsContent locale={locale} />
+</LearnLayout>

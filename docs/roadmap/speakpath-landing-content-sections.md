@@ -1,7 +1,7 @@
 ---
-status: draft
+status: completed
 created: 2026-04-05
-completed:
+completed: 2026-05-19
 depends-on: [speakpath-landing-scaffold]
 ---
 

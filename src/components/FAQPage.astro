@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../layouts/Base.astro';
+import type { LocalizedPageCopy, Locale } from '../i18n/site';
+
+interface Props {
+  locale: Locale;
+  copy: LocalizedPageCopy;
+}
+
+const { locale, copy } = Astro.props;
+const { faq } = copy;
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.items.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+};
+---
+
+<BaseLayout
+  title={faq.meta.title}
+  description={faq.meta.description}
+  locale={locale}
+  ogLocale={copy.meta.ogLocale}
+  nav={copy.nav}
+  footer={copy.footer}
+  languageAlternatePath="/faq/"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+
+  <section class="relative px-6 py-20 md:py-28 text-on-surface">
+    <div class="absolute inset-x-0 top-0 -z-10 h-72 bg-[radial-gradient(circle_at_50%_0%,rgba(28,196,185,0.18),transparent_62%)]"></div>
+
+    <div class="mx-auto max-w-4xl">
+      <div class="mb-14 max-w-3xl">
+        <p class="text-primary text-sm font-label uppercase tracking-widest mb-4">{faq.eyebrow}</p>
+        <h1 class="text-4xl md:text-6xl font-bold font-headline tracking-tight text-on-surface mb-6">
+          {faq.title}
+        </h1>
+        <p class="text-lg md:text-xl text-on-surface-variant leading-relaxed">
+          {faq.intro}
+        </p>
+      </div>
+
+      <div class="divide-y divide-outline-variant/20 rounded-2xl border border-outline-variant/20 bg-surface-container-low/60">
+        {faq.items.map((item) => (
+          <section class="p-6 md:p-8">
+            <h2 class="text-xl md:text-2xl font-semibold font-headline text-on-surface mb-3">
+              {item.question}
+            </h2>
+            <p class="text-on-surface-variant leading-relaxed">
+              {item.answer}
+            </p>
+          </section>
+        ))}
+      </div>
+
+      <div class="mt-12 flex flex-col sm:flex-row gap-4 sm:items-center">
+        <a
+          href={`https://app.speakpath.dev?utm_source=speakpath.dev&utm_medium=faq&utm_campaign=organic&utm_content=${locale}`}
+          class="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-surface transition-colors hover:bg-tertiary"
+        >
+          {faq.cta}
+        </a>
+        <a href={locale === 'en' ? '/' : `/${locale}/`} class="text-primary hover:underline underline-offset-4 text-sm font-medium">
+          {faq.back}
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
