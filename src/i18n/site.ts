@@ -320,6 +320,11 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
           title: 'Built-in feedback',
           body: 'Found a bug or have an idea? Click or tap the feedback button and the team sees it directly. We read everything.',
         },
+        {
+          icon: 'psychology',
+          title: 'Remembers you',
+          body: 'Your coach gets to know you over time — your goals, your habits, even what you enjoy talking about. No starting from scratch every session.',
+        },
       ],
     },
     comingSoon: {
@@ -617,6 +622,11 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
           icon: 'rate_review',
           title: 'Comentarios integrados',
           body: '¿Encontraste un error o tienes una idea? Toca el botón de comentarios y el equipo lo recibe directamente. Leemos todo.',
+        },
+        {
+          icon: 'psychology',
+          title: 'Te recuerda',
+          body: 'Tu coach te va conociendo con el tiempo — tus objetivos, tus hábitos e incluso de qué te gusta hablar. Sin empezar desde cero en cada sesión.',
         },
       ],
     },
@@ -917,6 +927,11 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
           title: 'Retours intégrés',
           body: 'Vous avez trouvé un bug ou une idée ? Appuyez sur le bouton de retour et l\'équipe le reçoit directement. Nous lisons tout.',
         },
+        {
+          icon: 'psychology',
+          title: 'Il se souvient de vous',
+          body: 'Votre coach apprend à vous connaître au fil du temps — vos objectifs, vos habitudes et même ce que vous aimez raconter. Plus besoin de tout recommencer à chaque session.',
+        },
       ],
     },
     comingSoon: {
@@ -1215,6 +1230,11 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
           title: 'Integriertes Feedback',
           body: 'Einen Fehler gefunden oder eine Idee? Tippe auf den Feedback-Button und das Team sieht es direkt. Wir lesen alles.',
         },
+        {
+          icon: 'psychology',
+          title: 'Erinnert sich an dich',
+          body: 'Dein Coach lernt dich mit der Zeit kennen — deine Ziele, deine Gewohnheiten und sogar, worüber du gerne sprichst. Kein Neustart mehr bei jeder Session.',
+        },
       ],
     },
     comingSoon: {
@@ -1512,6 +1532,11 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
           icon: 'rate_review',
           title: 'Feedback integrado',
           body: 'Encontrou um bug ou tem uma ideia? Toque no botão de feedback e a equipe vê diretamente. Lemos tudo.',
+        },
+        {
+          icon: 'psychology',
+          title: 'Lembra de você',
+          body: 'Seu coach vai te conhecendo ao longo do tempo — seus objetivos, seus hábitos e até do que você gosta de falar. Sem recomeçar do zero a cada sessão.',
         },
       ],
     },
