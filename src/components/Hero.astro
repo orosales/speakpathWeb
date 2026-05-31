@@ -60,25 +60,21 @@ const { copy } = Astro.props;
           style="background: radial-gradient(ellipse 70% 60% at 42% 40%, rgba(200,125,255,0.12) 0%, transparent 70%);"
         ></div>
 
-        <!-- Mascot image — no blend tricks needed; overlay handles edge blending -->
-        <img
-          src="/mascot-network.png"
-          alt="SpeakPath AI mascot"
-          class="block w-full h-auto"
-          style="position: relative; z-index: 1;"
-        />
+        <!-- Mascot image with transparent background -->
+        <picture style="position: relative; z-index: 1;">
+          <source srcset="/mascot-network-transparent.webp" type="image/webp" />
+          <img
+            src="/mascot-network-transparent.png"
+            alt="SpeakPath AI mascot"
+            class="block w-full h-auto"
+          />
+        </picture>
 
-        <!-- Gradient overlay: transparent at center → exact page bg colour at edges -->
-        <div
-          class="pointer-events-none absolute inset-0"
-          style="z-index: 2; background: radial-gradient(ellipse 78% 74% at 52% 47%, rgba(1,14,36,0.28) 0%, rgba(1,14,36,0.32) 35%, rgba(1,14,36,0.65) 58%, #010e24 74%);"
-        ></div>
-
-        <!-- Animated network canvas — floats above the gradient overlay -->
+        <!-- Animated network canvas — floats above the mascot -->
         <canvas
           id="neuro-graph"
           class="absolute inset-0 w-full h-full pointer-events-none"
-          style="z-index: 3; mix-blend-mode: screen;"
+          style="z-index: 2; mix-blend-mode: screen;"
           aria-hidden="true"
         ></canvas>
       </div>
