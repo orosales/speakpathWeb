@@ -200,7 +200,7 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
         bottom: 'Speak Better.',
       },
       description:
-        'Have a real AI conversation — no typing, no scripts. After each session, SpeakPath shows you the grammar mistakes you made and tells you exactly which topic to work on. Then you go back and speak again.',
+        'Master a language through real AI conversation practice — no typing, no scripts. SpeakPath builds your vocabulary, fluency, and confidence through live voice sessions in English, Spanish, French, or German. After each session it shows you the grammar mistakes you made and tells you exactly which topic to work on next.',
       cta: 'Start Practicing Free',
       note: 'No credit card. Get started in minutes.',
       companionEyebrow: 'AI Companion',
@@ -212,10 +212,10 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
       intro: 'Start where you are. Switch anytime.',
       moreSoon: 'More languages coming soon.',
       cards: [
-        { flag: '🇺🇸', name: 'English', label: 'Business', tagline: "The world's business language" },
-        { flag: '🇪🇸', name: 'Spanish', label: '500M', tagline: '500 million native speakers' },
-        { flag: '🇫🇷', name: 'French', label: 'Culture', tagline: 'Romance, culture, opportunity' },
-        { flag: '🇩🇪', name: 'German', label: 'Science', tagline: 'Precision, science, career growth' },
+        { flag: '/flags/us.svg', name: 'English', label: 'Business', tagline: "The world's business language" },
+        { flag: '/flags/es.svg', name: 'Spanish', label: '500M', tagline: '500 million native speakers' },
+        { flag: '/flags/fr.svg', name: 'French', label: 'Culture', tagline: 'Romance, culture, opportunity' },
+        { flag: '/flags/de.svg', name: 'German', label: 'Science', tagline: 'Precision, science, career growth' },
       ],
     },
     howItWorks: {
@@ -498,7 +498,7 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
         bottom: 'Habla mejor.',
       },
       description:
-        'Ten una conversación real con IA — sin escribir, sin guiones. Después de cada sesión, SpeakPath te muestra los errores gramaticales que cometiste y te indica exactamente en qué tema trabajar. Luego vuelves a hablar.',
+        'Domina un idioma con práctica real de conversación con IA — sin escribir, sin guiones. SpeakPath desarrolla tu vocabulario, fluidez y confianza en sesiones de voz en vivo en inglés, español, francés o alemán. Después de cada sesión te muestra los errores gramaticales que cometiste y te indica exactamente qué tema trabajar a continuación.',
       cta: 'Empieza gratis',
       note: 'Sin tarjeta. Empieza en minutos.',
       companionEyebrow: 'Compañero con IA',
@@ -510,10 +510,10 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
       intro: 'Empieza donde estés. Cambia cuando quieras.',
       moreSoon: 'Pronto habrá más idiomas.',
       cards: [
-        { flag: '🇺🇸', name: 'Inglés', label: 'Negocios', tagline: 'El idioma global de los negocios' },
-        { flag: '🇪🇸', name: 'Español', label: '500M', tagline: '500 millones de hablantes nativos' },
-        { flag: '🇫🇷', name: 'Francés', label: 'Cultura', tagline: 'Romance, cultura y oportunidad' },
-        { flag: '🇩🇪', name: 'Alemán', label: 'Ciencia', tagline: 'Precisión, ciencia y crecimiento profesional' },
+        { flag: '/flags/us.svg', name: 'Inglés', label: 'Negocios', tagline: 'El idioma global de los negocios' },
+        { flag: '/flags/es.svg', name: 'Español', label: '500M', tagline: '500 millones de hablantes nativos' },
+        { flag: '/flags/fr.svg', name: 'Francés', label: 'Cultura', tagline: 'Romance, cultura y oportunidad' },
+        { flag: '/flags/de.svg', name: 'Alemán', label: 'Ciencia', tagline: 'Precisión, ciencia y crecimiento profesional' },
       ],
     },
     howItWorks: {
@@ -797,7 +797,7 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
         bottom: 'Parlez mieux.',
       },
       description:
-        "Ayez une vraie conversation avec l'IA — sans clavier, sans script. Après chaque session, SpeakPath vous montre les erreurs grammaticales que vous avez commises et vous indique exactement quel sujet travailler. Puis vous reprenez la parole.",
+        "Maîtrisez une langue grâce à la pratique réelle de conversation avec l'IA — sans clavier, sans script. SpeakPath développe votre vocabulaire, votre fluidité et votre confiance lors de sessions vocales en direct en anglais, espagnol, français ou allemand. Après chaque session, il vous montre les erreurs grammaticales commises et vous indique exactement quel sujet travailler ensuite.",
       cta: 'Commencer gratuitement',
       note: 'Sans carte bancaire. Commencez en quelques minutes.',
       companionEyebrow: 'Compagnon IA',
@@ -809,10 +809,10 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
       intro: 'Commencez où vous en êtes. Changez à tout moment.',
       moreSoon: 'D\'autres langues arrivent bientôt.',
       cards: [
-        { flag: '🇺🇸', name: 'Anglais', label: 'Business', tagline: 'La langue mondiale des affaires' },
-        { flag: '🇪🇸', name: 'Espagnol', label: '500M', tagline: '500 millions de locuteurs natifs' },
-        { flag: '🇫🇷', name: 'Français', label: 'Culture', tagline: 'Romance, culture et opportunité' },
-        { flag: '🇩🇪', name: 'Allemand', label: 'Science', tagline: 'Précision, science et évolution de carrière' },
+        { flag: '/flags/us.svg', name: 'Anglais', label: 'Business', tagline: 'La langue mondiale des affaires' },
+        { flag: '/flags/es.svg', name: 'Espagnol', label: '500M', tagline: '500 millions de locuteurs natifs' },
+        { flag: '/flags/fr.svg', name: 'Français', label: 'Culture', tagline: 'Romance, culture et opportunité' },
+        { flag: '/flags/de.svg', name: 'Allemand', label: 'Science', tagline: 'Précision, science et évolution de carrière' },
       ],
     },
     howItWorks: {
@@ -1095,7 +1095,7 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
         bottom: 'Sprich besser.',
       },
       description:
-        'Führe ein echtes KI-Gespräch — kein Tippen, kein Skript. Nach jeder Session zeigt dir SpeakPath die Grammatikfehler, die du gemacht hast, und sagt dir genau, an welchem Thema du arbeiten solltest. Dann sprichst du wieder.',
+        'Meistere eine Sprache durch echte KI-Gesprächspraxis — kein Tippen, kein Skript. SpeakPath baut deinen Wortschatz, deine Sprachflüssigkeit und dein Selbstvertrauen in Live-Sprachsitzungen auf Englisch, Spanisch, Französisch oder Deutsch auf. Nach jeder Session zeigt es dir die Grammatikfehler, die du gemacht hast, und sagt dir genau, welches Thema du als Nächstes angehen solltest.',
       cta: 'Kostenlos starten',
       note: 'Keine Kreditkarte. Starte in wenigen Minuten.',
       companionEyebrow: 'KI-Begleiter',
@@ -1107,10 +1107,10 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
       intro: 'Beginne dort, wo du gerade bist. Wechsle jederzeit.',
       moreSoon: 'Weitere Sprachen folgen bald.',
       cards: [
-        { flag: '🇺🇸', name: 'Englisch', label: 'Business', tagline: 'Die globale Sprache der Wirtschaft' },
-        { flag: '🇪🇸', name: 'Spanisch', label: '500M', tagline: '500 Millionen Muttersprachler' },
-        { flag: '🇫🇷', name: 'Französisch', label: 'Kultur', tagline: 'Romantik, Kultur und Chancen' },
-        { flag: '🇩🇪', name: 'Deutsch', label: 'Wissen', tagline: 'Präzision, Wissenschaft und Karrierewachstum' },
+        { flag: '/flags/us.svg', name: 'Englisch', label: 'Business', tagline: 'Die globale Sprache der Wirtschaft' },
+        { flag: '/flags/es.svg', name: 'Spanisch', label: '500M', tagline: '500 Millionen Muttersprachler' },
+        { flag: '/flags/fr.svg', name: 'Französisch', label: 'Kultur', tagline: 'Romantik, Kultur und Chancen' },
+        { flag: '/flags/de.svg', name: 'Deutsch', label: 'Wissen', tagline: 'Präzision, Wissenschaft und Karrierewachstum' },
       ],
     },
     howItWorks: {
@@ -1393,7 +1393,7 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
         bottom: 'Fale melhor.',
       },
       description:
-        'Tenha uma conversa real com IA — sem digitar, sem roteiro. Após cada sessão, o SpeakPath mostra os erros gramaticais que você cometeu e diz exatamente qual tema trabalhar. Então você volta a falar.',
+        'Domine um idioma com prática real de conversação com IA — sem digitar, sem roteiro. O SpeakPath desenvolve seu vocabulário, fluência e confiança em sessões de voz ao vivo em inglês, espanhol, francês ou alemão. Após cada sessão, mostra os erros gramaticais que você cometeu e diz exatamente qual tema trabalhar a seguir.',
       cta: 'Comece Grátis',
       note: 'Sem cartão de crédito. Comece em minutos.',
       companionEyebrow: 'Companheiro de IA',
@@ -1405,10 +1405,10 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
       intro: 'Comece onde você está. Mude quando quiser.',
       moreSoon: 'Mais idiomas em breve.',
       cards: [
-        { flag: '🇺🇸', name: 'Inglês', label: 'Negócios', tagline: 'O idioma global dos negócios' },
-        { flag: '🇪🇸', name: 'Espanhol', label: '500M', tagline: '500 milhões de falantes nativos' },
-        { flag: '🇫🇷', name: 'Francês', label: 'Cultura', tagline: 'Romance, cultura e oportunidade' },
-        { flag: '🇩🇪', name: 'Alemão', label: 'Ciência', tagline: 'Precisão, ciência e crescimento profissional' },
+        { flag: '/flags/us.svg', name: 'Inglês', label: 'Negócios', tagline: 'O idioma global dos negócios' },
+        { flag: '/flags/es.svg', name: 'Espanhol', label: '500M', tagline: '500 milhões de falantes nativos' },
+        { flag: '/flags/fr.svg', name: 'Francês', label: 'Cultura', tagline: 'Romance, cultura e oportunidade' },
+        { flag: '/flags/de.svg', name: 'Alemão', label: 'Ciência', tagline: 'Precisão, ciência e crescimento profissional' },
       ],
     },
     howItWorks: {

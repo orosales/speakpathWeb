@@ -94,11 +94,11 @@ const englishPath = locale === defaultLocale ? '/learn/english/' : `/${locale}/l
 const homePath = locale === defaultLocale ? '/' : `/${locale}/`;
 
 const languages = [
-  { flag: '🇺🇸', name: locale === 'en' ? 'English' : copy.languages.cards[0].name, code: 'en', active: true, path: englishPath },
-  { flag: '🇪🇸', name: copy.languages.cards[1].name, code: 'es', active: false },
-  { flag: '🇫🇷', name: copy.languages.cards[2].name, code: 'fr', active: false },
-  { flag: '🇩🇪', name: copy.languages.cards[3].name, code: 'de', active: false },
-  { flag: '🇧🇷', name: locale === 'pt' ? 'Português' : 'Portuguese', code: 'pt', active: false },
+  { flag: '/flags/us.svg', name: locale === 'en' ? 'English' : copy.languages.cards[0].name, code: 'en', active: true, path: englishPath },
+  { flag: '/flags/es.svg', name: copy.languages.cards[1].name, code: 'es', active: false },
+  { flag: '/flags/fr.svg', name: copy.languages.cards[2].name, code: 'fr', active: false },
+  { flag: '/flags/de.svg', name: copy.languages.cards[3].name, code: 'de', active: false },
+  { flag: '/flags/br.svg', name: locale === 'pt' ? 'Português' : 'Portuguese', code: 'pt', active: false },
 ];
 ---
 
@@ -137,7 +137,7 @@ const languages = [
               data-lang-code={lang.code}
               class="group flex items-center gap-4 p-5 rounded-2xl bg-surface-container border border-primary/30 hover:border-primary hover:bg-surface-container-high transition-all duration-200 no-underline"
             >
-              <span class="text-3xl" aria-hidden="true">{lang.flag}</span>
+              <img src={lang.flag} alt="" aria-hidden="true" class="w-9 h-6 object-cover rounded shrink-0" />
               <div class="flex-1 min-w-0">
                 <h3 class="font-headline font-bold text-on-surface group-hover:text-primary transition-colors">{lang.name}</h3>
                 <p class="text-primary text-xs font-semibold font-headline mt-0.5">{text.available}</p>
@@ -151,7 +151,7 @@ const languages = [
               class="flex items-center gap-4 p-5 rounded-2xl bg-surface-container border border-outline-variant/10 opacity-60 cursor-not-allowed"
               aria-disabled="true"
             >
-              <span class="text-3xl" aria-hidden="true">{lang.flag}</span>
+              <img src={lang.flag} alt="" aria-hidden="true" class="w-9 h-6 object-cover rounded shrink-0" />
               <div class="flex-1 min-w-0">
                 <h3 class="font-headline font-bold text-on-surface-variant">{lang.name}</h3>
                 <p class="text-on-surface-variant/60 text-xs font-semibold font-headline mt-0.5">{text.comingSoon}</p>
