@@ -1,0 +1,524 @@
+---
+import type { LocalizedPageCopy } from '../i18n/site';
+
+interface Props {
+  copy: LocalizedPageCopy['howItWorks']['demo'];
+}
+
+const { copy } = Astro.props;
+
+// Scripted session: the learner practises English, so these lines stay in English on every locale
+const chat = [
+  { from: 'ai', text: 'Hi! What would you like to talk about today?' },
+  { from: 'user', text: "I didn't practice my English in a long time." },
+  { from: 'ai', text: "No problem! Let's warm up. What did you do last weekend?" },
+  { from: 'user', text: 'I go to the beach with my friends.' },
+];
+
+const corrections = [
+  { wrong: chat[1].text, fixed: "I haven't practiced my English in a long time.", tip: copy.tips[0] },
+  { wrong: chat[3].text, fixed: 'I went to the beach with my friends.', tip: copy.tips[1] },
+];
+
+const bars = [0.45, 0.8, 0.35, 1, 0.6, 0.9, 0.4, 0.7, 0.5];
+---
+
+<div
+  class="demo-phone relative w-full max-w-[20rem]"
+  role="img"
+  aria-label="SpeakPath demo: tap the mic, talk with the AI, then get a grammar report that corrects your mistakes."
+>
+  <div
+    class="pointer-events-none absolute -inset-16 -z-10"
+    style="background: radial-gradient(ellipse at center, rgba(139,0,255,0.28) 0%, rgba(79,115,255,0.1) 45%, transparent 70%);"
+    aria-hidden="true"
+  ></div>
+
+  <div class="rounded-[2.75rem] bg-gradient-to-b from-[#2a2350] to-[#0d1430] p-2.5 shadow-[0_30px_80px_rgba(0,0,0,0.55)] ring-1 ring-white/10">
+    <div id="product-demo" class="demo-screen" data-phase="ready" data-status="speaking" aria-hidden="true">
+      <!-- App header -->
+      <div class="demo-header">
+        <div class="flex items-center gap-1.5">
+          <img src="/logo-mark.svg" alt="" width="14" height="16" class="h-4 w-auto" />
+          <span class="font-headline text-[0.95rem] font-extrabold tracking-tight text-[#a855f7]">SpeakPath</span>
+        </div>
+        <div class="flex items-center gap-1.5 text-[0.6rem] text-[#9ca3af]">
+          {copy.practice}
+          <span class="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[0.65rem] text-white">English</span>
+        </div>
+      </div>
+
+      <!-- Ready state -->
+      <div class="demo-ready">
+        <span class="inline-flex items-center gap-1.5 rounded-full border border-[#22c55e]/40 bg-[#22c55e]/10 px-2.5 py-1 text-[0.55rem] font-bold uppercase tracking-[0.14em] text-white">
+          <span class="h-1.5 w-1.5 rounded-full bg-[#22c55e]"></span>
+          {copy.ready}
+        </span>
+        <p class="mt-3 text-[0.72rem] text-[#9ca3af]">{copy.prompt}</p>
+        <div class="mt-3 flex flex-wrap justify-center gap-1.5">
+          <span class="demo-chip">"Let's practice small talk"</span>
+          <span class="demo-chip">"Help me with a job interview"</span>
+        </div>
+      </div>
+
+      <!-- Conversation -->
+      <div class="demo-chat">
+        {chat.map((line) => (
+          <div class:list={['demo-bubble', line.from === 'ai' ? 'is-ai' : 'is-user']}>
+            <p>{line.text}</p>
+            {line.from === 'user' && <span class="demo-avatar"></span>}
+          </div>
+        ))}
+      </div>
+
+      <!-- Controls -->
+      <div class="demo-controls">
+        <div class="demo-wave">
+          {bars.map((height, i) => (
+            <span style={`--h:${height}; animation-delay:${i * 0.11}s`}></span>
+          ))}
+          <em class="demo-status-listening">{copy.listening}</em>
+          <em class="demo-status-speaking">{copy.speaking}</em>
+        </div>
+        <div class="demo-button">
+          <span class="demo-tap"></span>
+          <svg class="demo-icon-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <rect x="9" y="3" width="6" height="11" rx="3" />
+            <path d="M5 11a7 7 0 0 0 14 0M12 18v3" />
+          </svg>
+          <svg class="demo-icon-stop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="8" />
+            <rect x="10" y="10" width="4" height="4" rx="0.5" fill="currentColor" />
+          </svg>
+        </div>
+        <p class="demo-button-label">
+          <span class="demo-label-start">{copy.start}</span>
+          <span class="demo-label-end">{copy.endSession}</span>
+        </p>
+      </div>
+
+      <!-- Grammar report -->
+      <div class="demo-report">
+        <h4 class="demo-report-title">{copy.report}</h4>
+        {corrections.map((item) => (
+          <div class="demo-card">
+            <p class="demo-wrong"><span>{item.wrong}</span></p>
+            <p class="demo-fixed">{item.fixed}</p>
+            <p class="demo-tip">{item.tip}</p>
+          </div>
+        ))}
+        <div class="demo-progress">
+          <h4 class="demo-report-title">{copy.progress}</h4>
+          <div class="demo-stat">
+            <span>{copy.cleanTurns}</span>
+            <strong>3 / 5</strong>
+          </div>
+          <div class="demo-bar"><span></span></div>
+          <p class="demo-working">{copy.workingOn}</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="demo-topic">present perfect</span>
+            <span class="demo-topic">past simple</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .demo-screen {
+    position: relative;
+    aspect-ratio: 9 / 17;
+    overflow: hidden;
+    border-radius: 2.2rem;
+    background:
+      radial-gradient(circle at 15% 10%, rgba(139, 0, 255, 0.22), transparent 55%),
+      radial-gradient(circle at 90% 95%, rgba(0, 188, 212, 0.1), transparent 50%),
+      linear-gradient(180deg, #0a0a1a, #10152a);
+    font-family: 'Manrope', sans-serif;
+    color: #fff;
+    transition: opacity 0.5s ease;
+  }
+  .demo-screen.is-fading {
+    opacity: 0;
+  }
+
+  .demo-header {
+    position: absolute;
+    inset: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 1rem 0.7rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  /* Ready state */
+  .demo-ready {
+    position: absolute;
+    inset: 32% 0.75rem auto;
+    text-align: center;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .demo-chip {
+    border-radius: 999px;
+    border: 1px solid rgba(139, 0, 255, 0.25);
+    background: rgba(139, 0, 255, 0.1);
+    padding: 0.2rem 0.55rem;
+    font-size: 0.55rem;
+    color: #c4c4d4;
+  }
+  [data-phase='talk'] .demo-ready,
+  [data-phase='report'] .demo-ready {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  /* Conversation */
+  .demo-chat {
+    position: absolute;
+    inset: 3.6rem 0.75rem 10.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+  .demo-bubble {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.35rem;
+    max-width: 88%;
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+  .demo-bubble p {
+    border-radius: 0.8rem;
+    padding: 0.5rem 0.7rem;
+    font-size: 0.76rem;
+    line-height: 1.35;
+  }
+  .demo-bubble.is-ai p {
+    background: rgba(255, 255, 255, 0.06);
+    border-left: 2px solid #00bcd4;
+  }
+  .demo-bubble.is-user {
+    align-self: flex-end;
+  }
+  .demo-bubble.is-user p {
+    background: rgba(255, 255, 255, 0.1);
+    border-right: 2px solid #8b00ff;
+  }
+  .demo-avatar {
+    flex-shrink: 0;
+    width: 1.1rem;
+    height: 1.1rem;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #b000ff, #4f73ff);
+  }
+  .demo-bubble.is-shown {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Controls */
+  .demo-controls {
+    position: absolute;
+    inset: auto 0 1.3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .demo-wave {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    height: 1.6rem;
+    margin-bottom: 0.7rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .demo-wave span {
+    width: 3px;
+    height: calc(var(--h) * 100%);
+    border-radius: 3px;
+    background: linear-gradient(180deg, #8b00ff, #00bcd4);
+    animation: demoBar 0.9s ease-in-out infinite;
+  }
+  .demo-wave em {
+    display: none;
+    margin-left: 0.4rem;
+    font-size: 0.65rem;
+    font-style: normal;
+  }
+  .demo-status-listening {
+    color: #4f73ff;
+  }
+  .demo-status-speaking {
+    color: #22c55e;
+  }
+  [data-phase='talk'] .demo-wave {
+    opacity: 1;
+  }
+  [data-status='listening'] .demo-status-listening,
+  [data-status='speaking'] .demo-status-speaking {
+    display: inline;
+  }
+
+  .demo-button {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 3.6rem;
+    height: 3.6rem;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #8b00ff, #00a6e0);
+    box-shadow: 0 0 0 6px rgba(139, 0, 255, 0.15), 0 0 30px rgba(139, 0, 255, 0.4);
+    transition: background 0.4s ease, box-shadow 0.4s ease;
+  }
+  .demo-button svg {
+    position: absolute;
+    width: 1.4rem;
+    height: 1.4rem;
+    transition: opacity 0.3s ease;
+  }
+  .demo-icon-stop {
+    opacity: 0;
+  }
+  [data-phase='talk'] .demo-button {
+    background: linear-gradient(135deg, #ef4444, #b91c1c);
+    box-shadow: 0 0 0 6px rgba(239, 68, 68, 0.12), 0 0 30px rgba(239, 68, 68, 0.35);
+  }
+  [data-phase='talk'] .demo-icon-mic {
+    opacity: 0;
+  }
+  [data-phase='talk'] .demo-icon-stop {
+    opacity: 1;
+  }
+
+  .demo-tap {
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    opacity: 0;
+  }
+  .demo-button.is-tapping {
+    animation: demoPress 0.35s ease;
+  }
+  .demo-button.is-tapping .demo-tap {
+    animation: demoTap 0.7s ease-out;
+  }
+
+  .demo-button-label {
+    margin-top: 0.55rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+  }
+  .demo-label-end,
+  [data-phase='talk'] .demo-label-start {
+    display: none;
+  }
+  [data-phase='talk'] .demo-label-end {
+    display: inline;
+  }
+
+  /* Grammar report */
+  .demo-report {
+    position: absolute;
+    inset: 3.3rem 0 0;
+    padding: 0.9rem 0.75rem;
+    background: linear-gradient(180deg, #0f0f24, #121a33);
+    transform: translateY(100%);
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  [data-phase='report'] .demo-report {
+    transform: none;
+  }
+  .demo-report-title {
+    margin-bottom: 0.7rem;
+    padding-left: 0.5rem;
+    border-left: 3px solid #8b00ff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #a855f7;
+  }
+  .demo-card {
+    margin-bottom: 0.6rem;
+    padding: 0.7rem 0.75rem;
+    border-radius: 0.8rem;
+    border-left: 3px solid #8b00ff;
+    background: rgba(255, 255, 255, 0.05);
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+  .demo-wrong span {
+    position: relative;
+    color: #f87171;
+    background: linear-gradient(#f87171, #f87171) no-repeat 0 55% / 0% 1.5px;
+    transition: background-size 0.6s ease;
+  }
+  .demo-card.is-struck .demo-wrong span {
+    background-size: 100% 1.5px;
+  }
+  .demo-fixed,
+  .demo-tip {
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+  }
+  .demo-fixed {
+    margin-top: 0.3rem;
+    font-weight: 700;
+    color: #34d399;
+  }
+  .demo-tip {
+    margin-top: 0.3rem;
+    font-size: 0.68rem;
+    color: #9ca3af;
+    transition-delay: 0.2s;
+  }
+  .demo-card.is-fixed .demo-fixed,
+  .demo-card.is-fixed .demo-tip {
+    opacity: 1;
+    transform: none;
+  }
+
+  .demo-progress {
+    margin-top: 1rem;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .demo-progress.is-shown {
+    opacity: 1;
+    transform: none;
+  }
+  .demo-stat {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.74rem;
+    color: #d1d5db;
+  }
+  .demo-stat strong {
+    color: #34d399;
+  }
+  .demo-bar {
+    height: 0.4rem;
+    margin: 0.4rem 0 0.8rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+  }
+  .demo-bar span {
+    display: block;
+    width: 0;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #8b00ff, #4f73ff, #21f4d4);
+    transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s;
+  }
+  .demo-progress.is-shown .demo-bar span {
+    width: 60%;
+  }
+  .demo-working {
+    margin-bottom: 0.4rem;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #9ca3af;
+  }
+  .demo-topic {
+    border-radius: 999px;
+    border: 1px solid rgba(139, 0, 255, 0.35);
+    background: rgba(139, 0, 255, 0.12);
+    padding: 0.2rem 0.6rem;
+    font-size: 0.66rem;
+    color: #d8b4fe;
+  }
+
+  @keyframes demoBar {
+    0%, 100% { transform: scaleY(0.35); }
+    50%      { transform: scaleY(1); }
+  }
+  @keyframes demoTap {
+    0%   { opacity: 0.9; transform: scale(1); }
+    100% { opacity: 0;   transform: scale(1.8); }
+  }
+  @keyframes demoPress {
+    50% { transform: scale(0.92); }
+  }
+</style>
+
+<script>
+  const screen = document.getElementById('product-demo');
+
+  if (screen) {
+    const button = screen.querySelector<HTMLElement>('.demo-button');
+    const bubbles = screen.querySelectorAll<HTMLElement>('.demo-bubble');
+    const cards = screen.querySelectorAll<HTMLElement>('.demo-card');
+    const progress = screen.querySelector<HTMLElement>('.demo-progress');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const setStep = (step: number) => window.dispatchEvent(new CustomEvent('demo:step', { detail: step }));
+    const tap = () => {
+      button?.classList.remove('is-tapping');
+      void button?.offsetWidth; // restart the animation
+      button?.classList.add('is-tapping');
+    };
+
+    // [ms from start, action] — one full loop of the demo
+    const TIMELINE: Array<[number, () => void]> = [
+      [0, () => setStep(0)],
+      [1500, tap],
+      [1900, () => { screen.dataset.phase = 'talk'; setStep(1); }],
+      [2300, () => bubbles[0].classList.add('is-shown')],
+      [3700, () => { screen.dataset.status = 'listening'; }],
+      [4200, () => bubbles[1].classList.add('is-shown')],
+      [5600, () => { screen.dataset.status = 'speaking'; }],
+      [5900, () => bubbles[2].classList.add('is-shown')],
+      [7400, () => { screen.dataset.status = 'listening'; }],
+      [7900, () => bubbles[3].classList.add('is-shown')],
+      [9300, tap],
+      [9700, () => { screen.dataset.phase = 'report'; setStep(2); }],
+      [10500, () => cards[0].classList.add('is-struck')],
+      [11200, () => cards[0].classList.add('is-fixed')],
+      [12200, () => cards[1].classList.add('is-struck')],
+      [12900, () => cards[1].classList.add('is-fixed')],
+      [13700, () => progress?.classList.add('is-shown')],
+      [17500, () => screen.classList.add('is-fading')],
+      [18000, () => { reset(); play(); }],
+    ];
+
+    let timers: number[] = [];
+
+    const reset = () => {
+      timers.forEach(clearTimeout);
+      timers = [];
+      screen.classList.remove('is-fading');
+      screen.dataset.phase = 'ready';
+      screen.dataset.status = 'speaking';
+      bubbles.forEach((el) => el.classList.remove('is-shown'));
+      cards.forEach((el) => el.classList.remove('is-struck', 'is-fixed'));
+      progress?.classList.remove('is-shown');
+    };
+
+    const play = () => {
+      timers = TIMELINE.map(([at, action]) => window.setTimeout(action, at));
+    };
+
+    if (reduceMotion) {
+      // Show the payoff statically: the finished grammar report
+      screen.dataset.phase = 'report';
+      cards.forEach((el) => el.classList.add('is-struck', 'is-fixed'));
+      progress?.classList.add('is-shown');
+    } else {
+      new IntersectionObserver(([entry]) => {
+        reset();
+        if (entry.isIntersecting) play();
+      }, { threshold: 0.35 }).observe(screen);
+    }
+  }
+</script>

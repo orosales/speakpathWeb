@@ -33,7 +33,7 @@ const {
     languageSwitcherLabel: 'Choose site language',
   },
   footer = {
-    tagline: 'Precision Audio Engineering for Fluency.',
+    tagline: 'Real conversations. Real fluency.',
     faq: 'FAQ',
     privacy: 'Privacy',
     contact: 'Contact',
@@ -61,6 +61,8 @@ const xDefaultHref = languageAlternatePath
   ? `${siteUrl}${getLocalizedRoute(defaultLocale, languageAlternatePath)}`
   : siteUrl;
 const localizedFaqHref = getLocalizedRoute(locale, '/faq/');
+const localizedPrivacyHref = getLocalizedRoute(locale, '/privacy/');
+const contactEmail = 'hello@speakpath.dev';
 ---
 
 <!doctype html>
@@ -162,14 +164,7 @@ const localizedFaqHref = getLocalizedRoute(locale, '/faq/');
       "name": appName,
       "url": siteUrl,
       "description": description,
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": {
-          "@type": "EntryPoint",
-          "urlTemplate": `${siteUrl}/?q={search_term_string}`
-        },
-        "query-input": "required name=search_term_string"
-      }
+      "inLanguage": locales
     })} />
 
     <!-- JSON-LD Structured Data: Organization -->
@@ -179,6 +174,7 @@ const localizedFaqHref = getLocalizedRoute(locale, '/faq/');
       "name": appName,
       "url": siteUrl,
       "description": description,
+      "email": contactEmail,
       "sameAs": []
     })} />
 
@@ -202,9 +198,7 @@ const localizedFaqHref = getLocalizedRoute(locale, '/faq/');
     <nav class="fixed top-0 w-full z-50 bg-surface/95 backdrop-blur-sm border-b border-outline-variant/10">
       <div class="flex justify-between items-center gap-4 px-6 md:px-8 py-5 max-w-7xl mx-auto">
         <a href="/" class="flex items-center gap-2 no-underline">
-          <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">
-            graphic_eq
-          </span>
+          <img src="/logo-mark.svg" alt="" width="25" height="28" class="h-7 w-auto" />
           <span class="text-xl font-bold tracking-tighter text-primary font-headline">SpeakPath</span>
         </a>
         <div class="flex items-center gap-4 sm:gap-5">
@@ -283,10 +277,10 @@ const localizedFaqHref = getLocalizedRoute(locale, '/faq/');
           <a href={localizedFaqHref} class="text-on-surface-variant text-sm font-label hover:text-tertiary underline-offset-4 hover:underline transition-colors">
             {footer.faq ?? 'FAQ'}
           </a>
-          <a href="/privacy" class="text-on-surface-variant text-sm font-label hover:text-tertiary underline-offset-4 hover:underline transition-colors">
+          <a href={localizedPrivacyHref} class="text-on-surface-variant text-sm font-label hover:text-tertiary underline-offset-4 hover:underline transition-colors">
             {footer.privacy}
           </a>
-          <a href="#" class="text-on-surface-variant text-sm font-label hover:text-tertiary underline-offset-4 hover:underline transition-colors">
+          <a href={`mailto:${contactEmail}`} class="text-on-surface-variant text-sm font-label hover:text-tertiary underline-offset-4 hover:underline transition-colors">
             {footer.contact}
           </a>
         </div>

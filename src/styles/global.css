@@ -54,12 +54,12 @@
   /* Gradient CTA — DESIGN.md §5 Buttons */
   .btn-primary {
     @apply inline-flex items-center gap-3 px-8 py-4 rounded-xl font-bold text-lg font-headline;
-    background: linear-gradient(135deg, #58f5d1, #1cd0ad);
-    color: #003f33;
+    background: linear-gradient(135deg, #8b00ff, #4f73ff);
+    color: #ffffff;
     transition: box-shadow 0.25s ease, transform 0.2s ease;
   }
   .btn-primary:hover {
-    box-shadow: 0 0 28px rgba(88, 245, 209, 0.45);
+    box-shadow: 0 0 28px rgba(139, 0, 255, 0.45);
     transform: translateY(-1px);
   }
   .btn-primary .arrow {
@@ -92,9 +92,18 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .waveform-bar {
+    .waveform-bar,
+    .animate-float {
       animation: none !important;
     }
+  }
+
+  /* Brand gradient text — mirrors the logo's violet → blue → teal path */
+  .text-brand-gradient {
+    background: linear-gradient(135deg, #c56bff 0%, #6f8cff 55%, #3ee8d2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   /* Tight headline tracking — DESIGN.md §3 */

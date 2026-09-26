@@ -46,6 +46,20 @@ export interface LocalizedPageCopy {
       line2: string;
     };
     stepLabel: string;
+    demo: {
+      practice: string;
+      ready: string;
+      prompt: string;
+      listening: string;
+      speaking: string;
+      start: string;
+      endSession: string;
+      report: string;
+      tips: [string, string];
+      progress: string;
+      cleanTurns: string;
+      workingOn: string;
+    };
     steps: Array<{
       icon: string;
       color: string;
@@ -212,7 +226,7 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
       intro: 'Start where you are. Switch anytime.',
       moreSoon: 'More languages coming soon.',
       cards: [
-        { flag: '/flags/us.svg', name: 'English', label: 'Business', tagline: "The world's business language" },
+        { flag: '/flags/ca.svg', name: 'English', label: 'Business', tagline: "The world's business language" },
         { flag: '/flags/es.svg', name: 'Spanish', label: '500M', tagline: '500 million native speakers' },
         { flag: '/flags/fr.svg', name: 'French', label: 'Culture', tagline: 'Romance, culture, opportunity' },
         { flag: '/flags/de.svg', name: 'German', label: 'Science', tagline: 'Precision, science, career growth' },
@@ -225,6 +239,23 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
         line2: 'a conversation',
       },
       stepLabel: 'Step',
+      demo: {
+        practice: 'Practice:',
+        ready: 'Ready to practice',
+        prompt: 'Practice your conversations with AI',
+        listening: 'Listening…',
+        speaking: 'Speaking…',
+        start: 'Start speaking',
+        endSession: 'End session',
+        report: 'Grammar Report',
+        progress: 'Session progress',
+        cleanTurns: 'Clean sentences',
+        workingOn: 'Still working on',
+        tips: [
+          'Use the present perfect for something that continues up to now.',
+          'Use the past simple for a finished action.',
+        ],
+      },
       steps: [
         {
           icon: 'settings_voice',
@@ -515,7 +546,7 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
       intro: 'Empieza donde estés. Cambia cuando quieras.',
       moreSoon: 'Pronto habrá más idiomas.',
       cards: [
-        { flag: '/flags/us.svg', name: 'Inglés', label: 'Negocios', tagline: 'El idioma global de los negocios' },
+        { flag: '/flags/ca.svg', name: 'Inglés', label: 'Negocios', tagline: 'El idioma global de los negocios' },
         { flag: '/flags/es.svg', name: 'Español', label: '500M', tagline: '500 millones de hablantes nativos' },
         { flag: '/flags/fr.svg', name: 'Francés', label: 'Cultura', tagline: 'Romance, cultura y oportunidad' },
         { flag: '/flags/de.svg', name: 'Alemán', label: 'Ciencia', tagline: 'Precisión, ciencia y crecimiento profesional' },
@@ -528,6 +559,23 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
         line2: 'una conversación',
       },
       stepLabel: 'Paso',
+      demo: {
+        practice: 'Practicar:',
+        ready: 'Listo para practicar',
+        prompt: 'Practica tus conversaciones con IA',
+        listening: 'Escuchando…',
+        speaking: 'Hablando…',
+        start: 'Empezar a hablar',
+        endSession: 'Terminar sesión',
+        report: 'Informe gramatical',
+        progress: 'Progreso de la sesión',
+        cleanTurns: 'Frases correctas',
+        workingOn: 'Sigues practicando',
+        tips: [
+          'Usa el present perfect para algo que continúa hasta ahora.',
+          'Usa el past simple para una acción terminada.',
+        ],
+      },
       steps: [
         {
           icon: 'settings_voice',
@@ -725,7 +773,7 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
       ],
     },
     footer: {
-      tagline: 'Ingeniería de audio de precisión para la fluidez.',
+      tagline: 'Conversaciones reales. Fluidez real.',
       faq: 'FAQ',
       privacy: 'Privacidad',
       contact: 'Contacto',
@@ -819,7 +867,7 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
       intro: 'Commencez où vous en êtes. Changez à tout moment.',
       moreSoon: 'D\'autres langues arrivent bientôt.',
       cards: [
-        { flag: '/flags/us.svg', name: 'Anglais', label: 'Business', tagline: 'La langue mondiale des affaires' },
+        { flag: '/flags/ca.svg', name: 'Anglais', label: 'Business', tagline: 'La langue mondiale des affaires' },
         { flag: '/flags/es.svg', name: 'Espagnol', label: '500M', tagline: '500 millions de locuteurs natifs' },
         { flag: '/flags/fr.svg', name: 'Français', label: 'Culture', tagline: 'Romance, culture et opportunité' },
         { flag: '/flags/de.svg', name: 'Allemand', label: 'Science', tagline: 'Précision, science et évolution de carrière' },
@@ -832,6 +880,23 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
         line2: 'une conversation',
       },
       stepLabel: 'Étape',
+      demo: {
+        practice: 'Pratiquer :',
+        ready: 'Prêt à pratiquer',
+        prompt: 'Pratiquez vos conversations avec l’IA',
+        listening: 'Écoute…',
+        speaking: 'Parle…',
+        start: 'Commencer à parler',
+        endSession: 'Terminer la session',
+        report: 'Rapport de grammaire',
+        progress: 'Progrès de la session',
+        cleanTurns: 'Phrases correctes',
+        workingOn: 'À travailler',
+        tips: [
+          'Utilisez le present perfect pour une action qui dure jusqu’à maintenant.',
+          'Utilisez le past simple pour une action terminée.',
+        ],
+      },
       steps: [
         {
           icon: 'settings_voice',
@@ -1028,7 +1093,7 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
       ],
     },
     footer: {
-      tagline: 'Ingénierie audio de précision au service de la fluidité.',
+      tagline: 'De vraies conversations. Une vraie aisance.',
       faq: 'FAQ',
       privacy: 'Confidentialité',
       contact: 'Contact',
@@ -1122,7 +1187,7 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
       intro: 'Beginne dort, wo du gerade bist. Wechsle jederzeit.',
       moreSoon: 'Weitere Sprachen folgen bald.',
       cards: [
-        { flag: '/flags/us.svg', name: 'Englisch', label: 'Business', tagline: 'Die globale Sprache der Wirtschaft' },
+        { flag: '/flags/ca.svg', name: 'Englisch', label: 'Business', tagline: 'Die globale Sprache der Wirtschaft' },
         { flag: '/flags/es.svg', name: 'Spanisch', label: '500M', tagline: '500 Millionen Muttersprachler' },
         { flag: '/flags/fr.svg', name: 'Französisch', label: 'Kultur', tagline: 'Romantik, Kultur und Chancen' },
         { flag: '/flags/de.svg', name: 'Deutsch', label: 'Wissen', tagline: 'Präzision, Wissenschaft und Karrierewachstum' },
@@ -1135,6 +1200,23 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
         line2: 'ein Gespräch',
       },
       stepLabel: 'Schritt',
+      demo: {
+        practice: 'Üben:',
+        ready: 'Bereit zum Üben',
+        prompt: 'Übe deine Gespräche mit KI',
+        listening: 'Hört zu…',
+        speaking: 'Spricht…',
+        start: 'Sprechen starten',
+        endSession: 'Sitzung beenden',
+        report: 'Grammatikbericht',
+        progress: 'Sitzungsfortschritt',
+        cleanTurns: 'Fehlerfreie Sätze',
+        workingOn: 'Daran arbeitest du noch',
+        tips: [
+          'Nutze das Present Perfect für etwas, das bis jetzt andauert.',
+          'Nutze das Past Simple für eine abgeschlossene Handlung.',
+        ],
+      },
       steps: [
         {
           icon: 'settings_voice',
@@ -1331,7 +1413,7 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
       ],
     },
     footer: {
-      tagline: 'Präzises Audio-Engineering für echte Sprachflüssigkeit.',
+      tagline: 'Echte Gespräche. Echte Sprachflüssigkeit.',
       faq: 'FAQ',
       privacy: 'Datenschutz',
       contact: 'Kontakt',
@@ -1425,7 +1507,7 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
       intro: 'Comece onde você está. Mude quando quiser.',
       moreSoon: 'Mais idiomas em breve.',
       cards: [
-        { flag: '/flags/us.svg', name: 'Inglês', label: 'Negócios', tagline: 'O idioma global dos negócios' },
+        { flag: '/flags/ca.svg', name: 'Inglês', label: 'Negócios', tagline: 'O idioma global dos negócios' },
         { flag: '/flags/es.svg', name: 'Espanhol', label: '500M', tagline: '500 milhões de falantes nativos' },
         { flag: '/flags/fr.svg', name: 'Francês', label: 'Cultura', tagline: 'Romance, cultura e oportunidade' },
         { flag: '/flags/de.svg', name: 'Alemão', label: 'Ciência', tagline: 'Precisão, ciência e crescimento profissional' },
@@ -1438,6 +1520,23 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
         line2: 'uma conversa',
       },
       stepLabel: 'Passo',
+      demo: {
+        practice: 'Praticar:',
+        ready: 'Pronto para praticar',
+        prompt: 'Pratique suas conversas com IA',
+        listening: 'Ouvindo…',
+        speaking: 'Falando…',
+        start: 'Começar a falar',
+        endSession: 'Encerrar sessão',
+        report: 'Relatório gramatical',
+        progress: 'Progresso da sessão',
+        cleanTurns: 'Frases corretas',
+        workingOn: 'Ainda praticando',
+        tips: [
+          'Use o present perfect para algo que continua até agora.',
+          'Use o past simple para uma ação concluída.',
+        ],
+      },
       steps: [
         {
           icon: 'settings_voice',
@@ -1634,7 +1733,7 @@ const pageCopy: Record<Locale, LocalizedPageCopy> = {
       ],
     },
     footer: {
-      tagline: 'Engenharia de áudio de precisão para fluência.',
+      tagline: 'Conversas reais. Fluência real.',
       faq: 'FAQ',
       privacy: 'Privacidade',
       contact: 'Contato',

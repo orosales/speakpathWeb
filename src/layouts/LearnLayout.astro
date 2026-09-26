@@ -14,6 +14,7 @@ const { title, description, currentSlug, locale = 'en' } = Astro.props;
 
 const basePath = locale === 'en' ? '/learn/english' : `/${locale}/learn/english`;
 const learnPath = locale === 'en' ? '/learn/' : `/${locale}/learn/`;
+const privacyPath = locale === 'en' ? '/privacy/' : `/${locale}/privacy/`;
 const homePath = locale === 'en' ? '/' : `/${locale}/`;
 
 const labels = {
@@ -27,7 +28,7 @@ const labels = {
     next: 'Next',
     done: "You're done!",
     mobilePractice: 'Put this into practice — speak with an AI that corrects you in real time.',
-    footer: 'Precision Audio Engineering for Fluency.',
+    footer: 'Real conversations. Real fluency.',
     privacy: 'Privacy',
   },
   es: {
@@ -40,7 +41,7 @@ const labels = {
     next: 'Siguiente',
     done: 'Terminaste',
     mobilePractice: 'Pon esto en práctica: habla con una IA que te corrige en tiempo real.',
-    footer: 'Ingeniería de audio de precisión para la fluidez.',
+    footer: 'Conversaciones reales. Fluidez real.',
     privacy: 'Privacidad',
   },
   fr: {
@@ -53,7 +54,7 @@ const labels = {
     next: 'Suivant',
     done: 'Vous avez terminé',
     mobilePractice: 'Mettez cela en pratique : parlez avec une IA qui vous corrige en temps réel.',
-    footer: 'Ingénierie audio de précision au service de la fluidité.',
+    footer: 'De vraies conversations. Une vraie aisance.',
     privacy: 'Confidentialité',
   },
   de: {
@@ -66,7 +67,7 @@ const labels = {
     next: 'Weiter',
     done: 'Fertig',
     mobilePractice: 'Setze es in die Praxis um: Sprich mit einer KI, die dich in Echtzeit korrigiert.',
-    footer: 'Präzises Audio-Engineering für echte Sprachflüssigkeit.',
+    footer: 'Echte Gespräche. Echte Sprachflüssigkeit.',
     privacy: 'Datenschutz',
   },
   pt: {
@@ -79,7 +80,7 @@ const labels = {
     next: 'Próximo',
     done: 'Você terminou',
     mobilePractice: 'Coloque isso em prática: fale com uma IA que corrige você em tempo real.',
-    footer: 'Engenharia de áudio de precisão para fluência.',
+    footer: 'Conversas reais. Fluência real.',
     privacy: 'Privacidade',
   },
 };
@@ -139,9 +140,7 @@ const siteUrl = 'https://speakpath.dev';
     <nav class="fixed top-0 w-full z-50 bg-surface/95 backdrop-blur-sm border-b border-outline-variant/10">
       <div class="flex justify-between items-center gap-4 px-6 md:px-8 py-5 max-w-7xl mx-auto">
         <a href={homePath} class="flex items-center gap-2 no-underline">
-          <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">
-            graphic_eq
-          </span>
+          <img src="/logo-mark.svg" alt="" width="25" height="28" class="h-7 w-auto" />
           <span class="text-xl font-bold tracking-tighter text-primary font-headline">SpeakPath</span>
         </a>
         <div class="flex items-center gap-5">
@@ -288,7 +287,7 @@ const siteUrl = 'https://speakpath.dev';
           </p>
         </div>
         <div class="flex gap-6">
-          <a href="/privacy" class="text-on-surface-variant text-xs hover:text-tertiary underline-offset-4 hover:underline transition-colors">{copy.privacy}</a>
+          <a href={privacyPath} class="text-on-surface-variant text-xs hover:text-tertiary underline-offset-4 hover:underline transition-colors">{copy.privacy}</a>
           <a href={learnPath} class="text-on-surface-variant text-xs hover:text-tertiary underline-offset-4 hover:underline transition-colors">{copy.learn}</a>
         </div>
       </div>
